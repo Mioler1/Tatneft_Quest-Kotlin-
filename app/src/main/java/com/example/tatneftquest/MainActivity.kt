@@ -1,14 +1,26 @@
 package com.example.tatneftquest
 
-import android.accounts.AuthenticatorDescription
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
+import com.example.tatneftquest.Menu.AppDrawer
+import com.example.tatneftquest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mBinding: ActivityMainBinding
+    private lateinit var mToolbar: Toolbar
+    private lateinit var appDrawer: AppDrawer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
+        init()
+        appDrawer.drawerMenuFunc()
     }
 
+    private fun init() {
+        mToolbar = mBinding.toolbar
+        appDrawer = AppDrawer(this, mToolbar)
+    }
 }

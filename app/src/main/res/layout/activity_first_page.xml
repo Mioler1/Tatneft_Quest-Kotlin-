@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".FirstScreenActivity">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/tatneft"
+        android:scaleType="centerCrop"/>
 
-    <Button
-        android:id="@+id/buttonReg"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:background="@drawable/shape_button"
-        android:text="Погнали!"
-        android:textAllCaps="false"
-        android:textColor="#d7ddcf"
-        android:textSize="20sp"/>
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="-56dp"
+        android:background="@drawable/shape_login">
 
-    <TextView
-        android:id="@+id/Questions"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@+id/buttonReg"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Уже зарегистрирован?"
-        android:textColor="@color/black"
-        android:textSize="16sp"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@color/green"
+            android:background="@color/green"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/black"
+            app:tabInlineLabel="true"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@color/white"/>
 
-    <Button
-        android:id="@+id/buttonAut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Questions"
-        android:layout_centerHorizontal="true"
-        android:text="Войти"
-        android:textAllCaps="false"
-        style="?android:attr/borderlessButtonStyle"
-        android:textColor="@color/black"
-        android:textSize="16sp"/>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_below="@id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

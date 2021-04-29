@@ -7,4 +7,9 @@
     <string name="number">Ваш номер телефона</string>
     <string name="password">Пароль</string>
     <string name="rememberPassword">Забыли пароль?</string>
+
+    <!-- slider -->
+    <string name="nextBtn">Дальше</string>
+    <string name="getStart">Старт</string>
+    <string name="skip">Пропустить</string>
 </resources>

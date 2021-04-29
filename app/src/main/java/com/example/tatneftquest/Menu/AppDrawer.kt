@@ -24,6 +24,7 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
+
             .addProfiles(
                 ProfileDrawerItem().withName("Sergey Galdin")
                     .withEmail("veretennik-v@mail.ru")
@@ -45,11 +46,36 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
                     .withSelectable(false),
                 PrimaryDrawerItem().withIdentifier(2)
                     .withIconTintingEnabled(true)
+                    .withName("Квест")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(false),
+                PrimaryDrawerItem().withIdentifier(3)
+                    .withIconTintingEnabled(true)
+                    .withName("Экскурсия")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(false),
+                PrimaryDrawerItem().withIdentifier(4)
+                    .withIconTintingEnabled(true)
+                    .withName("Призы")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(false),
+                PrimaryDrawerItem().withIdentifier(5)
+                    .withIconTintingEnabled(true)
+                    .withName("Вопросы")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(false),
+                DividerDrawerItem(),
+                PrimaryDrawerItem().withIdentifier(6)
+                    .withIconTintingEnabled(true)
+                    .withName("Помощь")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(false),
+                PrimaryDrawerItem().withIdentifier(7)
+                    .withIconTintingEnabled(true)
                     .withName("Настройки")
                     .withIcon(R.drawable.ic_settings)
                     .withSelectable(false),
-                DividerDrawerItem(),
-                PrimaryDrawerItem().withIdentifier(3)
+                PrimaryDrawerItem().withIdentifier(8)
                     .withIconTintingEnabled(true)
                     .withName("Выход")
                     .withIcon(R.drawable.ic_logout)

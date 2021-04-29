@@ -7,8 +7,8 @@ import com.example.tatneftquest.Menu.AppDrawer
 import com.example.tatneftquest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mBinding: ActivityMainBinding
-    private lateinit var mToolbar: Toolbar
+    lateinit var mBinding: ActivityMainBinding
+    lateinit var mToolbar: Toolbar
     private lateinit var appDrawer: AppDrawer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         mToolbar = mBinding.toolbar
+        setSupportActionBar(mToolbar)
         appDrawer = AppDrawer(this, mToolbar)
     }
 }

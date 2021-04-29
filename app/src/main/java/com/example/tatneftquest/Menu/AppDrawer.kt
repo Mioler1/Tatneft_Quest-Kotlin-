@@ -23,7 +23,7 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mHeader: AccountHeader
 
     fun drawerMenuFunc() {
-        activity.setSupportActionBar(toolbar)
+//        activity.setSupportActionBar(toolbar)
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
@@ -90,6 +90,8 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
                     Toast.makeText(activity, "$position", Toast.LENGTH_SHORT).show()
                     when (position) {
                         1 -> addFragment(ProfileFragment())
+                        2 -> addFragment(SelectQuestFragment())
+                        3 -> addFragment(SelectExcursionsFragment())
                     }
                     return false
                 }

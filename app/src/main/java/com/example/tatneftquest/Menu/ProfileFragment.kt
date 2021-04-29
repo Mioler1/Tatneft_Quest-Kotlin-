@@ -10,7 +10,7 @@ import com.example.tatneftquest.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var textView: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,6 +22,5 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textView = binding.myText
     }
 }

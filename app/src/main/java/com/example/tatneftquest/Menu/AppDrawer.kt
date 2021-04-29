@@ -4,6 +4,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import com.example.tatneftquest.BlankFragment
 import com.example.tatneftquest.R
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -60,8 +62,16 @@ class AppDrawer(val activity: AppCompatActivity, val toolbar: Toolbar) {
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     Toast.makeText(activity, "$position", Toast.LENGTH_SHORT).show()
+                    when (position) {
+                        1 -> addFragment(BlankFragment())
+                    }
                     return false
                 }
             }).build()
+    }
+
+    private fun addFragment(fragment: Fragment) {
+        activity.supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment).commit()
     }
 }

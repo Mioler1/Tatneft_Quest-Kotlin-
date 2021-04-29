@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneftquest.R
+import com.mikepenz.iconics.utils.toIconicsSizeDp
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -14,6 +15,8 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import com.mikepenz.materialdrawer.util.DrawerItemViewHelper
+import com.mikepenz.materialdrawer.util.DrawerNavigationUI
 
 class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
@@ -24,57 +27,55 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
-
             .addProfiles(
                 ProfileDrawerItem().withName("Sergey Galdin")
                     .withEmail("veretennik-v@mail.ru")
                     .withIcon(R.drawable.ic_launcher_foreground)
-            )
-            .build()
-
+            ).build()
         mDrawer = DrawerBuilder()
             .withActivity(activity)
             .withToolbar(toolbar)
             .withActionBarDrawerToggle(true)
-            .withSelectedItem(-1)
+            .withSelectedItem(1)
             .withAccountHeader(mHeader)
+            .withDelayOnDrawerClose(300)
             .addDrawerItems(
                 PrimaryDrawerItem().withIdentifier(1)
                     .withIconTintingEnabled(true)
                     .withName("Профиль")
                     .withIcon(R.drawable.ic_person)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(2)
                     .withIconTintingEnabled(true)
                     .withName("Квест")
                     .withIcon(R.drawable.ic_person)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
                     .withName("Экскурсия")
                     .withIcon(R.drawable.ic_person)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(4)
                     .withIconTintingEnabled(true)
                     .withName("Призы")
                     .withIcon(R.drawable.ic_person)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(5)
                     .withIconTintingEnabled(true)
                     .withName("Вопросы")
                     .withIcon(R.drawable.ic_person)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 DividerDrawerItem(),
                 PrimaryDrawerItem().withIdentifier(6)
                     .withIconTintingEnabled(true)
                     .withName("Помощь")
                     .withIcon(R.drawable.ic_person)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(7)
                     .withIconTintingEnabled(true)
                     .withName("Настройки")
                     .withIcon(R.drawable.ic_settings)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(8)
                     .withIconTintingEnabled(true)
                     .withName("Выход")

@@ -33,12 +33,8 @@ class FirstScreenActivity : AppCompatActivity(){
         tabs.setupWithViewPager(viewPager)
     }
 
-
     private fun init() {
         viewPager = findViewById(R.id.viewPager)
         tabs = findViewById(R.id.tabs)
     }
-
-
-
 }

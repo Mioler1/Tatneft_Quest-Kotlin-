@@ -21,7 +21,7 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
 
     fun drawerMenuFunc() {
         activity.setSupportActionBar(toolbar)
-        addFragment(SelectQuestFragment())
+        addFragment(TravelFragment())
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
@@ -83,7 +83,7 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
                     Toast.makeText(activity, "$position", Toast.LENGTH_SHORT).show()
                     when (position) {
                         1 -> addFragment(ProfileFragment())
-                        2 -> addFragment(SelectQuestFragment())
+                        2 -> addFragment(TravelFragment())
                     }
                     return false
                 }

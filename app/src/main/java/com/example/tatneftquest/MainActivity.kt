@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         mToolbar = mBinding.toolbar
-        setSupportActionBar(mToolbar)
         appDrawer = AppDrawer(this, mToolbar)
     }
 }

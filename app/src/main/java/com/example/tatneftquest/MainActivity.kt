@@ -2,12 +2,11 @@ package com.example.tatneftquest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import com.example.tatneftquest.Interface.ReplaceFragmentHandler
 import com.example.tatneftquest.Menu.AppDrawer
+import com.example.tatneftquest.Menu.TravelFragment
 import com.example.tatneftquest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
@@ -21,6 +20,7 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
         setContentView(mBinding.root)
         init()
         appDrawer.drawerMenuFunc()
+        replace(TravelFragment())
     }
 
     private fun init() {

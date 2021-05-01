@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TravelPackage.StartGeneralFragment">
+
+    <ImageView
+        android:id="@+id/startImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon3" />
+
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startImage"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            style="@style/layoutMargin_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_timeTransit"
+                style="@style/imageViewInStartGeneralFragment"
+                android:src="@drawable/icon4" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/image_timeTransit">
+
+                <TextView
+                    android:id="@+id/text_timeTransit"
+                    style="@style/textViewInStartGeneralFragment"
+                    android:layout_centerHorizontal="true"
+                    android:text="Средняя продолжительность" />
+
+                <TextView
+                    android:id="@+id/timeTransit"
+                    style="@style/textViewResultInStartGeneralFragment"
+                    android:layout_below="@+id/text_timeTransit"
+                    android:layout_centerHorizontal="true"
+                    android:text="4 ч" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/layoutMargin_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_numberPoint"
+                style="@style/imageViewInStartGeneralFragment"
+                android:src="@drawable/icon4" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/image_numberPoint">
+
+                <TextView
+                    android:id="@+id/text_numberPoint"
+                    style="@style/textViewInStartGeneralFragment"
+                    android:layout_centerHorizontal="true"
+                    android:text="Количество точек на маршруте" />
+
+                <TextView
+                    android:id="@+id/numberPoint"
+                    style="@style/textViewResultInStartGeneralFragment"
+                    android:layout_below="@+id/text_numberPoint"
+                    android:layout_centerHorizontal="true"
+                    android:text="10" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/layoutMargin_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_score"
+                style="@style/imageViewInStartGeneralFragment"
+                android:src="@drawable/icon4" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/image_score">
+
+                <TextView
+                    android:id="@+id/text_score"
+                    style="@style/textViewInStartGeneralFragment"
+                    android:layout_centerHorizontal="true"
+                    android:text="Максимальное количество баллов" />
+
+                <TextView
+                    android:id="@+id/score"
+                    style="@style/textViewResultInStartGeneralFragment"
+                    android:layout_below="@+id/text_score"
+                    android:layout_centerHorizontal="true"
+                    android:text="100" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/layoutMargin_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_firstPoint"
+                style="@style/imageViewInStartGeneralFragment"
+                android:src="@drawable/icon4" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/image_firstPoint">
+
+                <TextView
+                    android:id="@+id/text_firstPoint"
+                    style="@style/textViewInStartGeneralFragment"
+                    android:layout_centerHorizontal="true"
+                    android:text="Первая точка на маршруте" />
+
+                <TextView
+                    android:id="@+id/firstPoint"
+                    style="@style/textViewResultInStartGeneralFragment"
+                    android:layout_below="@+id/text_firstPoint"
+                    android:layout_centerHorizontal="true"
+                    android:text="Каскад прудов" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/layoutMargin_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_nextPoint"
+                style="@style/imageViewInStartGeneralFragment"
+                android:src="@drawable/icon4" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@+id/image_nextPoint">
+
+                <TextView
+                    android:id="@+id/text_nextPoint"
+                    style="@style/textViewInStartGeneralFragment"
+                    android:layout_centerHorizontal="true"
+                    android:text="Последняя точка на маршруте" />
+
+                <TextView
+                    android:id="@+id/nextPoint"
+                    style="@style/textViewResultInStartGeneralFragment"
+                    android:layout_below="@+id/text_nextPoint"
+                    android:layout_centerHorizontal="true"
+                    android:text="Шамсинур" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/startQuest"
+        style="@style/standardButton"
+        android:layout_below="@+id/contentLayout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:text="Начать квест" />
+
+</RelativeLayout>

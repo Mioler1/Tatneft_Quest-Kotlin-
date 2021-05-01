@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TravelPackage.QuestFragment">
+
+    <TextView
+        android:id="@+id/textCompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Компания"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textCompany"
+        android:text="Город"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textRes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textCity"
+        android:text="Ресурсы"
+        android:textSize="22sp" />
+
+</RelativeLayout>

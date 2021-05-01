@@ -35,12 +35,16 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
-    
+
     <style name="standardButton">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:background">@drawable/background_button_red</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="layoutMargin_5dp">
+        <item name="android:layout_marginTop">5dp</item>
     </style>
 
     // Боковое меню

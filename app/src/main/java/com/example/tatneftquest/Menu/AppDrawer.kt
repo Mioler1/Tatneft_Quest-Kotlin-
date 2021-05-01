@@ -1,7 +1,6 @@
 package com.example.tatneftquest.Menu
 
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -15,13 +14,13 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 
-class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
+class AppDrawer(private val activity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
+    private var pos: Int = 2
 
     fun drawerMenuFunc() {
         activity.setSupportActionBar(toolbar)
-        addFragment(TravelFragment())
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
@@ -78,12 +77,14 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
                 override fun onItemClick(
                     view: View?,
                     position: Int,
-                    drawerItem: IDrawerItem<*>
+                    drawerItem: IDrawerItem<*>,
                 ): Boolean {
-                    Toast.makeText(activity, "$position", Toast.LENGTH_SHORT).show()
-                    when (position) {
-                        1 -> addFragment(ProfileFragment())
-                        2 -> addFragment(TravelFragment())
+                    if (position != pos) {
+                        pos = mDrawer.currentSelectedPosition
+                        when (position) {
+                            1 -> addFragment(ProfileFragment())
+                            2 -> addFragment(TravelFragment())
+                        }
                     }
                     return false
                 }

@@ -12,17 +12,12 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
-        init()
-
+        ivLogo = findViewById(R.id.iv_logo)
         ivLogo.alpha = 0f
         ivLogo.animate().setDuration(1500).alpha(10f).withEndAction {
             startActivity(Intent(this, FirstScreenActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+            finish()
         }
-    }
-
-    private fun init() {
-        ivLogo = findViewById(R.id.iv_logo)
     }
 }

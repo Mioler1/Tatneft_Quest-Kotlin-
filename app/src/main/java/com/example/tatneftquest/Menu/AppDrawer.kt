@@ -47,28 +47,28 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
                 PrimaryDrawerItem().withIdentifier(2)
                     .withIconTintingEnabled(true)
                     .withName("Квест")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_map)
                     .withSelectable(false),
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
                     .withName("Экскурсия")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_location)
                     .withSelectable(false),
                 PrimaryDrawerItem().withIdentifier(4)
                     .withIconTintingEnabled(true)
                     .withName("Призы")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_celebration)
                     .withSelectable(false),
                 PrimaryDrawerItem().withIdentifier(5)
                     .withIconTintingEnabled(true)
                     .withName("Вопросы")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_help)
                     .withSelectable(false),
                 DividerDrawerItem(),
                 PrimaryDrawerItem().withIdentifier(6)
                     .withIconTintingEnabled(true)
                     .withName("Помощь")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_support)
                     .withSelectable(false),
                 PrimaryDrawerItem().withIdentifier(7)
                     .withIconTintingEnabled(true)

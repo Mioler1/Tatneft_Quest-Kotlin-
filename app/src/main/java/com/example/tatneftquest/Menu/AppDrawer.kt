@@ -15,9 +15,10 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 
-class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
+class AppDrawer(private val activity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
+    private var pos: Int = 2
 
     fun drawerMenuFunc() {
         activity.setSupportActionBar(toolbar)
@@ -29,53 +30,47 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
                 ProfileDrawerItem().withName("Sergey Galdin")
                     .withEmail("veretennik-v@mail.ru")
                     .withIcon(R.drawable.ic_launcher_foreground)
-            )
-            .build()
-
+            ).build()
         mDrawer = DrawerBuilder()
             .withActivity(activity)
             .withToolbar(toolbar)
             .withActionBarDrawerToggle(true)
-            .withSelectedItem(-1)
+            .withSelectedItem(2)
             .withAccountHeader(mHeader)
+            .withDelayOnDrawerClose(300)
             .addDrawerItems(
                 PrimaryDrawerItem().withIdentifier(1)
                     .withIconTintingEnabled(true)
                     .withName("Профиль")
                     .withIcon(R.drawable.ic_person)
-                    .withSelectable(false),
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(2)
                     .withIconTintingEnabled(true)
-                    .withName("Квест")
-                    .withIcon(R.drawable.ic_map)
-                    .withSelectable(false),
+                    .withName("Путешествия")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
-                    .withName("Экскурсия")
-                    .withIcon(R.drawable.ic_location)
-                    .withSelectable(false),
+                    .withName("Призы")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(4)
                     .withIconTintingEnabled(true)
-                    .withName("Призы")
-                    .withIcon(R.drawable.ic_celebration)
-                    .withSelectable(false),
+                    .withName("Вопросы")
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(true),
+                DividerDrawerItem(),
                 PrimaryDrawerItem().withIdentifier(5)
                     .withIconTintingEnabled(true)
-                    .withName("Вопросы")
-                    .withIcon(R.drawable.ic_help)
-                    .withSelectable(false),
-                DividerDrawerItem(),
-                PrimaryDrawerItem().withIdentifier(6)
-                    .withIconTintingEnabled(true)
                     .withName("Помощь")
-                    .withIcon(R.drawable.ic_support)
-                    .withSelectable(false),
-                PrimaryDrawerItem().withIdentifier(7)
+                    .withIcon(R.drawable.ic_person)
+                    .withSelectable(true),
+                PrimaryDrawerItem().withIdentifier(6)
                     .withIconTintingEnabled(true)
                     .withName("Настройки")
                     .withIcon(R.drawable.ic_settings)
-                    .withSelectable(false),
-                PrimaryDrawerItem().withIdentifier(8)
+                    .withSelectable(true),
+                PrimaryDrawerItem().withIdentifier(7)
                     .withIconTintingEnabled(true)
                     .withName("Выход")
                     .withIcon(R.drawable.ic_logout)
@@ -84,11 +79,14 @@ class AppDrawer(val activity: AppCompatActivity, private val toolbar: Toolbar) {
                 override fun onItemClick(
                     view: View?,
                     position: Int,
-                    drawerItem: IDrawerItem<*>
+                    drawerItem: IDrawerItem<*>,
                 ): Boolean {
-                    Toast.makeText(activity, "$position", Toast.LENGTH_SHORT).show()
-                    when (position) {
-                        1 -> addFragment(ProfileFragment())
+                    if (position != pos) {
+                        pos = mDrawer.currentSelectedPosition
+                        when (position) {
+                            1 -> addFragment(ProfileFragment())
+                            2 -> addFragment(TravelFragment())
+                        }
                     }
                     return false
                 }

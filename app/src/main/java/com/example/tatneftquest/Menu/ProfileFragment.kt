@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneftquest.databinding.FragmentProfileBinding
+import com.example.tatneftquest.fragments.BaseFragment
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment() {
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var textView: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,6 +24,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textView = binding.myText
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Профиль"
     }
 }

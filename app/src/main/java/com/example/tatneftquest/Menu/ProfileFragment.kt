@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneftquest.databinding.FragmentProfileBinding
-import com.example.tatneftquest.fragments.BaseFragment
 
-class ProfileFragment : BaseFragment() {
+class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(

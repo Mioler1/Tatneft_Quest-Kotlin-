@@ -6,7 +6,7 @@
     tools:context=".TravelPackage.StartGeneralFragment">
 
     <ImageView
-        android:id="@+id/startImage"
+        android:id="@+id/imageQuest"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
@@ -16,7 +16,7 @@
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/startImage"
+        android:layout_below="@+id/imageQuest"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -45,8 +45,7 @@
                     android:id="@+id/timeTransit"
                     style="@style/textViewResultInStartGeneralFragment"
                     android:layout_below="@+id/text_timeTransit"
-                    android:layout_centerHorizontal="true"
-                    android:text="4 ч" />
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 
@@ -77,9 +76,11 @@
                 <TextView
                     android:id="@+id/numberPoint"
                     style="@style/textViewResultInStartGeneralFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/text_numberPoint"
                     android:layout_centerHorizontal="true"
-                    android:text="10" />
+                    android:layout_marginTop="0dp" />
 
             </RelativeLayout>
 
@@ -111,8 +112,7 @@
                     android:id="@+id/score"
                     style="@style/textViewResultInStartGeneralFragment"
                     android:layout_below="@+id/text_score"
-                    android:layout_centerHorizontal="true"
-                    android:text="100" />
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 
@@ -144,8 +144,7 @@
                     android:id="@+id/firstPoint"
                     style="@style/textViewResultInStartGeneralFragment"
                     android:layout_below="@+id/text_firstPoint"
-                    android:layout_centerHorizontal="true"
-                    android:text="Каскад прудов" />
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 
@@ -168,17 +167,16 @@
                 android:layout_toEndOf="@+id/image_nextPoint">
 
                 <TextView
-                    android:id="@+id/text_nextPoint"
+                    android:id="@+id/text_lastPoint"
                     style="@style/textViewInStartGeneralFragment"
                     android:layout_centerHorizontal="true"
                     android:text="Последняя точка на маршруте" />
 
                 <TextView
-                    android:id="@+id/nextPoint"
+                    android:id="@+id/lastPoint"
                     style="@style/textViewResultInStartGeneralFragment"
-                    android:layout_below="@+id/text_nextPoint"
-                    android:layout_centerHorizontal="true"
-                    android:text="Шамсинур" />
+                    android:layout_below="@+id/text_lastPoint"
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 
@@ -186,12 +184,33 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/startQuest"
-        style="@style/standardButton"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/contentLayout"
-        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="20dp"
-        android:text="Начать квест" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/seeingMap"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0.6"
+            android:background="@drawable/border_button_red"
+            android:text="Карта"
+            android:textColor="@color/red" />
+
+        <Button
+            android:id="@+id/startQuest"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/background_button_red"
+            android:text="Начать квест"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 </RelativeLayout>

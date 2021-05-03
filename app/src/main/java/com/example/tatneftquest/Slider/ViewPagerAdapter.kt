@@ -11,7 +11,7 @@ import com.example.tatneftquest.R
 
 class ViewPagerAdapter(
     private var context: Context,
-    private var onBoardingDataList: List<OnBoardingData>
+    private var onBoardingDataList: List<OnBoardingData>,
 ) : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
@@ -27,7 +27,6 @@ class ViewPagerAdapter(
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(context).inflate(R.layout.item_page, null)
-
         val imageView: ImageView = view.findViewById(R.id.ivImage)
         val title: TextView = view.findViewById(R.id.tvTitle)
 
@@ -39,4 +38,5 @@ class ViewPagerAdapter(
 
     }
 
+    class OnBoardingData(var title: String, var imageUrl: Int)
 }

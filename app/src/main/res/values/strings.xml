@@ -12,4 +12,23 @@
     <string name="nextBtn">Дальше</string>
     <string name="getStart">Старт</string>
     <string name="skip">Пропустить</string>
+
+    <!--fragment_quest-->
+    <string name="city">Город</string>
+    <string name="company">Компания</string>
+    <string name="resource">Ресурсы</string>
+    <string name="titleForCity">Квест по истории города Альметьевск</string>
+    <string name="titleForCompany">Квест по компании Татнефть имени В. Д. Шашина</string>
+    <string name="titleForResource">Квест по ресурсосбережению</string>
+    <string name="rating">Рейтинг квеста:</string>
+    <string name="textForCity">Данный квест позволит вам познакомиться с городом в интересной и захватывающей форме</string>
+    <string name="textForCompany">Данный квест позволит вам познакомиться с компанией и узнать ее главные достижения</string>
+    <string name="textForResource">Данный квест позволит вам узнать о разных способах ресурсосбережения</string>
+
+    <!--fragment_startGeneral-->
+    <string name="avgDuration">Средняя продолжительность</string>
+    <string name="countPointOnRoute">Количество точек на маршруте</string>
+    <string name="maxPoint">Максимальное количество баллов</string>
+    <string name="firstPoint">Первая точка на маршруте</string>
+    <string name="lastPoint">Последняя точка на маршруте</string>
 </resources>

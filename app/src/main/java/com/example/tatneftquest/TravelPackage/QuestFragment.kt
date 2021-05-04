@@ -19,8 +19,11 @@ class QuestFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textCity.setOnClickListener {
-            outputData("5 часов", 10, 100, "Каскад", "Шамсинур")
+        binding.company.setOnClickListener {
+            outputData("2 часа", 10, 25, "Татнефть", "Шамсинур")
+        }
+        binding.city.setOnClickListener{
+            outputData("4 часа", 20, 50, "Каскад", "Шамсинур")
         }
     }
 }

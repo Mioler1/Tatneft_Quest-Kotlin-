@@ -24,16 +24,19 @@
     <style name="imageViewInStartGeneralFragment">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginRight">10dp</item>
     </style>
 
     <style name="textViewInStartGeneralFragment" parent="wrap_content">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="textViewResultInStartGeneralFragment" parent="wrap_content">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginTop">5dp</item>
     </style>
 
     <style name="standardButton">
@@ -45,7 +48,9 @@
 
     <style name="layoutMargin_5dp">
         <item name="android:layout_marginTop">5dp</item>
+        <item name="android:padding">10dp</item>
     </style>
+
 
     // Боковое меню
     <style name="CustomTheme" parent="MaterialDrawerTheme">

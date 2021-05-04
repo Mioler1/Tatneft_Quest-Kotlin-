@@ -47,23 +47,23 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                 PrimaryDrawerItem().withIdentifier(2)
                     .withIconTintingEnabled(true)
                     .withName("Путешествия")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_map)
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
                     .withName("Призы")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_celebration)
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(4)
                     .withIconTintingEnabled(true)
                     .withName("Вопросы")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_help)
                     .withSelectable(true),
                 DividerDrawerItem(),
                 PrimaryDrawerItem().withIdentifier(5)
                     .withIconTintingEnabled(true)
                     .withName("Помощь")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_support)
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(6)
                     .withIconTintingEnabled(true)

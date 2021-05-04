@@ -31,7 +31,6 @@ class TravelFragment : Fragment() {
         setupTabLayout()
     }
 
-
     private fun setupTabLayout() {
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager

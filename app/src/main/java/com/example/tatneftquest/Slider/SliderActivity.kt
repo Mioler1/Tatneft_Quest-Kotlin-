@@ -12,8 +12,7 @@ import com.example.tatneftquest.R
 import com.google.android.material.tabs.TabLayout
 import java.util.*
 
-class SliderActivity() : AppCompatActivity() {
-
+class SliderActivity : AppCompatActivity() {
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var tabLayout: TabLayout
     private lateinit var onBoardingViewPager: ViewPager
@@ -32,16 +31,17 @@ class SliderActivity() : AppCompatActivity() {
             finish()
         }
 
-        val onBoardingData: MutableList<OnBoardingData> = ArrayList()
-        onBoardingData.add(OnBoardingData("Выбирай квест или экскурсию", R.drawable.icon1))
-        onBoardingData.add(OnBoardingData("Следуй маршруту", R.drawable.icon2))
-        onBoardingData.add(OnBoardingData("Сканируй QR-code", R.drawable.icon3))
-        onBoardingData.add(OnBoardingData("Читай историю", R.drawable.icon4))
-        onBoardingData.add(OnBoardingData("Выполняй задания", R.drawable.icon5))
-        onBoardingData.add(OnBoardingData("Меняй баллы на подарки", R.drawable.icon6))
+        val onBoardingData: MutableList<ViewPagerAdapter.OnBoardingData> = ArrayList()
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Выбирай квест или экскурсию",
+            R.drawable.icon1))
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Следуй маршруту", R.drawable.icon2))
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Сканируй QR-code", R.drawable.icon3))
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Читай историю", R.drawable.icon4))
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Выполняй задания", R.drawable.icon5))
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Меняй баллы на подарки",
+            R.drawable.icon6))
 
         setViewPagerAdapter(onBoardingData)
-
         position = onBoardingViewPager.currentItem
 
         next.setOnClickListener {
@@ -84,7 +84,7 @@ class SliderActivity() : AppCompatActivity() {
         skip = findViewById(R.id.skip)
     }
 
-    private fun setViewPagerAdapter(onBoardingData: List<OnBoardingData>) {
+    private fun setViewPagerAdapter(onBoardingData: List<ViewPagerAdapter.OnBoardingData>) {
         viewPagerAdapter = ViewPagerAdapter(this, onBoardingData)
         onBoardingViewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(onBoardingViewPager)

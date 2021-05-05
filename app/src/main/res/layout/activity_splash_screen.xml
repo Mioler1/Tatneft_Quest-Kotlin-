@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/for_splash"
+        android:background="@drawable/start_screen"
         android:scaleType="centerCrop" />
 
 </RelativeLayout>

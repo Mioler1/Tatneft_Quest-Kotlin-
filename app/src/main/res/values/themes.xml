@@ -53,6 +53,7 @@
 
 
     // Боковое меню
+
     <style name="CustomTheme" parent="MaterialDrawerTheme">
         <item name="colorPrimary">@color/material_drawer_primary</item>
         <item name="colorPrimaryDark">@color/material_drawer_primary_dark</item>

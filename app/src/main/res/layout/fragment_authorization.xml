@@ -18,18 +18,22 @@
         android:visibility="visible">
 
         <RelativeLayout
-            android:id="@+id/label1"
+            android:id="@+id/labelAuthorization"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/textInputNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_phone"
+                app:prefixText="+7"
+                app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_authorization"
+                    android:id="@+id/numberAuthorization"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/number"
@@ -40,21 +44,23 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/label2"
+            android:id="@+id/labelRegistration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label1"
-            android:layout_marginTop="10dp">
+            android:layout_below="@+id/labelAuthorization">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_authorization"
+                    android:id="@+id/passwordAuthorization"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
@@ -68,9 +74,8 @@
             android:id="@+id/change_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label2"
+            android:layout_below="@+id/labelRegistration"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
             android:stateListAnimator="@animator/button_elevation"
             android:text="@string/rememberPassword"
             android:textSize="16sp" />

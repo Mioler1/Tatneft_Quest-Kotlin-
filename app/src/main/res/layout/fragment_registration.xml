@@ -23,13 +23,16 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputNumber"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+                app:prefixText="+7"
+                app:errorEnabled="true"
                 android:layout_height="wrap_content"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_registration"
+                    android:id="@+id/numberRegistration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Введите номер телефона"
@@ -43,12 +46,13 @@
             android:id="@+id/label2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label1"
-            android:layout_marginTop="10dp">
+            android:layout_below="@id/label1">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+                app:errorEnabled="true"
                 android:layout_height="wrap_content"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
@@ -67,13 +71,14 @@
             android:id="@+id/label3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/label2"
-            android:layout_marginTop="10dp">
+            android:layout_below="@id/label2">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputRepeatPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -94,7 +99,7 @@
             android:stateListAnimator="@animator/button_elevation"
             android:layout_below="@id/label3"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btn_save_active"
             android:text="Зарегистрироваться"
             android:textColor="@color/white" />

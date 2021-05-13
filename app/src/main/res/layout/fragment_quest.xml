@@ -20,8 +20,8 @@
                 android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:background="@drawable/shape_login">
 
                 <TextView
@@ -30,9 +30,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toStartOf="@id/image1"
                     android:gravity="center"
-                    android:paddingStart="16dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingEnd="10dp"
                     android:text="@string/titleForCity"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -42,7 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/titleCity"
-                    android:paddingStart="16dp"
+                    android:layout_toStartOf="@id/image1"
+                    android:paddingStart="10dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="16dp">
 
@@ -66,16 +67,16 @@
                     android:layout_below="@id/rating1"
                     android:layout_toStartOf="@id/image1"
                     android:gravity="center"
-                    android:paddingStart="16dp"
+                    android:paddingStart="5dp"
                     android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingEnd="5dp"
                     android:text="@string/textForCity"/>
 
 
                 <ImageView
                     android:id="@+id/image1"
                     android:layout_width="125dp"
-                    android:layout_height="175dp"
+                    android:layout_height="176dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
@@ -89,9 +90,9 @@
                 android:id="@+id/company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="15dp"
                 android:background="@drawable/shape_login">
 
                 <TextView
@@ -100,9 +101,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toStartOf="@id/image2"
                     android:gravity="center"
-                    android:paddingStart="16dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingEnd="10dp"
                     android:text="@string/titleForCompany"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -111,8 +112,9 @@
                     android:id="@+id/rating2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/image2"
                     android:layout_below="@id/titleCompany"
-                    android:paddingStart="16dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="16dp">
 
@@ -136,9 +138,9 @@
                     android:layout_below="@id/rating2"
                     android:layout_toStartOf="@id/image2"
                     android:gravity="center"
-                    android:paddingStart="16dp"
+                    android:paddingStart="5dp"
                     android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingEnd="5dp"
                     android:text="@string/textForCompany" />
 
 
@@ -159,9 +161,9 @@
                 android:id="@+id/resource"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="15dp"
                 android:background="@drawable/shape_login">
 
                 <TextView
@@ -170,9 +172,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toStartOf="@id/image3"
                     android:gravity="center"
-                    android:paddingStart="16dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingEnd="10dp"
                     android:text="@string/titleForResource"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -181,6 +183,7 @@
                     android:id="@+id/rating3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/image3"
                     android:layout_below="@id/titleResource"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
@@ -206,9 +209,9 @@
                     android:layout_below="@id/rating3"
                     android:layout_toStartOf="@id/image3"
                     android:gravity="center"
-                    android:paddingStart="16dp"
+                    android:paddingStart="5dp"
                     android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
+                    android:paddingEnd="5dp"
                     android:text="@string/textForResource" />
 
 

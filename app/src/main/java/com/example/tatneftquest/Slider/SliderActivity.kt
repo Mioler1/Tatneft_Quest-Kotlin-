@@ -9,21 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.tatneftquest.MainActivity
 import com.example.tatneftquest.R
+import com.example.tatneftquest.databinding.ActivitySliderBinding
+import com.example.tatneftquest.databinding.ActivityStartActionBinding
 import com.google.android.material.tabs.TabLayout
 import java.util.*
 
 class SliderActivity : AppCompatActivity() {
+    lateinit var mBinding: ActivitySliderBinding
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-    private lateinit var tabLayout: TabLayout
+    private lateinit var mTabLayout: TabLayout
     private lateinit var onBoardingViewPager: ViewPager
-    private lateinit var next: Button
-    private lateinit var skip: Button
+    private lateinit var mNext: Button
+    private lateinit var mSkip: Button
     private lateinit var sharedPreferences: SharedPreferences
     var position = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_slider)
+        mBinding = ActivitySliderBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         init()
 
         if (restorePrefData()) {
@@ -44,7 +48,7 @@ class SliderActivity : AppCompatActivity() {
         setViewPagerAdapter(onBoardingData)
         position = onBoardingViewPager.currentItem
 
-        next.setOnClickListener {
+        mNext.setOnClickListener {
             if (position < onBoardingData.size) {
                 position++
                 onBoardingViewPager.currentItem = position
@@ -55,17 +59,17 @@ class SliderActivity : AppCompatActivity() {
             }
         }
 
-        skip.setOnClickListener {
+        mSkip.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        mTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 position = tab!!.position
                 if (tab.position == onBoardingData.size - 1) {
-                    next.text = "Старт!"
+                    mNext.text = "Старт!"
                 } else {
-                    next.text = "Дальше"
+                    mNext.text = "Дальше"
                 }
             }
 
@@ -78,16 +82,16 @@ class SliderActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        tabLayout = findViewById(R.id.indicator)
-        next = findViewById(R.id.next)
-        onBoardingViewPager = findViewById(R.id.screenPager)
-        skip = findViewById(R.id.skip)
+        mTabLayout = mBinding.indicator
+        mNext = mBinding.next
+        onBoardingViewPager = mBinding.screenPager
+        mSkip = mBinding.skip
     }
 
     private fun setViewPagerAdapter(onBoardingData: List<ViewPagerAdapter.OnBoardingData>) {
         viewPagerAdapter = ViewPagerAdapter(this, onBoardingData)
         onBoardingViewPager.adapter = viewPagerAdapter
-        tabLayout.setupWithViewPager(onBoardingViewPager)
+        mTabLayout.setupWithViewPager(onBoardingViewPager)
     }
 
     private fun savePrefData() {

@@ -2,6 +2,7 @@ package com.example.tatneftquest.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import com.example.tatneftquest.Interface.ReplaceFragmentHandler

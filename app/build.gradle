@@ -56,4 +56,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Palette
+    implementation 'androidx.palette:palette-ktx:1.0.0'
+
+    // Scanner QR-code and barcode
+//    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
 }

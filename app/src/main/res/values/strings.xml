@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Tatneft Quest</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank</string>
 
     <!-- fragment_authorization -->
     <string name="come">Войти</string>
@@ -12,4 +12,33 @@
     <string name="nextBtn">Дальше</string>
     <string name="getStart">Старт</string>
     <string name="skip">Пропустить</string>
+
+    <!--fragment_quest-->
+    <string name="city">Город</string>
+    <string name="company">Компания</string>
+    <string name="resource">Ресурсы</string>
+    <string name="titleForCity">Квест по истории города Альметьевск</string>
+    <string name="titleForCompany">Квест по компании Татнефть имени В. Д. Шашина</string>
+    <string name="titleForResource">Квест по ресурсосбережению</string>
+    <string name="rating">Рейтинг: </string>
+    <string name="textForCity">Данный квест позволит вам познакомиться с городом в интересной и захватывающей форме</string>
+    <string name="textForCompany">Данный квест позволит вам познакомиться с компанией и узнать ее главные достижения</string>
+    <string name="textForResource">Данный квест позволит вам узнать о разных способах ресурсосбережения</string>
+
+    <!--fragment_startGeneral-->
+    <string name="avgDuration">Средняя продолжительность</string>
+    <string name="countPointOnRoute">Количество точек на маршруте</string>
+    <string name="maxPoint">Максимальное количество баллов</string>
+    <string name="firstPoint">Первая точка на маршруте</string>
+    <string name="lastPoint">Последняя точка на маршруте</string>
+
+    <!--activity_start_action-->
+    <string name="showing_code_in_fragment">Showing code in fragment</string>
+    <string name="scan_qr_code">SCAN QR CODE</string>
+    <string name="name">Name</string>
+    <string name="empty">---</string>
+    <string name="site_name">Site Name</string>
+    <string name="scan_a_code">Scan a QR Code</string>
+    <string name="result_not_found">Result Not Found</string>
+    <string name="show_scanner_from_fragment">Show Scanner From Fragment</string>
 </resources>

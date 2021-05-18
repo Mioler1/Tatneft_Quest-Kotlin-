@@ -1,10 +1,12 @@
 package com.example.tatneftquest.Menu
 
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneftquest.R
+import com.example.tatneftquest.fragments.AuthorizationFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -24,6 +26,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
+
             .addProfiles(
                 ProfileDrawerItem().withName("Sergey Galdin")
                     .withEmail("veretennik-v@mail.ru")
@@ -45,23 +48,23 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                 PrimaryDrawerItem().withIdentifier(2)
                     .withIconTintingEnabled(true)
                     .withName("Путешествия")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_map)
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
                     .withName("Призы")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_celebration)
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(4)
                     .withIconTintingEnabled(true)
                     .withName("Вопросы")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_help)
                     .withSelectable(true),
                 DividerDrawerItem(),
                 PrimaryDrawerItem().withIdentifier(5)
                     .withIconTintingEnabled(true)
                     .withName("Помощь")
-                    .withIcon(R.drawable.ic_person)
+                    .withIcon(R.drawable.ic_support)
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(6)
                     .withIconTintingEnabled(true)

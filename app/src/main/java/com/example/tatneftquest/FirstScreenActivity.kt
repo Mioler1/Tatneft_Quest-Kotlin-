@@ -3,8 +3,8 @@ package com.example.tatneftquest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import com.example.tatneftquest.fragments.AuthorizationFragment
-import com.example.tatneftquest.fragments.RegistrationFragment
+import com.example.tatneftquest.Fragments.AuthorizationFragment
+import com.example.tatneftquest.Fragments.RegistrationFragment
 import com.google.android.material.tabs.TabLayout
 import com.example.tatneftquest.Tablayout.PagerAdapter
 

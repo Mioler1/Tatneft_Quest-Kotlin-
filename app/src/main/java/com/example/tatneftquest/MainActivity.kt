@@ -2,14 +2,12 @@ package com.example.tatneftquest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneftquest.Interface.ReplaceFragmentHandler
 import com.example.tatneftquest.Menu.AppDrawer
 import com.example.tatneftquest.Menu.TravelFragment
 import com.example.tatneftquest.databinding.ActivityMainBinding
-import com.example.tatneftquest.fragments.AuthorizationFragment
 
 class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
     lateinit var mBinding: ActivityMainBinding

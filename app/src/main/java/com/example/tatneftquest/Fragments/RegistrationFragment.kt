@@ -1,23 +1,18 @@
-package com.example.tatneftquest.fragments
+package com.example.tatneftquest.Fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tatneftquest.FirstScreenActivity
-import com.example.tatneftquest.R
 import com.example.tatneftquest.Slider.SliderActivity
-import com.example.tatneftquest.databinding.FragmentAuthorizationBinding
 import com.example.tatneftquest.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationBinding
     var check = false
-
     val passwordCheck =
         """^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#${'$'}%!\-_?&])(?=\S+${'$'}).{8,}""".toRegex()
 
@@ -72,7 +67,6 @@ class RegistrationFragment : Fragment() {
             }
             startActivity(intent)
         }
-
     }
 
 }

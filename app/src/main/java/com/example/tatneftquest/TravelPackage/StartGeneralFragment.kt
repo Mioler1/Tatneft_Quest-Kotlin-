@@ -1,14 +1,13 @@
 package com.example.tatneftquest.TravelPackage
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneftquest.databinding.FragmentStartGeneralBinding
-import com.example.tatneftquest.fragments.BaseFragment
-import com.example.tatneftquest.fragments.StartActionFragment
+import com.example.tatneftquest.Fragments.BaseFragment
+import com.example.tatneftquest.Fragments.StartActionFragment
 
 class StartGeneralFragment : BaseFragment() {
     private lateinit var binding: FragmentStartGeneralBinding
@@ -22,7 +21,6 @@ class StartGeneralFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val intent = Intent(context, StartActionFragment::class.java)
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Квест"
         if (arguments != null) {
             binding.timeTransit.text = arguments?.getString("timeTransit")

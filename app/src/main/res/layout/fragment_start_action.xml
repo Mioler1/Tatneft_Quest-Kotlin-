@@ -20,19 +20,10 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:padding="10dp"
-            android:layout_below="@id/pointPosition"
-            android:text="Доберетесь до первой точки маршрута:"/>
-
-        <TextView
             android:id="@+id/name_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/description"
+            android:layout_below="@id/pointPosition"
             android:padding="10dp"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"

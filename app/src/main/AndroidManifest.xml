@@ -11,32 +11,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TatneftQuest">
 
-<!--        <activity-->
-<!--            android:name="com.journeyapps.barcodescanner.CaptureActivity"-->
-<!--            android:screenOrientation="fullSensor"-->
-<!--            tools:replace="screenOrientation" />-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${GOOGLE_MAPS_API_KEY}" />
 
-        <activity android:name=".MainActivity" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
-        <activity
-            android:name=".Slider.SliderActivity"
-            android:screenOrientation="portrait" />
+        <!--        <activity-->
+        <!--            android:name="com.journeyapps.barcodescanner.CaptureActivity"-->
+        <!--            android:screenOrientation="fullSensor"-->
+        <!--            tools:replace="screenOrientation" />-->
+
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".FirstScreenActivity"
             android:screenOrientation="portrait" />
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".Slider.SliderActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

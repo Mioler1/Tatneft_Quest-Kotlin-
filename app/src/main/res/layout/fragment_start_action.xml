@@ -11,12 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
+
         <TextView
             android:id="@+id/pointPosition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Точка 1"
             android:padding="10dp"
+            android:text="Точка 1"
             android:textSize="16sp" />
 
         <TextView
@@ -24,21 +25,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/pointPosition"
-            android:padding="10dp"
-            android:textSize="20sp"
             android:layout_centerHorizontal="true"
-            android:text="Главный офис ПАО Татнефть"/>
+            android:padding="10dp"
+            android:text="Главный офис ПАО Татнефть"
+            android:textSize="20sp" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/map"
+        <fragment
+            android:id="@+id/map_fragment"
+            class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_below="@id/name_location"/>
+            android:layout_below="@id/name_location" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/map"
+            android:layout_below="@+id/map_fragment"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
@@ -57,8 +59,8 @@
                 android:id="@+id/inPlace"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/background_button_red"
                 android:text="я уже на месте!"
@@ -68,13 +70,13 @@
                 android:id="@+id/btnScan"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/background_button_red"
                 android:text="Сканировать"
                 android:textColor="@color/white"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -108,14 +110,12 @@
             android:id="@+id/site_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/descriptionLocation"
             android:paddingBottom="@dimen/padding_default"
             android:text="@string/empty"
-            android:layout_below="@id/descriptionLocation"
             android:textStyle="bold|italic" />
 
     </RelativeLayout>
-
-
 
 
 </RelativeLayout>

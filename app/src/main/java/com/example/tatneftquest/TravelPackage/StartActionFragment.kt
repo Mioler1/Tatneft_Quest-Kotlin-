@@ -1,4 +1,4 @@
-package com.example.tatneftquest.Fragments
+package com.example.tatneftquest.TravelPackage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

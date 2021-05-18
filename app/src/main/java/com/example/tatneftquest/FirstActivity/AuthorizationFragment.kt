@@ -1,4 +1,4 @@
-package com.example.tatneftquest.Fragments
+package com.example.tatneftquest.FirstActivity
 
 import android.content.Intent
 import android.os.Bundle

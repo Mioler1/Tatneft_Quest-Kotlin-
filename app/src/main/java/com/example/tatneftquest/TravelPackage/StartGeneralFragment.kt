@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneftquest.databinding.FragmentStartGeneralBinding
 import com.example.tatneftquest.Fragments.BaseFragment
-import com.example.tatneftquest.Fragments.StartActionFragment
 
 class StartGeneralFragment : BaseFragment() {
     private lateinit var binding: FragmentStartGeneralBinding

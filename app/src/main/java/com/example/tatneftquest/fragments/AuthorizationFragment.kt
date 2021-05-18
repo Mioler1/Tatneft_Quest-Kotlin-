@@ -35,20 +35,20 @@ class AuthorizationFragment : Fragment() {
         binding.comeButton.setOnClickListener {
             val numberText = binding.numberAuthorization.text.toString()
             val passwordText = binding.passwordAuthorization.text.toString()
-            if (numberText.isEmpty()) {
-                binding.textInputNumber.error = "Пустое поле"
-                return@setOnClickListener
-            }
-            if (numberText.length < 10) {
-                binding.textInputNumber.error = "Номер телефона введен неверно"
-                return@setOnClickListener
-            }
-            if (passwordText.isEmpty()) {
-                binding.textInputPassword.error = "Пустое поле"
-                binding.textInputNumber.error = null
-                binding.textInputPassword.errorIconDrawable = null
-                return@setOnClickListener
-            }
+//            if (numberText.isEmpty()) {
+//                binding.textInputNumber.error = "Пустое поле"
+//                return@setOnClickListener
+//            }
+//            if (numberText.length < 10) {
+//                binding.textInputNumber.error = "Номер телефона введен неверно"
+//                return@setOnClickListener
+//            }
+//            if (passwordText.isEmpty()) {
+//                binding.textInputPassword.error = "Пустое поле"
+//                binding.textInputNumber.error = null
+//                binding.textInputPassword.errorIconDrawable = null
+//                return@setOnClickListener
+//            }
             startActivity(intent)
         }
 }

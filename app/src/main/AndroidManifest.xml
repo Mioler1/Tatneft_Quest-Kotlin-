@@ -11,12 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TatneftQuest">
 
-        <activity
-            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation" />
+<!--        <activity-->
+<!--            android:name="com.journeyapps.barcodescanner.CaptureActivity"-->
+<!--            android:screenOrientation="fullSensor"-->
+<!--            tools:replace="screenOrientation" />-->
 
-        <activity android:name=".StartAction"/>
         <activity android:name=".MainActivity" />
 
         <activity

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.tatneftquest"
-        minSdkVersion 24
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -61,5 +61,5 @@ dependencies {
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
     // Scanner QR-code and barcode
-    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+//    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
 }

@@ -10,7 +10,6 @@ import androidx.viewpager.widget.ViewPager
 import com.example.tatneftquest.MainActivity
 import com.example.tatneftquest.R
 import com.example.tatneftquest.databinding.ActivitySliderBinding
-import com.example.tatneftquest.databinding.ActivityStartActionBinding
 import com.google.android.material.tabs.TabLayout
 import java.util.*
 

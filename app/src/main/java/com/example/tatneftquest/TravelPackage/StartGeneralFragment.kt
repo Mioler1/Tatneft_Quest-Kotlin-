@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneftquest.databinding.FragmentStartGeneralBinding
 import com.example.tatneftquest.fragments.BaseFragment
-import com.example.tatneftquest.StartAction
+import com.example.tatneftquest.fragments.StartActionFragment
 
 class StartGeneralFragment : BaseFragment() {
     private lateinit var binding: FragmentStartGeneralBinding
@@ -22,7 +22,7 @@ class StartGeneralFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val intent = Intent(context, StartAction::class.java)
+        val intent = Intent(context, StartActionFragment::class.java)
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Квест"
         if (arguments != null) {
             binding.timeTransit.text = arguments?.getString("timeTransit")
@@ -33,7 +33,7 @@ class StartGeneralFragment : BaseFragment() {
         }
 
         binding.startQuest.setOnClickListener {
-            startActivity(intent)
+            mFragmentHandler?.replace(StartActionFragment())
         }
     }
 }

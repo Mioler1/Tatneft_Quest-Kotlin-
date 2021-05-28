@@ -2,11 +2,13 @@ package com.example.tatneftquest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneftquest.Interface.ReplaceFragmentHandler
 import com.example.tatneftquest.Menu.AppDrawer
 import com.example.tatneftquest.Menu.TravelFragment
+import com.example.tatneftquest.TravelPackage.StartActionFragment
 import com.example.tatneftquest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
         init()
         appDrawer.drawerMenuFunc()
         replace(TravelFragment())
+        checkIntent()
     }
 
     private fun init() {
@@ -30,6 +33,12 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
 
     override fun replace(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+    }
+
+    private fun checkIntent() {
+        if (intent.action == "start") {
+            replace(StartActionFragment())
+        }
     }
 }
 

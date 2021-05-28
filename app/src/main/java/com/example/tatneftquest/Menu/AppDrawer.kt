@@ -24,7 +24,6 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
-
             .addProfiles(
                 ProfileDrawerItem().withName("Sergey Galdin")
                     .withEmail("veretennik-v@mail.ru")

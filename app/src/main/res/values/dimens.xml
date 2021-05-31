@@ -7,5 +7,10 @@
     <dimen name="padding_default">10dp</dimen>
     <dimen name="padding_low">5dp</dimen>
     <dimen name="padding_highest">40dp</dimen>
+    
+
+    //  Marker
+    <dimen name="custom_marker_image">50dp</dimen>
+    <dimen name="custom_marker_padding">2dp</dimen>
 
 </resources>

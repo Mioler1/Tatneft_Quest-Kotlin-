@@ -64,6 +64,9 @@ dependencies {
     // Scanner QR-code and barcode
 //    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
 
+    //  Circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     testImplementation 'junit:junit:4.13.2'

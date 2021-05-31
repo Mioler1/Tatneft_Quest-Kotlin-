@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menu.PrizeFragment">
+
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/choose"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/description"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/block1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/item1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_login">
+
+            <ImageButton
+                    android:id="@+id/image_click_one"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:background="@drawable/tatneft"
+                    style="@style/cardImage"/>
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_below="@+id/image1"
+                    android:padding="5dp"
+                    style="@style/cardText"
+                    android:gravity="center"
+                    android:text="150 баллов - Фирменная ручка"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+                <RadioButton
+                    android:id="@+id/radio_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/item2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="5dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_login"
+                android:layout_toEndOf="@id/item1">
+
+                <ImageButton
+                    android:id="@+id/image_click_two"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+
+                <ImageView
+                    android:id="@+id/image2"
+                    style="@style/cardImage"
+                    android:background="@drawable/tatneft"/>
+
+                <TextView
+                    android:id="@+id/text2"
+                    style="@style/cardText"
+                    android:layout_below="@+id/image2"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="175 баллов - Футболка"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <RadioButton
+                    android:id="@+id/radio_button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/block2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/block1">
+
+            <RelativeLayout
+                android:id="@+id/item3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_login">
+
+                <ImageButton
+                    android:id="@+id/image_click_three"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:background="@drawable/tatneft"
+                    style="@style/cardImage"/>
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_below="@+id/image3"
+                    android:padding="5dp"
+                    style="@style/cardText"
+                    android:gravity="center"
+                    android:text="200 баллов - Фирменная бейсболка"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <RadioButton
+                    android:id="@+id/radio_button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/item4"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_login"
+                android:layout_toEndOf="@id/item3">
+
+                <ImageButton
+                    android:id="@+id/image_click_four"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+
+                <ImageView
+                    android:id="@+id/image4"
+                    style="@style/cardImage"
+                    android:background="@drawable/tatneft"/>
+
+                <TextView
+                    android:id="@+id/text4"
+                    style="@style/cardText"
+                    android:layout_below="@+id/image4"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:text="250 баллов - Топливная карта"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <RadioButton
+                    android:id="@+id/radio_button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/block3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/block2">
+
+            <RelativeLayout
+                android:id="@+id/item5"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_login">
+
+                <ImageButton
+                    android:id="@+id/image_click_five"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+
+                <ImageView
+                    android:id="@+id/image5"
+                    android:background="@drawable/tatneft"
+                    style="@style/cardImage"/>
+
+                <TextView
+                    android:id="@+id/text5"
+                    android:layout_below="@+id/image5"
+                    android:padding="5dp"
+                    style="@style/cardText"
+                    android:gravity="center"
+                    android:text="275 баллов - Power Bank"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <RadioButton
+                    android:id="@+id/radio_button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/item6"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_login"
+                android:layout_toEndOf="@id/item5">
+
+                <ImageButton
+                    android:id="@+id/image_click_six"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+
+                <ImageView
+                    android:id="@+id/image6"
+                    style="@style/cardImage"
+                    android:background="@drawable/tatneft"/>
+
+                <TextView
+                    android:id="@+id/text6"
+                    style="@style/cardText"
+                    android:layout_below="@+id/image6"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="300 баллов - Рюкзак"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <RadioButton
+                    android:id="@+id/radio_button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/block3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/background_button_red"
+                android:text="Получить приз"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

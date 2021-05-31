@@ -31,6 +31,6 @@ open class BaseFragment : Fragment() {
         bundle.putString("firstPoint", firstPoint)
         bundle.putString("lastPoint", lastPoint)
         startGeneralFragment.arguments = bundle
-        mFragmentHandler?.replace(startGeneralFragment)
+        mFragmentHandler?.replace(startGeneralFragment, true)
     }
 }

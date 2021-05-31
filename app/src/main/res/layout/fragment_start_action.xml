@@ -6,44 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".TravelPackage.StartActionFragment">
 
-    <RelativeLayout
-        android:id="@+id/main"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:weightSum="100">
 
-        <TextView
-            android:id="@+id/pointPosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Точка 1"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/name_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pointPosition"
-            android:layout_centerHorizontal="true"
-            android:padding="10dp"
-            android:text="Главный офис ПАО Татнефть"
-            android:textSize="20sp" />
-
-        <fragment
-            android:id="@+id/mapFragment"
-            class="com.google.android.gms.maps.SupportMapFragment"
+        <RelativeLayout
+            android:id="@+id/headerRelative"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@id/name_location" />
+            android:layout_height="0dp"
+            android:layout_weight="15">
 
-        <LinearLayout
+            <TextView
+                android:id="@+id/pointPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Точка 1"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/name_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pointPosition"
+                android:layout_centerHorizontal="true"
+                android:padding="10dp"
+                android:text="Главный офис ПАО Татнефть"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mapRelative"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/mapFragment"
+            android:layout_height="0dp"
+            android:layout_weight="65">
+
+            <fragment
+                android:id="@+id/mapFragment"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/btnMapFullScreen"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_fullscreen" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/footerRelative"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_weight="20">
 
             <Button
                 android:id="@+id/seeingMap"
@@ -59,6 +85,7 @@
                 android:id="@+id/inPlace"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_below="@+id/seeingMap"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
@@ -70,6 +97,7 @@
                 android:id="@+id/btnScan"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_below="@+id/seeingMap"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
@@ -78,9 +106,9 @@
                 android:textColor="@color/white"
                 android:visibility="gone" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/afterScan"
@@ -116,6 +144,5 @@
             android:textStyle="bold|italic" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

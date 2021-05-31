@@ -30,7 +30,7 @@ class StartGeneralFragment : BaseFragment() {
         }
 
         binding.startQuest.setOnClickListener {
-            mFragmentHandler?.replace(StartActionFragment())
+            mFragmentHandler?.replace(StartActionFragment(), true)
         }
     }
 }

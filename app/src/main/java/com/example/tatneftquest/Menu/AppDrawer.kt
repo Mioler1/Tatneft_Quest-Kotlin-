@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneftquest.R
+import com.example.tatneftquest.Variables.Companion.fragmentList
+import com.example.tatneftquest.Variables.Companion.menuList
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -83,7 +85,11 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                         pos = mDrawer.currentSelectedPosition
                         when (position) {
                             1 -> addFragment(ProfileFragment())
-                            2 -> addFragment(TravelFragment())
+                            2 -> addFragment(fragment = if (fragmentList.isNotEmpty()) {
+                                fragmentList[fragmentList.size -1]
+                            } else {
+                                TravelFragment()
+                            })
                         }
                     }
                     return false
@@ -94,5 +100,9 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
     private fun addFragment(fragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment).commit()
+        if (menuList.isNotEmpty()) {
+            menuList.clear()
+        }
+        menuList.add(fragment)
     }
 }

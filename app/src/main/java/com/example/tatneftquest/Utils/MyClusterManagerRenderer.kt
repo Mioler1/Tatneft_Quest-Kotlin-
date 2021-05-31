@@ -1,9 +1,10 @@
-package com.example.tatneftquest.Models
+package com.example.tatneftquest.Utils
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.example.tatneftquest.Models.ClusterMarker
 import com.example.tatneftquest.R
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory

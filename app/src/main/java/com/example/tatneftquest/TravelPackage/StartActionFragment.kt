@@ -1,6 +1,7 @@
 package com.example.tatneftquest.TravelPackage
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
@@ -16,14 +17,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.*
 import com.example.tatneftquest.Fragments.BaseFragment
 import com.example.tatneftquest.Models.ClusterMarker
-import com.example.tatneftquest.Models.MyClusterManagerRenderer
 import com.example.tatneftquest.R
 import com.example.tatneftquest.Services.LocationService
+import com.example.tatneftquest.Utils.MyClusterManagerRenderer
+import com.example.tatneftquest.Utils.ViewWeightAnimationWrapper
 import com.example.tatneftquest.Variables.Companion.LATITUDE
 import com.example.tatneftquest.Variables.Companion.LONGTITUDE
 import com.example.tatneftquest.databinding.FragmentStartActionBinding
@@ -35,17 +39,24 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import com.mikepenz.iconics.Iconics.applicationContext
 
 @Suppress("DEPRECATION")
 @SuppressLint("MissingPermission")
-class StartActionFragment : BaseFragment(), OnMapReadyCallback {
+class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickListener {
+    //  Widgets
     private var map: GoogleMap? = null
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var headerRelative: RelativeLayout
+    private lateinit var mapRelative: RelativeLayout
+    private lateinit var footerRelative: RelativeLayout
+    private lateinit var btnMapFullScreen: ImageView
+
     private var lastKnownLocation: Location? = null
     private var locationManager: LocationManager? = null
+    private var cameraPosition: CameraPosition? = null
     private val mHandler: Handler = Handler()
     private var mRunnable: Runnable? = null
 
@@ -54,17 +65,24 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback {
     private val mClusterMarkers: ArrayList<ClusterMarker> = ArrayList()
 
     private var mLocationPermissionGranted = false
-    private val defaultLocation = LatLng(-33.8523341, 151.2106085)
+    private val defaultLocation = LatLng(54.901388, 52.297118)
+    private var mMapLayoutState = 0
 
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var binding: FragmentStartActionBinding
 
     companion object {
         private const val TAG = "Map"
+        private const val KEY_CAMERA_POSITION = "camera_position"
+        private const val KEY_LOCATION = "location"
         private const val DEFAULT_ZOOM = 15
         private const val LOCATION_UPDATE_INTERVAL = 3000
         private const val ERROR_DIALOG_REQUEST = 9001
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9002
         private const val START_GPS = 9003
+
+        private const val MAP_LAYOUT_STATE_CONTRACTED = 0
+        private const val MAP_LAYOUT_STATE_EXPANDED = 1
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -81,11 +99,23 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback {
         map?.uiSettings?.isMyLocationButtonEnabled = true
     }
 
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        map?.let { map ->
+//            outState.putParcelable(KEY_CAMERA_POSITION, map.cameraPosition)
+//            outState.putParcelable(KEY_LOCATION, lastKnownLocation)
+//        }
+//        super.onSaveInstanceState(outState)
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+//        if (savedInstanceState != null) {
+//            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION)
+//            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
+//        }
         binding = FragmentStartActionBinding.inflate(inflater)
         return binding.root
     }
@@ -93,6 +123,13 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+
+        headerRelative = binding.headerRelative
+        mapRelative = binding.mapRelative
+        footerRelative = binding.footerRelative
+        btnMapFullScreen = binding.btnMapFullScreen.also {
+            it.setOnClickListener(this)
+        }
     }
 
     private fun initMap() {
@@ -295,9 +332,62 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback {
                 if (grantResults.isNotEmpty()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ) {
-                    mFragmentHandler?.replace(StartActionFragment())
+                    mFragmentHandler?.replace(StartActionFragment(), false)
                 } else {
                     activity?.finish()
+                }
+            }
+        }
+    }
+
+    private fun expandMapAnimation() {
+        val mapAnimationWrapper = ViewWeightAnimationWrapper(mapRelative)
+        val mapAnimation = ObjectAnimator.ofFloat(mapAnimationWrapper,
+            "weight", 65f, 100f)
+        mapAnimation.duration = 0
+        val recyclerHeaderAnimationWrapper = ViewWeightAnimationWrapper(headerRelative)
+        val recyclerHeaderAnimation = ObjectAnimator.ofFloat(recyclerHeaderAnimationWrapper,
+            "weight", 15f, 0f)
+        recyclerHeaderAnimation.duration = 0
+        val recyclerFooterAnimationWrapper = ViewWeightAnimationWrapper(footerRelative)
+        val recyclerFooterAnimation = ObjectAnimator.ofFloat(recyclerFooterAnimationWrapper,
+            "weight", 20f, 0f)
+        recyclerFooterAnimation.duration = 0
+        recyclerHeaderAnimation.start()
+        recyclerFooterAnimation.start()
+        mapAnimation.start()
+    }
+
+    private fun contractMapAnimation() {
+        val mapAnimationWrapper = ViewWeightAnimationWrapper(mapRelative)
+        val mapAnimation = ObjectAnimator.ofFloat(mapAnimationWrapper,
+            "weight", 100f, 65f)
+        mapAnimation.duration = 0
+        val recyclerHeaderAnimationWrapper = ViewWeightAnimationWrapper(headerRelative)
+        val recyclerHeaderAnimation = ObjectAnimator.ofFloat(recyclerHeaderAnimationWrapper,
+            "weight", 0f, 15f)
+        recyclerHeaderAnimation.duration = 0
+        val recyclerFooterAnimationWrapper = ViewWeightAnimationWrapper(footerRelative)
+        val recyclerFooterAnimation = ObjectAnimator.ofFloat(recyclerFooterAnimationWrapper,
+            "weight", 0f, 20f)
+        recyclerFooterAnimation.duration = 0
+        recyclerHeaderAnimation.start()
+        recyclerFooterAnimation.start()
+        mapAnimation.start()
+    }
+
+    @Override
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btnMapFullScreen -> {
+                if (mMapLayoutState == MAP_LAYOUT_STATE_CONTRACTED) {
+                    mMapLayoutState = MAP_LAYOUT_STATE_EXPANDED
+                    expandMapAnimation()
+                    btnMapFullScreen.setImageResource(R.drawable.ic_fullscreen_exit)
+                } else if (mMapLayoutState == MAP_LAYOUT_STATE_EXPANDED) {
+                    mMapLayoutState = MAP_LAYOUT_STATE_CONTRACTED
+                    contractMapAnimation()
+                    btnMapFullScreen.setImageResource(R.drawable.ic_fullscreen)
                 }
             }
         }

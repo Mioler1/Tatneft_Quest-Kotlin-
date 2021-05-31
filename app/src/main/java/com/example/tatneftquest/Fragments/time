@@ -42,17 +42,3 @@
 //            super.onActivityResult(requestCode, resultCode, data)
 //        }
 //    }
-
-
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        map?.let { map ->
-//            outState.putParcelable(KEY_CAMERA_POSITION, map.cameraPosition)
-//            outState.putParcelable(KEY_LOCATION, lastKnownLocation)
-//        }
-//        super.onSaveInstanceState(outState)
-//    }
-
-//        if (savedInstanceState != null) {
-//            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION)
-//            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
-//        }

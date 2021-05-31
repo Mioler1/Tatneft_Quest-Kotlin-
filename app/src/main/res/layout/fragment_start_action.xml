@@ -110,39 +110,4 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/afterScan"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/nameLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:paddingBottom="@dimen/padding_default"
-            android:text="@string/empty" />
-
-        <TextView
-            android:id="@+id/descriptionLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nameLocation"
-            android:paddingBottom="@dimen/padding_default"
-            android:text="@string/empty"
-            android:textStyle="bold|italic" />
-
-        <TextView
-            android:id="@+id/site_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/descriptionLocation"
-            android:paddingBottom="@dimen/padding_default"
-            android:text="@string/empty"
-            android:textStyle="bold|italic" />
-
-    </RelativeLayout>
-
 </RelativeLayout>

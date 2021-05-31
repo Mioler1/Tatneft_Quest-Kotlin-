@@ -16,6 +16,10 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.TatneftQuest">
+        <activity android:name=".LocationHistory"></activity>
+        <activity android:name=".FirstActivity.RegistrationActivity" />
+        <activity android:name=".FirstActivity.RestorePasswordActivity" />
+        <activity android:name=".FirstActivity.AuthorizationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -28,28 +32,25 @@
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
-        <!--        <activity-->
-        <!--            android:name="com.journeyapps.barcodescanner.CaptureActivity"-->
-        <!--            android:screenOrientation="fullSensor"-->
-        <!--            tools:replace="screenOrientation" />-->
-
+            android:resource="@array/preloaded_fonts" /> <!-- <activity -->
+        <!-- android:name="com.journeyapps.barcodescanner.CaptureActivity" -->
+        <!-- android:screenOrientation="fullSensor" -->
+        <!-- tools:replace="screenOrientation" /> -->
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
             android:name=".FirstActivity.FirstScreenActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".Slider.SliderActivity"
             android:screenOrientation="portrait" />

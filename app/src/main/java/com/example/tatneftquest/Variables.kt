@@ -10,5 +10,7 @@ open class Variables {
         val menuList: ArrayList<Fragment> = ArrayList()
         var LATITUDE by Delegates.notNull<Double>()
         var LONGTITUDE by Delegates.notNull<Double>()
+        val IMAGE_PICK_CODE = 1000
+        val PERMISSION_CODE = 1001
     }
 }

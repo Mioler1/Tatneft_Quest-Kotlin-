@@ -14,6 +14,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.util.Log
+import android.text.TextUtils.replace
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +32,8 @@ import com.example.tatneftquest.Utils.MyClusterManagerRenderer
 import com.example.tatneftquest.Utils.ViewWeightAnimationWrapper
 import com.example.tatneftquest.Variables.Companion.LATITUDE
 import com.example.tatneftquest.Variables.Companion.LONGTITUDE
+import com.example.tatneftquest.LocationHistoryFragment
+import com.example.tatneftquest.R
 import com.example.tatneftquest.databinding.FragmentStartActionBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -43,6 +47,8 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import com.mikepenz.iconics.Iconics.applicationContext
+import org.json.JSONException
+import org.json.JSONObject
 
 @Suppress("DEPRECATION")
 @SuppressLint("MissingPermission")
@@ -53,6 +59,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private lateinit var mapRelative: RelativeLayout
     private lateinit var footerRelative: RelativeLayout
     private lateinit var btnMapFullScreen: ImageView
+
 
     private var lastKnownLocation: Location? = null
     private var locationManager: LocationManager? = null
@@ -106,6 +113,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 //        }
 //        super.onSaveInstanceState(outState)
 //    }
+    private lateinit var binding: FragmentStartActionBinding
+//    private var qrScanIntegrator: IntentIntegrator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -318,6 +327,9 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         } else {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+        binding.btnScan.setOnClickListener {
+//            performAction()
+            mFragmentHandler?.replace(LocationHistoryFragment())
         }
     }
 

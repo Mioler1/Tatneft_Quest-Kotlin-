@@ -17,19 +17,9 @@ class FirstScreenActivity : AppCompatActivity(){
         setContentView(R.layout.activity_first_screen)
 
         init()
-        setUpTabs()
-    }
-
-    private fun setUpTabs() {
-        val adapter = PagerAdapter(supportFragmentManager)
-        adapter.addFragment(AuthorizationFragment(), "Авторизация")
-        adapter.addFragment(RegistrationFragment(), "Регистрация")
-        viewPager.adapter = adapter
-        tabs.setupWithViewPager(viewPager)
     }
 
     private fun init() {
         viewPager = findViewById(R.id.viewPager)
-        tabs = findViewById(R.id.tabs)
     }
 }

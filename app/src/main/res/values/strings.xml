@@ -2,11 +2,35 @@
     <string name="app_name">Tatneft Quest</string>
     <string name="hello_blank_fragment">Hello blank</string>
 
-    <!-- fragment_authorization -->
+    <!-- ActivityAuthorization -->
     <string name="come">Войти</string>
-    <string name="number">Ваш номер телефона</string>
+    <string name="email">Ваша электронная почта</string>
     <string name="password">Пароль</string>
-    <string name="rememberPassword">Забыли пароль?</string>
+    <string name="rememberPassword">Восстановить пароль</string>
+    <string name="createAccount">Создать аккаунт</string>
+    <string name="titleAuthorization">Авторизация</string>
+
+    <!--activityRestorePassword-->
+    <string name="enterEmail">Введите электронную почту</string>
+    <string name="send">Восстановить</string>
+    <string name="back">Вернуться назад</string>
+
+    <!-- ActivityRegistration -->
+    <string name="registration">Зарегистрироваться</string>
+    <string name="addEmail">Введите электронную почту</string>
+    <string name="passwordReg">Придумайте пароль</string>
+    <string name="surname">Фамилия</string>
+    <string name="namePeople">Имя</string>
+    <string name="patronymic">Отчество</string>
+    <string name="age">Дата рождение</string>
+    <string name="repeatPassword">Введите повторный пароль</string>
+    <string name="login">Придумайте логин</string>
+    <string name="auth">Уже зарегистрированы? /Войти</string>
+    <string name="titleRegistration">Регистрация</string>
+    <string name="number">Введите номер телефона</string>
+    <string name="gender">Пол</string>
+    <string name="man">Мужской</string>
+    <string name="female">Женский</string>
 
     <!-- slider -->
     <string name="nextBtn">Дальше</string>
@@ -41,4 +65,7 @@
     <string name="scan_a_code">Scan a QR Code</string>
     <string name="result_not_found">Result Not Found</string>
     <string name="show_scanner_from_fragment">Show Scanner From Fragment</string>
+
+    <!--fragment_prize-->
+    <string name="choose">Выберите приз от ПАО "Татнефть" в зависимости от количества заработанных баллов.</string>
 </resources>

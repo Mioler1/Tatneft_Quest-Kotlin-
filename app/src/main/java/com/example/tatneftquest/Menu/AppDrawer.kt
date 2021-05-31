@@ -85,6 +85,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                         when (position) {
                             1 -> addFragment(ProfileFragment())
                             2 -> addFragment(TravelFragment())
+                            3 -> addFragment(PrizeFragment())
                         }
                     }
                     return false

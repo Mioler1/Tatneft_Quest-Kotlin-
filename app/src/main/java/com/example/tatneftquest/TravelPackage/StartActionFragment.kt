@@ -1,15 +1,22 @@
 package com.example.tatneftquest.TravelPackage
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tatneftquest.Fragments.BaseFragment
+import com.example.tatneftquest.LocationHistoryFragment
+import com.example.tatneftquest.R
 import com.example.tatneftquest.databinding.FragmentStartActionBinding
+import org.json.JSONException
+import org.json.JSONObject
 
-class StartActionFragment : Fragment() {
+class StartActionFragment : BaseFragment() {
 
-    lateinit var binding: FragmentStartActionBinding
+    private lateinit var binding: FragmentStartActionBinding
 //    private var qrScanIntegrator: IntentIntegrator? = null
 
     override fun onCreateView(
@@ -32,8 +39,7 @@ class StartActionFragment : Fragment() {
 
         binding.btnScan.setOnClickListener {
 //            performAction()
-            binding.main.visibility = View.GONE
-            binding.afterScan.visibility = View.VISIBLE
+            mFragmentHandler?.replace(LocationHistoryFragment())
         }
 
 //        qrScanIntegrator = IntentIntegrator.forFragment(this)
@@ -45,9 +51,9 @@ class StartActionFragment : Fragment() {
 
     }
 
-//    private fun performAction() {
+    private fun performAction() {
 //        qrScanIntegrator?.initiateScan()
-//    }
+    }
 
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)

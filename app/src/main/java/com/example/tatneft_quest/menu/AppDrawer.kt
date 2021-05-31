@@ -1,10 +1,12 @@
 package com.example.tatneft_quest.menu
 
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneft_quest.R
+import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.mikepenz.materialdrawer.AccountHeader
@@ -96,6 +98,10 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                     return false
                 }
             }).build()
+    }
+
+    fun setSelection() {
+        mDrawer.setSelection(2)
     }
 
     private fun addFragment(fragment: Fragment) {

@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
                 .addToBackStack("stackFragment").commit()
             fragmentList.add(fragment)
-            Log.d(TAG, "replace: $fragmentList")
         } else {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
                 .commit()
@@ -49,14 +48,23 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
     override fun onBackPressed() {
         if (fragmentList.isEmpty()) {
             super.onBackPressed()
-        }
-        if (menuList.isNotEmpty()) {
-            menuList.clear()
-            replace(fragmentList[fragmentList.size -1], false)
         } else {
-            if (fragmentList.isNotEmpty()) {
-                fragmentList.removeAt(fragmentList.size - 1)
-                super.onBackPressed()
+            if (menuList.isNotEmpty()) {
+                if (fragmentList.isNotEmpty()) {
+                    if (fragmentList[fragmentList.size - 1] != menuList[menuList.size - 1]) {
+                        replace(fragmentList[fragmentList.size - 1], false)
+                        appDrawer.setSelection()
+                    } else {
+                        super.onBackPressed()
+                        fragmentList.removeAt(fragmentList.size - 1)
+                    }
+                }
+                menuList.clear()
+            } else {
+                if (fragmentList.isNotEmpty()) {
+                    fragmentList.removeAt(fragmentList.size - 1)
+                    super.onBackPressed()
+                }
             }
         }
     }

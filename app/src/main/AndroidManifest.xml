@@ -8,6 +8,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <supports-screens android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="false"
+        android:xlargeScreens="false"/>
+
     <application
         android:name="com.example.tatneft_quest.fragments.MyApplication"
         android:allowBackup="true"
@@ -24,6 +29,11 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${GOOGLE_MAPS_API_KEY}" />
+
+        <meta-data
+            android:name="android.max_aspect" android:value="2.4"
+            />
+
 
         <service
             android:name="com.example.tatneft_quest.services.LocationService"
@@ -50,7 +60,8 @@
             android:name="com.example.tatneft_quest.firstActivity.FirstScreenActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.example.tatneft_quest.MainActivity" />
+        <activity android:name="com.example.tatneft_quest.MainActivity">
+        </activity>
         <activity
             android:name="com.example.tatneft_quest.slider.SliderActivity"
             android:screenOrientation="portrait" />

@@ -147,7 +147,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputAge"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="175dp"
+                        android:layout_width="185dp"
                         android:layout_height="wrap_content"
                         app:endIconDrawable="@drawable/ic_calendar"
                         app:endIconMode="custom"
@@ -165,7 +165,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputGender"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="150dp"
+                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_toEndOf="@id/textInputAge"
@@ -177,7 +177,8 @@
                             android:id="@+id/gender"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/gender" />
+                            android:hint="@string/gender"
+                            android:text=""/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
@@ -323,6 +324,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:helperText="Заглавная буква, цифра, 6 символов"
                     app:errorEnabled="true"
                     app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 

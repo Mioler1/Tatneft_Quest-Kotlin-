@@ -93,6 +93,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                                 TravelFragment()
                             })
                             3 -> addFragment(PrizeFragment())
+                            5 -> addFragment(HelpFragment())
                         }
                     }
                     return false

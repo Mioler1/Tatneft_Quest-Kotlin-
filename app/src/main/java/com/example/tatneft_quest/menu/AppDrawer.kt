@@ -1,14 +1,20 @@
 package com.example.tatneft_quest.menu
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.tatneft_quest.MainActivity
 import com.example.tatneft_quest.R
+import com.example.tatneft_quest.Variables
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_TOKEN
 import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
+import com.example.tatneft_quest.firstActivity.AuthorizationActivity
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -88,11 +94,19 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                         when (position) {
                             1 -> addFragment(ProfileFragment())
                             2 -> addFragment(fragment = if (fragmentList.isNotEmpty()) {
-                                fragmentList[fragmentList.size -1]
+                                fragmentList[fragmentList.size - 1]
                             } else {
                                 TravelFragment()
                             })
                             3 -> addFragment(PrizeFragment())
+                            8 -> {
+                                activity.getSharedPreferences(SAVE_DATA_USER,
+                                    AppCompatActivity.MODE_PRIVATE)
+                                    .edit().putString(SAVE_DATA_USER_TOKEN, "false").apply()
+                                activity.startActivity(Intent(activity.applicationContext,
+                                    AuthorizationActivity::class.java))
+                                activity.finish()
+                            }
                         }
                     }
                     return false

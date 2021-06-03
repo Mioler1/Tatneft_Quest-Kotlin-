@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/mainRelative"
     tools:context=".firstActivity.RegistrationActivity">
 
     <TextView
@@ -145,7 +144,7 @@
                     android:layout_toEndOf="@id/iconBirthday">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputAge"
+                        android:id="@+id/textInputBirthday"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="175dp"
                         android:layout_height="wrap_content"
@@ -155,11 +154,11 @@
                         app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/age"
+                            android:id="@+id/birthday"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/age"
-                            android:inputType="date" />
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/age" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -168,7 +167,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_toEndOf="@id/textInputAge"
+                        android:layout_toEndOf="@id/textInputBirthday"
                         app:endIconMode="dropdown_menu"
                         app:errorEnabled="true"
                         app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
@@ -280,7 +279,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/number"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:maxLength="10" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </RelativeLayout>
@@ -379,6 +379,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/regButton"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@string/auth"
                 android:textAllCaps="false"
@@ -388,5 +390,13 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:theme="@style/progressBar"
+        android:visibility="gone" />
 
 </RelativeLayout>

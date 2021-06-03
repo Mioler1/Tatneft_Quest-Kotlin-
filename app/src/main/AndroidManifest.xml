@@ -17,9 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TatneftQuest">
         <activity android:name="com.example.tatneft_quest.travelPackage.LocationHistoryFragment" />
-        <activity android:name="com.example.tatneft_quest.firstActivity.RegistrationActivity" />
-        <activity android:name="com.example.tatneft_quest.firstActivity.RestorePasswordActivity" />
-        <activity android:name="com.example.tatneft_quest.firstActivity.AuthorizationActivity" />
+        <activity android:name="com.example.tatneft_quest.firstActivity.RegistrationActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.example.tatneft_quest.firstActivity.RestorePasswordActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.example.tatneft_quest.firstActivity.AuthorizationActivity"
+            android:windowSoftInputMode="stateHidden"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -37,7 +40,7 @@
         <!-- android:screenOrientation="fullSensor" -->
         <!-- tools:replace="screenOrientation" /> -->
         <activity
-            android:name="com.example.tatneft_quest.SplashScreen"
+            android:name="com.example.tatneft_quest.firstActivity.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

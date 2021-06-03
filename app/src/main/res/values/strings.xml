@@ -5,7 +5,7 @@
     <!-- ActivityAuthorization -->
     <string name="come">Войти</string>
     <string name="email">Ваша электронная почта</string>
-    <string name="password">Пароль</string>
+    <string name="password">Ваш пароль</string>
     <string name="rememberPassword">Восстановить пароль</string>
     <string name="createAccount">Создать аккаунт</string>
     <string name="titleAuthorization">Авторизация</string>

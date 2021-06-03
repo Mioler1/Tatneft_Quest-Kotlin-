@@ -29,7 +29,7 @@ import com.example.tatneft_quest.services.LocationService
 import com.example.tatneft_quest.utils.MyClusterManagerRenderer
 import com.example.tatneft_quest.utils.ViewWeightAnimationWrapper
 import com.example.tatneft_quest.Variables.Companion.LATITUDE
-import com.example.tatneft_quest.Variables.Companion.LONGTITUDE
+import com.example.tatneft_quest.Variables.Companion.LONGITUDE
 import com.example.tatneft_quest.databinding.FragmentStartActionBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -39,7 +39,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import com.mikepenz.iconics.Iconics.applicationContext
@@ -56,7 +55,6 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     private var lastKnownLocation: Location? = null
     private var locationManager: LocationManager? = null
-    private var cameraPosition: CameraPosition? = null
     private val mHandler: Handler = Handler()
     private var mRunnable: Runnable? = null
 
@@ -72,9 +70,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private lateinit var binding: FragmentStartActionBinding
 
     companion object {
-        private const val TAG = "Map"
-        private const val KEY_CAMERA_POSITION = "camera_position"
-        private const val KEY_LOCATION = "location"
+        private const val TAG = "check"
         private const val DEFAULT_ZOOM = 15
         private const val LOCATION_UPDATE_INTERVAL = 3000
         private const val ERROR_DIALOG_REQUEST = 9001
@@ -99,23 +95,11 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         map?.uiSettings?.isMyLocationButtonEnabled = true
     }
 
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        map?.let { map ->
-//            outState.putParcelable(KEY_CAMERA_POSITION, map.cameraPosition)
-//            outState.putParcelable(KEY_LOCATION, lastKnownLocation)
-//        }
-//        super.onSaveInstanceState(outState)
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-//        if (savedInstanceState != null) {
-//            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION)
-//            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION)
-//        }
         binding = FragmentStartActionBinding.inflate(inflater)
         return binding.root
     }
@@ -189,9 +173,9 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private fun retrieveUserLocations() {
         for (clusterMarker in mClusterMarkers) {
             for (i in mClusterMarkers.indices) {
-                mClusterMarkers[i].position = LatLng(LATITUDE, LONGTITUDE)
+                mClusterMarkers[i].position = LatLng(LATITUDE, LONGITUDE)
                 mClusterManagerRenderer!!.setUpdateMarker(mClusterMarkers[i])
-                Log.d(TAG, "retrieveUserLocations: $LATITUDE + $LONGTITUDE")
+                Log.d(TAG, "retrieveUserLocations: $LATITUDE + $LONGITUDE")
             }
         }
     }

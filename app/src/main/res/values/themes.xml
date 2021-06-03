@@ -21,6 +21,14 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="mainRelative" parent="match_parent">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="progressBar">
+        <item name="colorAccent">@color/red</item>
+    </style>
+
     <style name="imageViewInStartGeneralFragment">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
@@ -61,7 +69,6 @@
     </style>
 
     // Боковое меню
-
     <style name="CustomTheme" parent="MaterialDrawerTheme">
         <item name="colorPrimary">@color/material_drawer_primary</item>
         <item name="colorPrimaryDark">@color/material_drawer_primary_dark</item>
@@ -98,5 +105,22 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    // Настройка MaterialDatePicker
+    <style name="myMaterialCalendarHeaderToggleButton" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="materialCalendarStyle">@style/Widget.MaterialComponents.MaterialCalendar</item>
+        <item name="materialCalendarFullscreenTheme">
+            @style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen
+        </item>
+        <item name="materialCalendarTheme">@style/ThemeOverlay.MaterialComponents.MaterialCalendar
+        </item>
+        <item name="materialCalendarHeaderToggleButton">
+            @style/Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton
+        </item>
+    </style>
+
+    <style name="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:visibility">gone</item>
     </style>
 </resources>

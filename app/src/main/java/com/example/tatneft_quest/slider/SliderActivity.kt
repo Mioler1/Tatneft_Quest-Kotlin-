@@ -1,8 +1,6 @@
 package com.example.tatneft_quest.slider
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -14,25 +12,19 @@ import com.google.android.material.tabs.TabLayout
 import java.util.*
 
 class SliderActivity : AppCompatActivity() {
-    lateinit var mBinding: ActivitySliderBinding
+    private lateinit var mBinding: ActivitySliderBinding
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var mTabLayout: TabLayout
     private lateinit var onBoardingViewPager: ViewPager
     private lateinit var mNext: Button
     private lateinit var mSkip: Button
-    private lateinit var sharedPreferences: SharedPreferences
-    var position = 0
+    private var position = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivitySliderBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         init()
-
-        if (restorePrefData()) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
 
         val onBoardingData: MutableList<ViewPagerAdapter.OnBoardingData> = ArrayList()
         onBoardingData.add(ViewPagerAdapter.OnBoardingData("Выбирай квест или экскурсию",
@@ -53,13 +45,14 @@ class SliderActivity : AppCompatActivity() {
                 onBoardingViewPager.currentItem = position
             }
             if (position == onBoardingData.size) {
-                savePrefData()
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         }
 
         mSkip.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         mTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -91,18 +84,6 @@ class SliderActivity : AppCompatActivity() {
         viewPagerAdapter = ViewPagerAdapter(this, onBoardingData)
         onBoardingViewPager.adapter = viewPagerAdapter
         mTabLayout.setupWithViewPager(onBoardingViewPager)
-    }
-
-    private fun savePrefData() {
-        sharedPreferences = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("isFirstTimeRun", true)
-        editor.apply()
-    }
-
-    private fun restorePrefData(): Boolean {
-        sharedPreferences = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("isFirstTimeRun", false)
     }
 
 }

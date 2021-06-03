@@ -15,9 +15,8 @@ import com.example.tatneft_quest.fragments.MyApplication
 import com.example.tatneft_quest.MainActivity
 import com.example.tatneft_quest.R
 import com.example.tatneft_quest.Variables.Companion.LATITUDE
-import com.example.tatneft_quest.Variables.Companion.LONGTITUDE
+import com.example.tatneft_quest.Variables.Companion.LONGITUDE
 import com.google.android.gms.location.*
-
 
 @Suppress("DEPRECATION")
 class LocationService : Service() {
@@ -130,8 +129,8 @@ class LocationService : Service() {
                 val location: Location? = locationResult.lastLocation
                 if (location != null) {
                     LATITUDE = location.latitude
-                    LONGTITUDE = location.longitude
-                    Log.d(TAG, "$LATITUDE + $LONGTITUDE")
+                    LONGITUDE = location.longitude
+                    Log.d(TAG, "$LATITUDE + $LONGITUDE")
                 }
             }
         }

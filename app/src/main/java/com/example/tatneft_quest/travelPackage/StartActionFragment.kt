@@ -4,12 +4,14 @@ import android.Manifest
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.ActivityManager
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
@@ -17,20 +19,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.*
+import com.example.tatneft_quest.*
+import com.example.tatneft_quest.Variables.Companion.LATITUDE
+import com.example.tatneft_quest.Variables.Companion.LONGITUDE
+import com.example.tatneft_quest.Variables.Companion.fragmentList
+import com.example.tatneft_quest.databinding.FragmentStartActionBinding
 import com.example.tatneft_quest.fragments.BaseFragment
 import com.example.tatneft_quest.models.ClusterMarker
-import com.example.tatneft_quest.R
 import com.example.tatneft_quest.services.LocationService
 import com.example.tatneft_quest.utils.MyClusterManagerRenderer
 import com.example.tatneft_quest.utils.ViewWeightAnimationWrapper
-import com.example.tatneft_quest.Variables.Companion.LATITUDE
-import com.example.tatneft_quest.Variables.Companion.LONGITUDE
-import com.example.tatneft_quest.databinding.FragmentStartActionBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -52,6 +56,10 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private lateinit var mapRelative: RelativeLayout
     private lateinit var footerRelative: RelativeLayout
     private lateinit var btnMapFullScreen: ImageView
+    private lateinit var btnInPlace: Button
+    private lateinit var btnSeeingMap: Button
+    private lateinit var btnScan: Button
+    private var alertDialog: AlertDialog? = null
 
     private var lastKnownLocation: Location? = null
     private var locationManager: LocationManager? = null
@@ -73,24 +81,23 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         private const val TAG = "check"
         private const val DEFAULT_ZOOM = 15
         private const val LOCATION_UPDATE_INTERVAL = 3000
-        private const val ERROR_DIALOG_REQUEST = 9001
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9002
         private const val START_GPS = 9003
-
         private const val MAP_LAYOUT_STATE_CONTRACTED = 0
         private const val MAP_LAYOUT_STATE_EXPANDED = 1
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
-        if (checkSelfPermission(activity!!,
+        btnMapFullScreen.visibility = View.VISIBLE
+        btnInPlace.visibility = View.VISIBLE
+        btnSeeingMap.visibility = View.VISIBLE
+        if (checkSelfPermission(requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) {
             return
         }
         getDeviceLocation()
-
         map?.isMyLocationEnabled = true
         map?.uiSettings?.isMyLocationButtonEnabled = true
     }
@@ -111,14 +118,17 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         headerRelative = binding.headerRelative
         mapRelative = binding.mapRelative
         footerRelative = binding.footerRelative
-        btnMapFullScreen = binding.btnMapFullScreen.also {
-            it.setOnClickListener(this)
+        btnMapFullScreen = binding.btnMapFullScreen
+        btnInPlace = binding.inPlace
+        btnSeeingMap = binding.seeingMap
+        btnScan = binding.btnScan
+
+        btnMapFullScreen.setOnClickListener(this)
+        btnInPlace.setOnClickListener {
+            btnInPlace.visibility = View.GONE
+            btnScan.visibility = View.VISIBLE
         }
-        binding.inPlace.setOnClickListener {
-            binding.inPlace.visibility = View.GONE
-            binding.btnScan.visibility = View.VISIBLE
-        }
-        binding.btnScan.setOnClickListener {
+        btnScan.setOnClickListener {
             mFragmentHandler?.replace(LocationHistoryFragment(), true)
         }
     }
@@ -183,10 +193,12 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private fun addMarker(latitude: Double, longitude: Double) {
         if (map != null) {
             if (mClusterManager == null) {
-                mClusterManager = ClusterManager<ClusterMarker>(activity!!.applicationContext, map)
+                mClusterManager =
+                    ClusterManager<ClusterMarker>(requireActivity().applicationContext, map)
             }
             if (mClusterManagerRenderer == null) {
-                mClusterManagerRenderer = MyClusterManagerRenderer(activity!!, map, mClusterManager)
+                mClusterManagerRenderer =
+                    MyClusterManagerRenderer(requireActivity(), map, mClusterManager)
                 mClusterManager!!.renderer = mClusterManagerRenderer
             }
             try {
@@ -219,6 +231,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     override fun onStop() {
         super.onStop()
+        alertDialog?.dismiss()
         if (mLocationPermissionGranted) {
             stopLocationUpdates()
         }
@@ -228,7 +241,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         if (!isLocationServiceRunning()) {
             val intent = Intent(context, LocationService::class.java)
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                startForegroundService(context!!, intent)
+                startForegroundService(requireContext(), intent)
             } else {
                 activity?.startService(intent)
             }
@@ -263,14 +276,14 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                 return true
             }
             GoogleApiAvailability.getInstance().isUserResolvableError(available) -> {
-                GoogleApiAvailability.getInstance()
-                    .getErrorDialog(activity, available, ERROR_DIALOG_REQUEST).show()
+                buildAlertMessageUpdateGooglePlayServices()
             }
             else -> {
-                Toast.makeText(applicationContext,
+                Toast.makeText(requireActivity().applicationContext,
                     "Вы не можете делать запросы на карту",
                     Toast.LENGTH_SHORT).show()
-                activity?.finish()
+                fragmentList.removeAt(fragmentList.size - 1)
+                super.requireActivity().onBackPressed()
             }
         }
         return false
@@ -285,22 +298,45 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         return true
     }
 
+    private fun buildAlertMessageUpdateGooglePlayServices() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Требуется обновление Google Play сервисов")
+            .setCancelable(false)
+            .setPositiveButton("Обновить") { _, _ ->
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=com.google.android.gms&hl=ru&gl=RU")))
+                } catch (e: ActivityNotFoundException) {
+                    startActivity(Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.gms&hl=ru&gl=RU")))
+                }
+            }
+            .setNegativeButton("Отказаться") { _, _ ->
+                alertDialog?.dismiss()
+                fragmentList.removeAt(fragmentList.size - 1)
+                super.requireActivity().onBackPressed()
+            }
+        alertDialog = builder.create()
+        alertDialog!!.show()
+    }
+
     private fun buildAlertMessageNoGps() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Это приложение требует GPS. Вы хотите его включить?")
             .setCancelable(false)
             .setPositiveButton("Да") { _, _ ->
                 startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), START_GPS)
             }
             .setNegativeButton("Нет") { _, _ ->
-                activity?.finish()
+                fragmentList.removeAt(fragmentList.size - 1)
+                super.requireActivity().onBackPressed()
             }
         val alert: AlertDialog = builder.create()
         alert.show()
     }
 
     private fun getLocationPermission() {
-        if (checkSelfPermission(activity!!,
+        if (checkSelfPermission(requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
         ) {
@@ -325,7 +361,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                 ) {
                     mFragmentHandler?.replace(StartActionFragment(), false)
                 } else {
-                    activity?.finish()
+                    fragmentList.removeAt(fragmentList.size - 1)
+                    super.requireActivity().onBackPressed()
                 }
             }
         }

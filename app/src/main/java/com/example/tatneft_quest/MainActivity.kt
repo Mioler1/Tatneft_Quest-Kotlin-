@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
 
 
     override fun onBackPressed() {
-        if (fragmentList.isEmpty()) {
+        if (fragmentList.isEmpty() && menuList.isEmpty()) {
             super.onBackPressed()
         } else {
             if (menuList.isNotEmpty()) {
@@ -66,11 +66,15 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
                         super.onBackPressed()
                         fragmentList.removeAt(fragmentList.size - 1)
                     }
+                } else {
+                    replace(TravelFragment(), false)
                 }
                 menuList.clear()
             } else {
                 if (fragmentList.isNotEmpty()) {
                     fragmentList.removeAt(fragmentList.size - 1)
+                    super.onBackPressed()
+                } else {
                     super.onBackPressed()
                 }
             }

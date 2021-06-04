@@ -27,6 +27,7 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PATRONYMIC
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_SURNAME
 import com.example.tatneft_quest.databinding.ActivityRegistrationBinding
 import com.google.android.material.datepicker.*
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import de.hdodenhof.circleimageview.CircleImageView
@@ -49,6 +50,7 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var avatar: CircleImageView
     private lateinit var regButton: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var helper: ImageButton
 
     private lateinit var textInputSurname: TextInputLayout
     private lateinit var textInputName: TextInputLayout
@@ -64,8 +66,6 @@ class RegistrationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegistrationBinding
     private var byteString = "null"
-//    private val passwordCheck =
-//        """^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#${'$'}%!\-_?&])(?=\S+${'$'}).{8,}""".toRegex()
 
     private fun init() {
         emailRegistration = binding.emailRegistration
@@ -74,14 +74,15 @@ class RegistrationActivity : AppCompatActivity() {
         surname = binding.surname
         name = binding.name
         patronymic = binding.patronymic
-        birthday = binding.birthday
+        birthday = binding.birthday!!
         gender = binding.gender
         city = binding.city
         numberRegistration = binding.numberRegistration
         login = binding.login
         avatar = binding.avatar
         regButton = binding.regButton
-        progressBar = binding.progressBar
+        progressBar = binding.progressBar!!
+        helper = binding.helper!!
 
         gender.inputType = InputType.TYPE_NULL
         birthday.inputType = InputType.TYPE_NULL
@@ -89,7 +90,7 @@ class RegistrationActivity : AppCompatActivity() {
         textInputSurname = binding.textInputSurname
         textInputName = binding.textInputName
         textInputPatronymic = binding.textInputPatronymic
-        textInputBirthday = binding.textInputBirthday
+        textInputBirthday = binding.textInputBirthday!!
         textInputGender = binding.textInputGender
         textInputCity = binding.textInputCity
         textInputEmail = binding.textInputEmail
@@ -120,6 +121,12 @@ class RegistrationActivity : AppCompatActivity() {
         avatar.setOnClickListener {
             pickImageFromGallery()
         }
+
+        helper.setOnClickListener {
+            Snackbar.make(it, "Латиница, кириллица, цифра, от 6 символов, @\$#?_.-", Snackbar.LENGTH_LONG).show()
+
+        }
+
         birthday.setOnClickListener {
             val calendarStart = Calendar.getInstance()
             val calendarEnd = Calendar.getInstance()
@@ -228,11 +235,11 @@ class RegistrationActivity : AppCompatActivity() {
             textInputPassword.requestFocus()
             return
         }
-        if (passwordText.matches("[a-zA-Zа-яА-Я0-9@$#?&_.-]+".toRegex())) {
+        if (passwordText.matches("[a-zA-Zа-яА-Я0-9@$#?_.-]+".toRegex())) {
             check = true
         }
         if (!check) {
-            textInputPassword.error = "ИСПРАВИТЬ!!!"
+            textInputPassword.error = "Латиница, кириллица, цифра, от 6 символов, @\$#?_.-"
             textInputPassword.requestFocus()
             return
         }

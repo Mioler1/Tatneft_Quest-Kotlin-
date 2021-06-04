@@ -48,6 +48,7 @@
                     <ImageView
                         android:id="@+id/image1"
                         style="@style/cardImage"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/pen" />
 
                     <TextView
@@ -170,6 +171,7 @@
                     <ImageView
                         android:id="@+id/image4"
                         style="@style/cardImage"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/tatneft_card" />
 
                     <TextView
@@ -214,7 +216,7 @@
                     <ImageView
                         android:id="@+id/image5"
                         style="@style/cardImage"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/power_bank" />
 
                     <TextView
@@ -252,7 +254,7 @@
                     <ImageView
                         android:id="@+id/image6"
                         style="@style/cardImage"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/backpack" />
 
                     <TextView

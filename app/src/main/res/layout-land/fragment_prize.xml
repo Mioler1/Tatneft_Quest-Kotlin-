@@ -40,7 +40,7 @@
 
                     <ImageButton
                         android:id="@+id/image_click_one"
-                        android:layout_width="200dp"
+                        android:layout_width="320dp"
                         android:layout_height="200dp"
                         android:layout_centerHorizontal="true"
                         android:background="?android:attr/selectableItemBackground" />
@@ -48,6 +48,7 @@
                     <ImageView
                         android:id="@+id/image1"
                         style="@style/cardImage"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/pen" />
 
                     <TextView
@@ -56,6 +57,8 @@
                         android:layout_below="@+id/image1"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_centerHorizontal="true"
                         android:text="150 баллов - Фирменная ручка"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -76,7 +79,7 @@
 
                     <ImageButton
                         android:id="@+id/image_click_two"
-                        android:layout_width="200dp"
+                        android:layout_width="320dp"
                         android:layout_height="200dp"
                         android:layout_centerHorizontal="true"
                         android:background="?android:attr/selectableItemBackground" />
@@ -93,6 +96,8 @@
                         android:layout_below="@+id/image2"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_centerHorizontal="true"
                         android:text="175 баллов - Футболка"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -120,7 +125,7 @@
 
                     <ImageButton
                         android:id="@+id/image_click_three"
-                        android:layout_width="200dp"
+                        android:layout_width="320dp"
                         android:layout_height="200dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
@@ -141,6 +146,8 @@
                         android:layout_below="@+id/image3"
                         android:gravity="center"
                         android:padding="5dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_centerHorizontal="true"
                         android:text="200 баллов - Фирменная бейсболка"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -161,7 +168,7 @@
 
                     <ImageButton
                         android:id="@+id/image_click_four"
-                        android:layout_width="200dp"
+                        android:layout_width="320dp"
                         android:layout_height="200dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
@@ -170,6 +177,7 @@
                     <ImageView
                         android:id="@+id/image4"
                         style="@style/cardImage"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/tatneft_card" />
 
                     <TextView
@@ -177,7 +185,9 @@
                         style="@style/cardText"
                         android:layout_below="@+id/image4"
                         android:gravity="center"
+                        android:layout_centerHorizontal="true"
                         android:padding="5dp"
+                        android:layout_marginTop="5dp"
                         android:text="250 баллов - Топливная карта"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -206,7 +216,7 @@
 
                     <ImageButton
                         android:id="@+id/image_click_five"
-                        android:layout_width="200dp"
+                        android:layout_width="320dp"
                         android:layout_height="200dp"
                         android:layout_centerHorizontal="true"
                         android:background="?android:attr/selectableItemBackground" />
@@ -214,7 +224,7 @@
                     <ImageView
                         android:id="@+id/image5"
                         style="@style/cardImage"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/power_bank" />
 
                     <TextView
@@ -222,7 +232,9 @@
                         style="@style/cardText"
                         android:layout_below="@+id/image5"
                         android:gravity="center"
+                        android:layout_centerHorizontal="true"
                         android:padding="5dp"
+                        android:layout_marginTop="11dp"
                         android:text="275 баллов - Power Bank"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -243,7 +255,7 @@
 
                     <ImageButton
                         android:id="@+id/image_click_six"
-                        android:layout_width="200dp"
+                        android:layout_width="320dp"
                         android:layout_height="200dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
@@ -252,7 +264,7 @@
                     <ImageView
                         android:id="@+id/image6"
                         style="@style/cardImage"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/backpack" />
 
                     <TextView
@@ -261,6 +273,8 @@
                         android:layout_below="@+id/image6"
                         android:gravity="center"
                         android:padding="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_centerHorizontal="true"
                         android:text="300 баллов - Рюкзак"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 

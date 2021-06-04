@@ -61,7 +61,7 @@
 
                 <Button
                     android:id="@+id/answerOne"
-                    android:layout_width="400dp"
+                    android:layout_width="500dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/border_button_green"
@@ -72,7 +72,7 @@
 
                 <Button
                     android:id="@+id/answerTwo"
-                    android:layout_width="400dp"
+                    android:layout_width="500dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/answerOne"
                     android:layout_centerHorizontal="true"
@@ -85,7 +85,7 @@
 
                 <Button
                     android:id="@+id/correctAnswer"
-                    android:layout_width="400dp"
+                    android:layout_width="500dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/answerTwo"
                     android:layout_centerHorizontal="true"

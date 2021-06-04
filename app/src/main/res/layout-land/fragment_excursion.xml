@@ -8,6 +8,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="oiwhyufbwiucnwoij" />
+        android:layout_centerInParent="true"
+        android:text="В разработке"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
 
 </RelativeLayout>

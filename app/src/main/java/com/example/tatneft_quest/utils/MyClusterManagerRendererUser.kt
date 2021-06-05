@@ -1,13 +1,11 @@
 package com.example.tatneft_quest.utils
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.tatneft_quest.R
-import com.example.tatneft_quest.models.ClusterMarker
+import com.example.tatneft_quest.models.ClusterMarkerUser
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
@@ -18,12 +16,12 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.google.maps.android.ui.IconGenerator
 import de.hdodenhof.circleimageview.CircleImageView
 
-class MyClusterManagerRenderer(
+class MyClusterManagerRendererUser(
     context: Context,
     googleMap: GoogleMap?,
-    clusterManager: ClusterManager<ClusterMarker>?,
+    clusterManager: ClusterManager<ClusterMarkerUser>?,
 ) :
-    DefaultClusterRenderer<ClusterMarker>(context, googleMap, clusterManager) {
+    DefaultClusterRenderer<ClusterMarkerUser>(context, googleMap, clusterManager) {
 
     private var iconGenerator: IconGenerator? = IconGenerator(context.applicationContext)
     private var imageView: CircleImageView = CircleImageView(context.applicationContext)
@@ -40,17 +38,17 @@ class MyClusterManagerRenderer(
         iconGenerator!!.setContentView(imageView)
     }
 
-    override fun onBeforeClusterItemRendered(item: ClusterMarker, markerOptions: MarkerOptions) {
+    override fun onBeforeClusterItemRendered(item: ClusterMarkerUser, markerOptions: MarkerOptions) {
         imageView.setImageBitmap(item.getIconPicture())
         val icon: Bitmap? = iconGenerator?.makeIcon()
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
     }
 
-    override fun shouldRenderAsCluster(cluster: Cluster<ClusterMarker?>): Boolean {
+    override fun shouldRenderAsCluster(cluster: Cluster<ClusterMarkerUser?>): Boolean {
         return false
     }
 
-    fun setUpdateMarker(clusterMarker: ClusterMarker) {
+    fun setUpdateMarker(clusterMarker: ClusterMarkerUser) {
         val marker:Marker = getMarker(clusterMarker)
         marker.position = clusterMarker.position
     }

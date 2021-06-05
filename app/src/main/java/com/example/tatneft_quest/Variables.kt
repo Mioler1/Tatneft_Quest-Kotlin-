@@ -29,6 +29,7 @@ open class Variables {
         const val SAVE_DATA_USER_LOGIN = "login"
         const val SAVE_DATA_USER_AVATAR = "avatar"
         const val SAVE_DATA_USER_TOKEN = "token"
+        const val SAVE_DATA_USER_SCORE = "score"
 
         //  Name variables SAVE_DATA_PROGRAM
         const val INTRO_OPEN = "introOpen"

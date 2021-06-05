@@ -49,8 +49,8 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
     //  Боковое меню
-    implementation "com.mikepenz:materialdrawer:7.0.0"
-    implementation "com.mikepenz:materialdrawer-nav:7.0.0"
+    implementation 'com.mikepenz:materialdrawer:7.0.0'
+    implementation 'com.mikepenz:materialdrawer-nav:7.0.0'
 
     // Slider
     implementation 'me.relex:circleindicator:2.1.6'
@@ -60,9 +60,9 @@ dependencies {
 
     //  Google maps
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
-    implementation 'com.google.maps.android:android-maps-utils:2.2.0'
+    implementation 'com.google.maps.android:android-maps-utils:2.2.3'
     implementation 'com.google.android.libraries.places:places:2.4.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
     // Scanner QR-code and barcode
 //    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'

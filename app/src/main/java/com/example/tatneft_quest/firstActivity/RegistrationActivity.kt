@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import android.widget.*
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneft_quest.R
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
@@ -100,8 +99,7 @@ class RegistrationActivity : AppCompatActivity() {
         textInputRepeatPassword = binding.textInputRepeatPassword
     }
 
-    @SuppressLint("SetTextI18n")
-    @RequiresApi(Build.VERSION_CODES.N)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
@@ -128,36 +126,41 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
         birthday.setOnClickListener {
-            val calendarStart = Calendar.getInstance()
-            val calendarEnd = Calendar.getInstance()
-            val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date()).toInt()
-            val month = SimpleDateFormat("MM", Locale.getDefault()).format(Date()).toInt() - 1
-            val day = SimpleDateFormat("dd", Locale.getDefault()).format(Date()).toInt() - 1
-            calendarStart[year - 100, month] = day
-            calendarEnd[year, month] = day
-
-            val constraintsBuilder = CalendarConstraints.Builder()
-            val validators: ArrayList<CalendarConstraints.DateValidator> = ArrayList()
-            validators.add(DateValidatorPointForward.from(calendarStart.timeInMillis))
-            validators.add(DateValidatorPointBackward.before(calendarEnd.timeInMillis))
-            constraintsBuilder.setValidator(CompositeDateValidator.allOf(validators))
-
-            val materialDatePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Выберите дату рождения")
-                .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
-                .setTheme(R.style.myMaterialCalendarHeaderToggleButton)
-                .setCalendarConstraints(constraintsBuilder.build())
-                .build()
-
-            materialDatePicker.addOnPositiveButtonClickListener {
-                val calendar = Calendar.getInstance()
-                calendar.time = Date(it)
-                birthday.setText("${calendar.get(Calendar.DAY_OF_MONTH)}.${calendar.get(Calendar.MONTH) + 1}.${
-                    calendar.get(Calendar.YEAR)
-                }")
-            }
-            materialDatePicker.show(supportFragmentManager, "MaterialDatePicker")
+            selectBirthday()
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun selectBirthday() {
+        val calendarStart = Calendar.getInstance()
+        val calendarEnd = Calendar.getInstance()
+        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date()).toInt()
+        val month = SimpleDateFormat("MM", Locale.getDefault()).format(Date()).toInt() - 1
+        val day = SimpleDateFormat("dd", Locale.getDefault()).format(Date()).toInt() - 1
+        calendarStart[year - 100, month] = day
+        calendarEnd[year, month] = day
+
+        val constraintsBuilder = CalendarConstraints.Builder()
+        val validators: ArrayList<CalendarConstraints.DateValidator> = ArrayList()
+        validators.add(DateValidatorPointForward.from(calendarStart.timeInMillis))
+        validators.add(DateValidatorPointBackward.before(calendarEnd.timeInMillis))
+        constraintsBuilder.setValidator(CompositeDateValidator.allOf(validators))
+
+        val materialDatePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Выберите дату рождения")
+            .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
+            .setTheme(R.style.myMaterialCalendarHeaderToggleButton)
+            .setCalendarConstraints(constraintsBuilder.build())
+            .build()
+
+        materialDatePicker.addOnPositiveButtonClickListener {
+            val calendar = Calendar.getInstance()
+            calendar.time = Date(it)
+            birthday.setText("${calendar.get(Calendar.DAY_OF_MONTH)}.${calendar.get(Calendar.MONTH) + 1}.${
+                calendar.get(Calendar.YEAR)
+            }")
+        }
+        materialDatePicker.show(supportFragmentManager, "MaterialDatePicker")
     }
 
     private fun onStartRegistration() {

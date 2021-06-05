@@ -68,12 +68,31 @@
         <item name="android:padding">10dp</item>
     </style>
 
-    // Боковое меню
+    <style name="cardImage">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="cardText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Стартовый экран -->
+    <style name="Theme.SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/fon</item>
+    </style>
+
+    <!-- Боковое меню -->
     <style name="CustomTheme" parent="MaterialDrawerTheme">
         <item name="colorPrimary">@color/material_drawer_primary</item>
         <item name="colorPrimaryDark">@color/material_drawer_primary_dark</item>
         <item name="colorAccent">@color/material_drawer_accent</item>
-        <!-- MaterialDrawer specific values -->
         <item name="material_drawer_background">@color/material_drawer_background</item>
         <item name="material_drawer_primary_text">@color/material_drawer_primary_text</item>
         <item name="material_drawer_primary_icon">@color/material_drawer_primary_icon</item>
@@ -92,22 +111,7 @@
         <item name="material_drawer_legacy_style">false</item>
     </style>
 
-    <style name="cardImage">
-        <item name="android:layout_width">120dp</item>
-        <item name="android:layout_height">120dp</item>
-        <item name="android:scaleType">centerCrop</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_centerHorizontal">true</item>
-    </style>
-
-    <style name="cardText">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    // Настройка MaterialDatePicker
+    <!-- Настройка MaterialDatePicker -->
     <style name="myMaterialCalendarHeaderToggleButton" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="materialCalendarStyle">@style/Widget.MaterialComponents.MaterialCalendar</item>
         <item name="materialCalendarFullscreenTheme">

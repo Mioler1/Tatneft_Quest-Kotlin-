@@ -50,7 +50,7 @@ class AuthorizationActivity : AppCompatActivity() {
         sharedPreferencesUser = getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
         sharedPreferencesProgram = getSharedPreferences(SAVE_DATA_PROGRAM, MODE_PRIVATE)
 
-        if (sharedPreferencesUser.contains(SAVE_DATA_USER_TOKEN).toString() == "true") {
+        if (sharedPreferencesUser.getString(SAVE_DATA_USER_TOKEN, "") == "true") {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

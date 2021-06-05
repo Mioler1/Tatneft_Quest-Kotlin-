@@ -1,17 +1,23 @@
 package com.example.tatneft_quest.menu
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.util.Log
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.example.tatneft_quest.MainActivity
 import com.example.tatneft_quest.R
-import com.example.tatneft_quest.Variables
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_AVATAR
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_EMAIL
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NAME
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PATRONYMIC
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_SURNAME
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_TOKEN
-import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.firstActivity.AuthorizationActivity
@@ -23,21 +29,45 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import java.util.*
 
 class AppDrawer(private val activity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
+    private lateinit var sharedPreferencesUser: SharedPreferences
+    private lateinit var email: String
+    private lateinit var surname: String
+    private lateinit var name: String
+    private lateinit var patranymic: String
+    private lateinit var avatar: String
+    private lateinit var bitmap: Bitmap
     private var pos: Int = 2
 
+    private fun init() {
+        sharedPreferencesUser = activity.getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
+        email = sharedPreferencesUser.getString(SAVE_DATA_USER_EMAIL, "").toString()
+        surname = sharedPreferencesUser.getString(SAVE_DATA_USER_SURNAME, "").toString()
+        name = sharedPreferencesUser.getString(SAVE_DATA_USER_NAME, "").toString()
+        patranymic = sharedPreferencesUser.getString(SAVE_DATA_USER_PATRONYMIC, "").toString()
+        avatar = sharedPreferencesUser.getString(SAVE_DATA_USER_AVATAR, "").toString()
+        val byteArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Base64.getDecoder().decode(avatar)
+        } else {
+            android.util.Base64.decode(avatar, android.util.Base64.DEFAULT)
+        }
+        bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    }
+
     fun drawerMenuFunc() {
+        init()
         activity.setSupportActionBar(toolbar)
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
             .addProfiles(
-                ProfileDrawerItem().withName("Sergey Galdin")
-                    .withEmail("veretennik-v@mail.ru")
-                    .withIcon(R.drawable.ic_launcher_foreground)
+                ProfileDrawerItem().withName("$surname $name $patranymic")
+                    .withEmail(email)
+                    .withIcon(bitmap)
             ).build()
         mDrawer = DrawerBuilder()
             .withActivity(activity)
@@ -100,9 +130,8 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                             })
                             3 -> addFragment(PrizeFragment())
                             8 -> {
-                                activity.getSharedPreferences(SAVE_DATA_USER,
-                                    AppCompatActivity.MODE_PRIVATE)
-                                    .edit().putString(SAVE_DATA_USER_TOKEN, "false").apply()
+                                sharedPreferencesUser.edit()
+                                    .putString(SAVE_DATA_USER_TOKEN, "false").apply()
                                 activity.startActivity(Intent(activity.applicationContext,
                                     AuthorizationActivity::class.java))
                                 activity.finish()

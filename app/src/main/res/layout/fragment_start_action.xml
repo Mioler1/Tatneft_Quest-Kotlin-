@@ -75,13 +75,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/footerRelative"
+            android:id="@+id/footerRelativeButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="20"
-            android:gravity="center">
+            android:layout_weight="20">
 
             <Button
                 android:id="@+id/seeingMap"

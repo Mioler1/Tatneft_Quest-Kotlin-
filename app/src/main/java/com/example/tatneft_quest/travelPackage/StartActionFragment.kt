@@ -128,7 +128,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         sharedPreferencesUser = requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
         headerRelative = binding.headerRelative
         mapRelative = binding.mapRelative
-        footerRelative = binding.footerRelative
+        footerRelative = binding.footerRelativeButton!!
         btnMapFullScreen = binding.btnMapFullScreen
         btnMoveCamera = binding.btnMoveCamera!!
         btnInPlace = binding.inPlace

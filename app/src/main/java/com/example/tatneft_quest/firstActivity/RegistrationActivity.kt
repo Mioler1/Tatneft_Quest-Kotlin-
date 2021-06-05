@@ -81,7 +81,7 @@ class RegistrationActivity : AppCompatActivity() {
         avatar = binding.avatar
         regButton = binding.regButton
         progressBar = binding.progressBar!!
-        helper = binding.helper!!
+        helper = binding.helper
 
         gender.inputType = InputType.TYPE_NULL
         birthday.inputType = InputType.TYPE_NULL

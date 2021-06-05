@@ -5,6 +5,7 @@
     style="@style/mainRelative"
     tools:context=".firstActivity.RegistrationActivity">
 
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -49,8 +50,8 @@
                 <ImageView
                     android:id="@+id/iconPerson"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="22dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/ic_person" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -167,7 +168,6 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_toEndOf="@id/textInputBirthday"
                         app:endIconMode="dropdown_menu"
                         app:errorEnabled="true"
                         app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
@@ -177,7 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/gender"
-                            android:text=""/>
+                            android:text="" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
@@ -339,11 +339,11 @@
                     android:id="@+id/helper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_help"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="22dp"
                     android:layout_marginEnd="10dp"
                     android:background="?android:attr/selectableItemBackground"
-                    android:layout_alignParentEnd="true"/>
+                    android:src="@drawable/ic_help" />
             </RelativeLayout>
 
             <RelativeLayout

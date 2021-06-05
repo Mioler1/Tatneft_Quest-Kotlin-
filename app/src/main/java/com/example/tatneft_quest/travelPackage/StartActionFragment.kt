@@ -121,7 +121,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         mapRelative = binding.mapRelative
         footerRelative = binding.footerRelative
         btnMapFullScreen = binding.btnMapFullScreen
-        btnMoveCamera = binding.btnMoveCamera
+        btnMoveCamera = binding.btnMoveCamera!!
         btnInPlace = binding.inPlace
         btnSeeingMap = binding.seeingMap
         btnScan = binding.btnScan

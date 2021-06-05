@@ -59,7 +59,7 @@
                         android:padding="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_centerHorizontal="true"
-                        android:text="150 баллов - Фирменная ручка"
+                        android:text="@string/prize_pen"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <RadioButton
@@ -98,7 +98,7 @@
                         android:padding="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_centerHorizontal="true"
-                        android:text="175 баллов - Футболка"
+                        android:text="@string/prize_tshort"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <RadioButton
@@ -148,7 +148,7 @@
                         android:padding="5dp"
                         android:layout_marginTop="24dp"
                         android:layout_centerHorizontal="true"
-                        android:text="200 баллов - Фирменная бейсболка"
+                        android:text="@string/prize_cape"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <RadioButton
@@ -188,7 +188,7 @@
                         android:layout_centerHorizontal="true"
                         android:padding="5dp"
                         android:layout_marginTop="5dp"
-                        android:text="250 баллов - Топливная карта"
+                        android:text="@string/prize_card"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <RadioButton
@@ -235,7 +235,7 @@
                         android:layout_centerHorizontal="true"
                         android:padding="5dp"
                         android:layout_marginTop="11dp"
-                        android:text="275 баллов - Power Bank"
+                        android:text="@string/prize_power_bank"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <RadioButton
@@ -275,7 +275,7 @@
                         android:padding="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_centerHorizontal="true"
-                        android:text="300 баллов - Рюкзак"
+                        android:text="@string/prize_backpack"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <RadioButton
@@ -297,22 +297,21 @@
 
                 <Button
                     android:id="@+id/seeingMap"
-                    android:layout_width="175dp"
+                    android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/border_button_red"
-                    android:text="Мои подарки"
+                    android:text="@string/my_prize"
                     android:textColor="@color/red" />
 
                 <Button
                     android:id="@+id/inPlace"
-                    android:layout_width="175dp"
+                    android:layout_width="250dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/seeingMap"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/background_button_red"
-                    android:text="получить подарок"
+                    android:text="@string/get_prize"
                     android:textColor="@color/white" />
             </LinearLayout>
 

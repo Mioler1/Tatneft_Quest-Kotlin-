@@ -168,7 +168,6 @@
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_toEndOf="@id/textInputAge"
                         app:endIconMode="dropdown_menu"
                         app:errorEnabled="true"
                         app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">

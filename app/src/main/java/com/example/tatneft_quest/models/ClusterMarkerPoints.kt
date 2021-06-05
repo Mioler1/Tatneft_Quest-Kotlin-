@@ -1,10 +1,11 @@
 package com.example.tatneft_quest.models
 
-import android.graphics.Bitmap
+import android.media.Image
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
-class ClusterMarker(private var position: LatLng, private var iconPicture: Bitmap) : ClusterItem {
+class ClusterMarkerPoints(private var position: LatLng, private var iconPicture: Int) :
+    ClusterItem {
 
     override fun getPosition(): LatLng {
         return position
@@ -18,7 +19,7 @@ class ClusterMarker(private var position: LatLng, private var iconPicture: Bitma
         return null
     }
 
-    fun getIconPicture(): Bitmap {
+    fun getIconPicture(): Int {
         return iconPicture
     }
 

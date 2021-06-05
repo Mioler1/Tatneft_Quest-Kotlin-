@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/mainRelative"
     tools:context=".travelPackage.StartActionFragment">
 
     <LinearLayout
@@ -59,7 +58,19 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_fullscreen" />
+                android:src="@drawable/ic_fullscreen"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/btnMoveCamera"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_gps"
+                android:visibility="gone" />
 
         </RelativeLayout>
 
@@ -79,7 +90,8 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/border_button_red"
                 android:text="Открыть в навигаторе"
-                android:textColor="@color/red" />
+                android:textColor="@color/red"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/inPlace"
@@ -91,7 +103,8 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/background_button_red"
                 android:text="я уже на месте!"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnScan"

@@ -4,16 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="30dp"
-        android:scaleType="centerCrop"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvTitle"
@@ -21,12 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ivImage"
         android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/yanone_kaffeesatz"
         android:gravity="center"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
         android:textSize="32sp"
         android:textStyle="bold" />
-
 
 </RelativeLayout>

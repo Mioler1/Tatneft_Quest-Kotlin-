@@ -1,130 +1,274 @@
 package com.example.tatneft_quest.firstActivity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.text.InputType
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneft_quest.R
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_AVATAR
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_BIRTHDAY
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_CITY
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_EMAIL
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_GENDER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_LOGIN
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NAME
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NUMBER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PASSWORD
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PATRONYMIC
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_SURNAME
 import com.example.tatneft_quest.databinding.ActivityRegistrationBinding
+import com.google.android.material.datepicker.*
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import de.hdodenhof.circleimageview.CircleImageView
+import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegistrationActivity : AppCompatActivity() {
+    private lateinit var emailRegistration: TextInputEditText
+    private lateinit var passwordRegistration: TextInputEditText
+    private lateinit var repeatPasswordRegistration: TextInputEditText
+    private lateinit var surname: TextInputEditText
+    private lateinit var name: TextInputEditText
+    private lateinit var patronymic: TextInputEditText
+    private lateinit var birthday: TextInputEditText
+    private lateinit var gender: AutoCompleteTextView
+    private lateinit var city: TextInputEditText
+    private lateinit var numberRegistration: TextInputEditText
+    private lateinit var login: TextInputEditText
+    private lateinit var avatar: CircleImageView
+    private lateinit var regButton: Button
+    private lateinit var progressBar: ProgressBar
+
+    private lateinit var textInputSurname: TextInputLayout
+    private lateinit var textInputName: TextInputLayout
+    private lateinit var textInputPatronymic: TextInputLayout
+    private lateinit var textInputBirthday: TextInputLayout
+    private lateinit var textInputGender: TextInputLayout
+    private lateinit var textInputCity: TextInputLayout
+    private lateinit var textInputEmail: TextInputLayout
+    private lateinit var textInputNumber: TextInputLayout
+    private lateinit var textInputLogin: TextInputLayout
+    private lateinit var textInputPassword: TextInputLayout
+    private lateinit var textInputRepeatPassword: TextInputLayout
+
     private lateinit var binding: ActivityRegistrationBinding
-    private var check = false
-    private val passwordCheck =
-        """^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#${'$'}%!\-_?&])(?=\S+${'$'}).{8,}""".toRegex()
+    private var byteString = "null"
+
+    private fun init() {
+        emailRegistration = binding.emailRegistration
+        passwordRegistration = binding.passwordRegistration
+        repeatPasswordRegistration = binding.repeatPasswordRegistration
+        surname = binding.surname
+        name = binding.name
+        patronymic = binding.patronymic
+        birthday = binding.birthday
+        gender = binding.gender
+        city = binding.city
+        numberRegistration = binding.numberRegistration
+        login = binding.login
+        avatar = binding.avatar
+        regButton = binding.regButton
+        progressBar = binding.progressBar
+
+        gender.inputType = InputType.TYPE_NULL
+        birthday.inputType = InputType.TYPE_NULL
+
+        textInputSurname = binding.textInputSurname
+        textInputName = binding.textInputName
+        textInputPatronymic = binding.textInputPatronymic
+        textInputBirthday = binding.textInputBirthday
+        textInputGender = binding.textInputGender
+        textInputCity = binding.textInputCity
+        textInputEmail = binding.textInputEmail
+        textInputNumber = binding.textInputNumber
+        textInputLogin = binding.textInputLogin
+        textInputPassword = binding.textInputPassword
+        textInputRepeatPassword = binding.textInputRepeatPassword
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        init()
 
         val items = listOf("Мужской", "Женский")
         val adapter = ArrayAdapter(this, R.layout.dropdown_item, items)
+        gender.setAdapter(adapter)
 
-        binding.gender.setAdapter(adapter)
-
-        binding.authButton.setOnClickListener{
-            val intent = Intent(this, AuthorizationActivity::class.java)
-            startActivity(intent)
+        binding.authButton.setOnClickListener {
+            super.onBackPressed()
         }
-
-        binding.avatar.setOnClickListener{
+        regButton.setOnClickListener {
+            onStartRegistration()
+        }
+        avatar.setOnClickListener {
             pickImageFromGallery()
         }
-
-        binding.regButton.setOnClickListener {
-            val emailText = binding.emailRegistration.text.toString()
-            val passwordText = binding.passwordRegistration.text.toString()
-            val repeatPassword = binding.repeatPasswordRegistration.text.toString()
-            val surnameText = binding.surname.text.toString()
-            val nameText = binding.name.text.toString()
-            val patronymicText = binding.patronymic.text.toString()
-            val ageText = binding.age.text.toString()
-            val genderText = binding.gender.text.toString()
-            val cityText = binding.city.text.toString()
-            val numberText = binding.numberRegistration.text.toString()
-            val loginText = binding.login.text.toString()
-            if (surnameText.isEmpty()) {
-                binding.textInputSurname.error = "Пустое поле"
-                return@setOnClickListener
-            }
-            if (nameText.isEmpty()) {
-                binding.textInputName.error = "Пустое поле"
-                binding.textInputSurname.error = null
-                return@setOnClickListener
-            }
-            if (patronymicText.isEmpty()) {
-                binding.textInputPatronymic.error = "Пустое поле"
-                binding.textInputName.error = null
-                return@setOnClickListener
-            }
-            if (ageText.isEmpty()) {
-                binding.textInputAge.error = "Пустое поле"
-                binding.textInputPatronymic.error = null
-                return@setOnClickListener
-            }
-            if (genderText.isEmpty()) {
-                binding.textInputGender.error = "Пустое поле"
-                binding.textInputAge.error = null
-                return@setOnClickListener
-            }
-            if (cityText.isEmpty()) {
-                binding.textInputCity.error = "Пустое поле"
-                binding.textInputGender.error = null
-                return@setOnClickListener
-            }
-            if (emailText.isEmpty()) {
-                binding.textInputEmail.error = "Пустое поле"
-                binding.textInputCity.error = null
-                return@setOnClickListener
-            }
-            if (emailText.length < 10) {
-                binding.textInputEmail.error = "Номер телефона введен неверно"
-                binding.textInputCity.error = null
-                return@setOnClickListener
-            }
-            if (numberText.isEmpty()) {
-                binding.textInputNumber.error = "Пустое поле"
-                binding.textInputEmail.error = null
-                return@setOnClickListener
-            }
-            if (loginText.isEmpty()) {
-                binding.textInputLogin.error = "Пустое поле"
-                binding.textInputNumber.error = null
-                return@setOnClickListener
-            }
-            if (passwordText.isEmpty()) {
-                binding.textInputPassword.error = "Пустое поле"
-                binding.textInputLogin.error = null
-                return@setOnClickListener
-            }
-            if (passwordText.length < 6) {
-                binding.textInputPassword.error = "Минимум 6 символов"
-                binding.textInputLogin.error = null
-                return@setOnClickListener
-            }
-            if (passwordText.matches(passwordCheck)) {
-                check = true
-            }
-            if (!check) {
-                binding.textInputPassword.error = "Заглавная буква, цифра, спец. символ"
-                return@setOnClickListener
-            }
-            if (repeatPassword.isEmpty()) {
-                binding.textInputRepeatPassword.error = "Пустое поле"
-                binding.textInputPassword.error = null
-                return@setOnClickListener
-            }
-            if (passwordText != repeatPassword) {
-                binding.textInputRepeatPassword.error = "Пароль не совпадают"
-                return@setOnClickListener
-            }
-            startActivity(intent)
+        birthday.setOnClickListener {
+            selectBirthday()
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun selectBirthday() {
+        val calendarStart = Calendar.getInstance()
+        val calendarEnd = Calendar.getInstance()
+        val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date()).toInt()
+        val month = SimpleDateFormat("MM", Locale.getDefault()).format(Date()).toInt() - 1
+        val day = SimpleDateFormat("dd", Locale.getDefault()).format(Date()).toInt() - 1
+        calendarStart[year - 100, month] = day
+        calendarEnd[year, month] = day
+
+        val constraintsBuilder = CalendarConstraints.Builder()
+        val validators: ArrayList<CalendarConstraints.DateValidator> = ArrayList()
+        validators.add(DateValidatorPointForward.from(calendarStart.timeInMillis))
+        validators.add(DateValidatorPointBackward.before(calendarEnd.timeInMillis))
+        constraintsBuilder.setValidator(CompositeDateValidator.allOf(validators))
+
+        val materialDatePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Выберите дату рождения")
+            .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
+            .setTheme(R.style.myMaterialCalendarHeaderToggleButton)
+            .setCalendarConstraints(constraintsBuilder.build())
+            .build()
+
+        materialDatePicker.addOnPositiveButtonClickListener {
+            val calendar = Calendar.getInstance()
+            calendar.time = Date(it)
+            birthday.setText("${calendar.get(Calendar.DAY_OF_MONTH)}.${calendar.get(Calendar.MONTH) + 1}.${
+                calendar.get(Calendar.YEAR)
+            }")
+        }
+        materialDatePicker.show(supportFragmentManager, "MaterialDatePicker")
+    }
+
+    private fun onStartRegistration() {
+        val emailText = emailRegistration.text.toString()
+        val passwordText = passwordRegistration.text.toString()
+        val repeatPassword = repeatPasswordRegistration.text.toString()
+        val surnameText = surname.text.toString()
+        val nameText = name.text.toString()
+        val patronymicText = patronymic.text.toString()
+        val birthdayText = birthday.text.toString()
+        val genderText = gender.text.toString()
+        val cityText = city.text.toString()
+        val numberText = numberRegistration.text.toString()
+        val loginText = login.text.toString()
+        var check = false
+
+        clearTextInputLayout()
+        if (surnameText.isEmpty()) {
+            textInputSurname.error = "Пустое поле"
+            textInputSurname.requestFocus()
+            return
+        }
+        if (nameText.isEmpty()) {
+            textInputName.error = "Пустое поле"
+            textInputName.requestFocus()
+            return
+        }
+        if (patronymicText.isEmpty()) {
+            textInputPatronymic.error = "Пустое поле"
+            textInputPatronymic.requestFocus()
+            return
+        }
+        if (birthdayText.isEmpty()) {
+            textInputBirthday.error = "Пустое поле"
+            textInputBirthday.requestFocus()
+            return
+        }
+        if (genderText.isEmpty()) {
+            textInputGender.error = "Пустое поле"
+            textInputGender.requestFocus()
+            return
+        }
+        if (cityText.isEmpty()) {
+            textInputCity.error = "Пустое поле"
+            textInputCity.requestFocus()
+            return
+        }
+        if (emailText.isEmpty()) {
+            textInputEmail.error = "Пустое поле"
+            textInputEmail.requestFocus()
+            return
+        }
+        if (numberText.isEmpty()) {
+            textInputNumber.error = "Пустое поле"
+            textInputNumber.requestFocus()
+            return
+        }
+        if (numberText.length != 10) {
+            textInputNumber.error = "Номер телефона введен неверно"
+            textInputNumber.requestFocus()
+            return
+        }
+        if (loginText.isEmpty()) {
+            textInputLogin.error = "Пустое поле"
+            textInputLogin.requestFocus()
+            return
+        }
+        if (passwordText.isEmpty()) {
+            textInputPassword.error = "Пустое поле"
+            textInputPassword.requestFocus()
+            return
+        }
+        if (passwordText.length < 6) {
+            textInputPassword.error = "Минимум 6 символов"
+            textInputPassword.requestFocus()
+            return
+        }
+        if (passwordText.matches("[a-zA-Zа-яА-Я0-9@$#?&_.-]+".toRegex())) {
+            check = true
+        }
+        if (!check) {
+            textInputPassword.error = "ИСПРАВИТЬ!!!"
+            textInputPassword.requestFocus()
+            return
+        }
+        if (repeatPassword.isEmpty()) {
+            textInputRepeatPassword.error = "Пустое поле"
+            textInputRepeatPassword.requestFocus()
+            return
+        }
+        if (passwordText != repeatPassword) {
+            textInputRepeatPassword.error = "Пароль не совпадают"
+            textInputRepeatPassword.requestFocus()
+            return
+        }
+
+        getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE).edit().also {
+            it.putString(SAVE_DATA_USER_EMAIL, emailText)
+                .putString(SAVE_DATA_USER_PASSWORD, passwordText)
+                .putString(SAVE_DATA_USER_SURNAME, surnameText)
+                .putString(SAVE_DATA_USER_NAME, nameText)
+                .putString(SAVE_DATA_USER_PATRONYMIC, patronymicText)
+                .putString(SAVE_DATA_USER_BIRTHDAY, birthdayText)
+                .putString(SAVE_DATA_USER_GENDER, genderText)
+                .putString(SAVE_DATA_USER_CITY, cityText)
+                .putString(SAVE_DATA_USER_NUMBER, numberText)
+                .putString(SAVE_DATA_USER_LOGIN, loginText)
+                .putString(SAVE_DATA_USER_AVATAR, byteString)
+                .apply()
+        }
+
+        val intent = Intent(this, AuthorizationActivity::class.java)
+        intent.putExtra("email", emailText)
+        intent.putExtra("password", passwordText)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun pickImageFromGallery() {
@@ -133,33 +277,57 @@ class RegistrationActivity : AppCompatActivity() {
         startActivityForResult(intent, IMAGE_PICK_CODE)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray,
-    ) {
-        when(requestCode) {
-            PERMISSION_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] ==
-                        PackageManager.PERMISSION_GRANTED) {
-                        pickImageFromGallery()
-                }
-                else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
-                }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_PICK_CODE && data != null && data.data != null) {
+            if (resultCode == Activity.RESULT_OK) {
+                progressBar.visibility = View.VISIBLE
+                avatar.setImageURI(data.data)
+                regButton.setBackgroundResource(R.drawable.background_button_disable)
+                regButton.isEnabled = false
+                uploadImage()
             }
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-           binding.avatar.setImageURI(data?.data)
-       }
+    private fun uploadImage() {
+        val bitmap = (avatar.drawable as BitmapDrawable).bitmap
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        if (byteArray.size <= 5242880) {
+            byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Base64.getEncoder().encodeToString(byteArray)
+            } else {
+                android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
+            }
+            regButton.isEnabled = true
+            regButton.setBackgroundResource(R.drawable.background_button_green)
+            progressBar.visibility = View.GONE
+        } else {
+            Toast.makeText(this, "Размер картинки не более 5мб", Toast.LENGTH_SHORT).show()
+            avatar.setImageResource(R.drawable.default_avatar)
+            regButton.isEnabled = true
+            regButton.setBackgroundResource(R.drawable.background_button_green)
+            progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun clearTextInputLayout() {
+        textInputSurname.error = null
+        textInputName.error = null
+        textInputPatronymic.error = null
+        textInputBirthday.error = null
+        textInputGender.error = null
+        textInputCity.error = null
+        textInputEmail.error = null
+        textInputNumber.error = null
+        textInputLogin.error = null
+        textInputPassword.error = null
+        textInputRepeatPassword.error = null
     }
 
     companion object {
         const val IMAGE_PICK_CODE = 1000
-        const val PERMISSION_CODE = 1001
     }
 }

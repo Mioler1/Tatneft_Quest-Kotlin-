@@ -1,6 +1,5 @@
 package com.example.tatneft_quest.firstActivity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tatneft_quest.databinding.ActivityRestorePasswordBinding
@@ -14,8 +13,7 @@ class RestorePasswordActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.backAuthorization.setOnClickListener {
-            val intent = Intent(this, AuthorizationActivity::class.java)
-            startActivity(intent)
+            super.onBackPressed()
         }
     }
 

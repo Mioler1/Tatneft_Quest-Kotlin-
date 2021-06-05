@@ -9,23 +9,36 @@ import com.example.tatneft_quest.`interface`.ReplaceFragmentHandler
 import com.example.tatneft_quest.menu.AppDrawer
 import com.example.tatneft_quest.menu.TravelFragment
 import com.example.tatneft_quest.travelPackage.StartActionFragment
-import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
-    lateinit var mBinding: ActivityMainBinding
-    lateinit var mToolbar: Toolbar
+    private lateinit var mBinding: ActivityMainBinding
+    private lateinit var mToolbar: Toolbar
     private lateinit var appDrawer: AppDrawer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+        if (menuList.isEmpty() && fragmentList.isEmpty()) {
+            replace(TravelFragment(), false)
+        } else {
+            if (menuList.isNotEmpty()) {
+                supportFragmentManager.beginTransaction().attach(menuList[menuList.size - 1])
+            } else {
+                val fragment = if (fragmentList.isNotEmpty()) {
+                    fragmentList[fragmentList.size - 1]
+                } else {
+                    TravelFragment()
+                }
+                supportFragmentManager.beginTransaction().attach(fragment)
+            }
+        }
         init()
         appDrawer.drawerMenuFunc()
-        replace(TravelFragment(), false)
         checkIntent()
     }
 
@@ -45,8 +58,9 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
         }
     }
 
+
     override fun onBackPressed() {
-        if (fragmentList.isEmpty()) {
+        if (fragmentList.isEmpty() && menuList.isEmpty()) {
             super.onBackPressed()
         } else {
             if (menuList.isNotEmpty()) {
@@ -58,11 +72,15 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
                         super.onBackPressed()
                         fragmentList.removeAt(fragmentList.size - 1)
                     }
+                } else {
+                    replace(TravelFragment(), false)
                 }
                 menuList.clear()
             } else {
                 if (fragmentList.isNotEmpty()) {
                     fragmentList.removeAt(fragmentList.size - 1)
+                    super.onBackPressed()
+                } else {
                     super.onBackPressed()
                 }
             }
@@ -71,6 +89,7 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
 
     private fun checkIntent() {
         if (intent.action == "start") {
+            menuList.clear()
             replace(StartActionFragment(), false)
         }
     }

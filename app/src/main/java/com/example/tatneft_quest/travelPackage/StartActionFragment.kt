@@ -7,11 +7,15 @@ import android.app.ActivityManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Context.ACTIVITY_SERVICE
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
@@ -28,6 +32,7 @@ import androidx.core.content.ContextCompat.*
 import com.example.tatneft_quest.*
 import com.example.tatneft_quest.Variables.Companion.LATITUDE
 import com.example.tatneft_quest.Variables.Companion.LONGITUDE
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.databinding.FragmentStartActionBinding
 import com.example.tatneft_quest.fragments.BaseFragment
@@ -46,23 +51,25 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import com.mikepenz.iconics.Iconics.applicationContext
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 @SuppressLint("MissingPermission")
 class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickListener {
     //  Widgets
+    private var alertDialog: AlertDialog? = null
     private var map: GoogleMap? = null
     private lateinit var headerRelative: RelativeLayout
     private lateinit var mapRelative: RelativeLayout
     private lateinit var footerRelative: RelativeLayout
     private lateinit var btnMapFullScreen: ImageView
+    private lateinit var btnMoveCamera: ImageView
     private lateinit var btnInPlace: Button
     private lateinit var btnSeeingMap: Button
     private lateinit var btnScan: Button
-    private var alertDialog: AlertDialog? = null
 
     private var lastKnownLocation: Location? = null
-    private var locationManager: LocationManager? = null
     private val mHandler: Handler = Handler()
     private var mRunnable: Runnable? = null
 
@@ -74,6 +81,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private val defaultLocation = LatLng(54.901388, 52.297118)
     private var mMapLayoutState = 0
 
+    private lateinit var sharedPreferencesUser: SharedPreferences
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var binding: FragmentStartActionBinding
 
@@ -89,17 +97,12 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        btnMapFullScreen.visibility = View.VISIBLE
-        btnInPlace.visibility = View.VISIBLE
-        btnSeeingMap.visibility = View.VISIBLE
         if (checkSelfPermission(requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) {
             return
         }
         getDeviceLocation()
-        map?.isMyLocationEnabled = true
-        map?.uiSettings?.isMyLocationButtonEnabled = true
     }
 
     override fun onCreateView(
@@ -113,12 +116,12 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-
+        sharedPreferencesUser = requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
         headerRelative = binding.headerRelative
         mapRelative = binding.mapRelative
         footerRelative = binding.footerRelative
         btnMapFullScreen = binding.btnMapFullScreen
+        btnMoveCamera = binding.btnMoveCamera
         btnInPlace = binding.inPlace
         btnSeeingMap = binding.seeingMap
         btnScan = binding.btnScan
@@ -139,6 +142,13 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         mapFragment!!.getMapAsync(this)
     }
 
+    private fun init() {
+        btnMapFullScreen.visibility = View.VISIBLE
+        btnMoveCamera.visibility = View.VISIBLE
+        btnInPlace.visibility = View.VISIBLE
+        btnSeeingMap.visibility = View.VISIBLE
+    }
+
     private fun getDeviceLocation() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(applicationContext)
@@ -153,12 +163,13 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                             map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(
                                 lastKnownLocation!!.latitude,
                                 lastKnownLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
+                        } else {
+                            getDeviceLocation()
                         }
                     } else {
                         Log.e(TAG, "getDeviceLocation: ${task.exception}")
                         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation,
                             DEFAULT_ZOOM.toFloat()))
-                        map?.uiSettings?.isMyLocationButtonEnabled = false
                     }
                 }
             }
@@ -185,7 +196,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
             for (i in mClusterMarkers.indices) {
                 mClusterMarkers[i].position = LatLng(LATITUDE, LONGITUDE)
                 mClusterManagerRenderer!!.setUpdateMarker(mClusterMarkers[i])
-                Log.d(TAG, "retrieveUserLocations: $LATITUDE + $LONGITUDE")
+//                Log.d(TAG, "retrieveUserLocations: $LATITUDE + $LONGITUDE")
             }
         }
     }
@@ -202,7 +213,16 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                 mClusterManager!!.renderer = mClusterManagerRenderer
             }
             try {
-                val newClusterMarker = ClusterMarker(LatLng(latitude, longitude), R.drawable.icon5)
+                val avatar =
+                    sharedPreferencesUser.getString(Variables.SAVE_DATA_USER_AVATAR, "").toString()
+                val byteArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Base64.getDecoder().decode(avatar)
+                } else {
+                    android.util.Base64.decode(avatar, android.util.Base64.DEFAULT)
+                }
+                val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+
+                val newClusterMarker = ClusterMarker(LatLng(latitude, longitude), bitmap)
                 mClusterManager!!.addItem(newClusterMarker)
                 mClusterMarkers.add(newClusterMarker)
             } catch (e: NullPointerException) {
@@ -224,6 +244,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     override fun onResume() {
         super.onResume()
         if (mLocationPermissionGranted) {
+            init()
             startLocationService()
             startUserLocationsRunnable()
         }
@@ -240,7 +261,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private fun startLocationService() {
         if (!isLocationServiceRunning()) {
             val intent = Intent(context, LocationService::class.java)
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForegroundService(requireContext(), intent)
             } else {
                 activity?.startService(intent)
@@ -251,7 +272,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private fun isLocationServiceRunning(): Boolean {
         val manager = activity?.getSystemService(ACTIVITY_SERVICE) as ActivityManager?
         for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
-            if ("com.example.tatneft_quest.Services.LocationService" == service.service.className) {
+            if ("com.example.tatneft_quest.services.LocationService" == service.service.className) {
                 Log.d(TAG, "isLocationServiceRunning: location service is already running.")
                 return true
             }

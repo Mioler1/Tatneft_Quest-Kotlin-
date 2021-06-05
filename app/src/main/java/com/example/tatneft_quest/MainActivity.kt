@@ -2,6 +2,7 @@ package com.example.tatneft_quest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneft_quest.`interface`.ReplaceFragmentHandler
@@ -22,14 +23,19 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        if (menuList.isNotEmpty()) {
-            replace(menuList[menuList.size - 1], false)
+        if (menuList.isEmpty() && fragmentList.isEmpty()) {
+            replace(TravelFragment(), false)
         } else {
-            replace(fragment = if (fragmentList.isNotEmpty()) {
-                fragmentList[fragmentList.size - 1]
+            if (menuList.isNotEmpty()) {
+                supportFragmentManager.beginTransaction().attach(menuList[menuList.size - 1])
             } else {
-                TravelFragment()
-            }, false)
+                val fragment = if (fragmentList.isNotEmpty()) {
+                    fragmentList[fragmentList.size - 1]
+                } else {
+                    TravelFragment()
+                }
+                supportFragmentManager.beginTransaction().attach(fragment)
+            }
         }
         init()
         appDrawer.drawerMenuFunc()
@@ -83,6 +89,7 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
 
     private fun checkIntent() {
         if (intent.action == "start") {
+            menuList.clear()
             replace(StartActionFragment(), false)
         }
     }

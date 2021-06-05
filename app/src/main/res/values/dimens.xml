@@ -12,6 +12,6 @@
 
     //  Marker
     <dimen name="custom_marker_image">50dp</dimen>
-    <dimen name="custom_marker_padding">2dp</dimen>
+    <dimen name="custom_marker_padding">1dp</dimen>
 
 </resources>

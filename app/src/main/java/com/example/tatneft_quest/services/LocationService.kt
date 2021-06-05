@@ -3,19 +3,28 @@ package com.example.tatneft_quest.services
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.provider.Settings
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.example.tatneft_quest.fragments.MyApplication
 import com.example.tatneft_quest.MainActivity
 import com.example.tatneft_quest.R
+import com.example.tatneft_quest.Variables
 import com.example.tatneft_quest.Variables.Companion.LATITUDE
 import com.example.tatneft_quest.Variables.Companion.LONGITUDE
+import com.example.tatneft_quest.travelPackage.StartActionFragment
+import com.example.tatneft_quest.utils.AlertDialogGpsActivity
 import com.google.android.gms.location.*
 
 @Suppress("DEPRECATION")
@@ -24,6 +33,8 @@ class LocationService : Service() {
     private var notificationManager: NotificationManager? = null
     private var notification: Notification? = null
     private var mLocationCallback: LocationCallback? = null
+    private var mHandler: Handler? = Handler()
+    private var mRunnable: Runnable? = null
     private lateinit var mLocationRequestHighAccuracy: LocationRequest
 
     companion object {
@@ -31,7 +42,7 @@ class LocationService : Service() {
         private const val FASTEST_INTERVAL: Long = 2000
         private const val ACTION_STOP_SERVICE = "stop"
         private const val ACTION_START_ACTIVITY = "start"
-        private const val TAG = "Map"
+        private const val TAG = "check"
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -40,33 +51,24 @@ class LocationService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.d(TAG, "onCreate")
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         sendNotification()
         checkLocation()
+        checkGPS()
         requestLocationUpdates()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "onStartCommand")
         if (ACTION_STOP_SERVICE == intent?.action) {
             if (!(applicationContext as MyApplication).isAppForeground()) {
                 removeLocationUpdates()
-                stopSelf()
             }
         }
         return START_NOT_STICKY
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy")
-    }
-
     private fun sendNotification() {
-        Log.d(TAG, "sendNotification")
-
         val stopIntent = Intent(this, LocationService::class.java)
         stopIntent.action = ACTION_STOP_SERVICE
         val pendingStopSelf =
@@ -130,10 +132,23 @@ class LocationService : Service() {
                 if (location != null) {
                     LATITUDE = location.latitude
                     LONGITUDE = location.longitude
-                    Log.d(TAG, "$LATITUDE + $LONGITUDE")
+                    Log.d(TAG, "onLocationResult")
                 }
             }
         }
+    }
+
+    private fun checkGPS() {
+        mHandler?.postDelayed(Runnable {
+            Log.d(TAG, "checkGPS")
+            val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                startActivity(Intent(applicationContext, AlertDialogGpsActivity::class.java))
+                removeLocationUpdates()
+                return@Runnable
+            }
+            mHandler?.postDelayed(mRunnable!!, UPDATE_INTERVAL)
+        }.also { mRunnable = it }, UPDATE_INTERVAL)
     }
 
     @SuppressLint("MissingPermission")
@@ -144,6 +159,9 @@ class LocationService : Service() {
     }
 
     private fun removeLocationUpdates() {
+        Log.d(TAG, "removeLocationUpdates")
         mFusedLocationClient?.removeLocationUpdates(mLocationCallback)
+        mHandler?.removeCallbacks(mRunnable!!)
+        stopSelf()
     }
 }

@@ -37,8 +37,10 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.databinding.FragmentStartActionBinding
 import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.models.ClusterMarkerPoints
 import com.example.tatneft_quest.models.ClusterMarkerUser
 import com.example.tatneft_quest.services.LocationService
+import com.example.tatneft_quest.utils.MyClusterManagerRendererPoints
 import com.example.tatneft_quest.utils.MyClusterManagerRendererUser
 import com.example.tatneft_quest.utils.ViewWeightAnimationWrapper
 import com.google.android.gms.common.ConnectionResult
@@ -75,6 +77,10 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private var mClusterManagerRendererUser: MyClusterManagerRendererUser? = null
     private val mClusterMarkersUser: ArrayList<ClusterMarkerUser> = ArrayList()
 
+    private var clusterManagerPoints: ClusterManager<ClusterMarkerPoints>? = null
+    private var clusterManagerRendererPoints: MyClusterManagerRendererPoints? = null
+    private val clusterMarkerPoints: ArrayList<ClusterMarkerPoints> = ArrayList()
+
     private var mLocationPermissionGranted = false
     private val defaultLocation = LatLng(54.901388, 52.297118)
     private var mMapLayoutState = 0
@@ -102,6 +108,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
             return
         }
         getDeviceLocation()
+        addMarkerPoints()
     }
 
     override fun onCreateView(
@@ -144,6 +151,9 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         btnScan.setOnClickListener {
             mFragmentHandler?.replace(LocationHistoryFragment(), true)
         }
+
+        clusterMarkerPoints.add(ClusterMarkerPoints(LatLng(54.903642,52.281305), "Парк Шамсинур", R.drawable.icon1))
+        clusterMarkerPoints.add(ClusterMarkerPoints(LatLng(54.89389,52.276154), "Городской пляж", R.drawable.icon2))
     }
 
     private fun visibility() {
@@ -174,7 +184,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                     if (task.isSuccessful) {
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
-                            addMarkerUser(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
+                            addMarkerUser(lastKnownLocation!!.latitude,
+                                lastKnownLocation!!.longitude)
                             moveCamera(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
                         } else {
                             getDeviceLocation()
@@ -241,14 +252,32 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                 mClusterManagerUser!!.addItem(newClusterMarker)
                 mClusterMarkersUser.add(newClusterMarker)
             } catch (e: NullPointerException) {
-                Log.e(TAG, "addMapMarkers: NullPointerException: ${e.message}")
+                Log.e(TAG, "addMapMarkersUser: NullPointerException: ${e.message}")
             }
         }
         mClusterManagerUser?.cluster()
     }
 
     private fun addMarkerPoints() {
-
+        if (map != null) {
+            if (clusterManagerPoints == null) {
+                clusterManagerPoints =
+                    ClusterManager<ClusterMarkerPoints>(requireActivity().applicationContext, map)
+            }
+            if (clusterManagerRendererPoints == null) {
+                clusterManagerRendererPoints =
+                    MyClusterManagerRendererPoints(requireActivity(), map, clusterManagerPoints)
+                clusterManagerPoints!!.renderer = clusterManagerRendererPoints
+            }
+            try {
+                clusterMarkerPoints.forEach {
+                    clusterManagerPoints!!.addItem(it)
+                }
+            } catch (e: java.lang.NullPointerException) {
+                Log.e(TAG, "addMapMarkersPoints: NullPointerException: ${e.message}")
+            }
+        }
+        clusterManagerPoints?.cluster()
     }
 
     override fun onStart() {

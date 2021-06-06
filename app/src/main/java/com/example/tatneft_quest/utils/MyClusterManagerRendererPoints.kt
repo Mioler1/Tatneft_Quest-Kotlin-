@@ -43,7 +43,7 @@ class MyClusterManagerRendererPoints(
     ) {
         imageView.setImageResource(item.getIconPicture())
         val icon: Bitmap? = iconGenerator?.makeIcon()
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon)).title(item.title)
     }
 
     override fun shouldRenderAsCluster(cluster: Cluster<ClusterMarkerPoints?>): Boolean {

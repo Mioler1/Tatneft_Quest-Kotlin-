@@ -65,7 +65,41 @@
     <string name="scan_a_code">Scan a QR Code</string>
     <string name="result_not_found">Result Not Found</string>
     <string name="show_scanner_from_fragment">Show Scanner From Fragment</string>
+    <string name="point_1">Точка 1</string>
+    <string name="name_location">Главный офис ПАО Татнефть</string>
+    <string name="open_in_navigator">Открыть в навигаторе</string>
+    <string name="place">Я уже на месте!</string>
+    <string name="scanning">Сканировать</string>
+    <string name="map">Карта</string>
+    <string name="start_quest">Начать квест</string>
+
+    <!--fragment_profile-->
+    <string name="mail">Электронная почта</string>
+    <string name="phone">Номер телефона</string>
+
+    <!--fragment_help-->
+    <string name="describe_problem">Опишите проблему</string>
+    <string name="nameProblem">Заголовок проблемы</string>
+    <string name="report_problem">Сообщить о проблеме</string>
 
     <!--fragment_prize-->
     <string name="choose">Выберите приз от ПАО "Татнефть" в зависимости от количества заработанных баллов.</string>
+    <string name="prize_pen">150 баллов - Фирменная ручка</string>
+    <string name="prize_tshort">175 баллов - Футболка</string>
+    <string name="prize_cape">200 баллов - Фирменная бейсболка</string>
+    <string name="prize_card">250 баллов - Топливная карта"</string>
+    <string name="prize_power_bank">275 баллов - Power Bank</string>
+    <string name="prize_backpack">300 баллов - Рюкзак</string>
+    <string name="my_prize">Мои подарки</string>
+    <string name="get_prize">Получить подарок</string>
+
+    <!--fragment_question-->
+    <string name="point">точка</string>
+    <string name="question">вопрос</string>
+    <string name="description">описание</string>
+    <string name="choose_correctly_answer">Выберите правильный ответ:</string>
+    <string name="answer_first_questions">Ответ на первый вопрос</string>
+    <string name="answer_two_questions">Ответ на второй вопрос</string>
+    <string name="answer_correctly_questions">Ответ на правильный вопрос</string>
+    <string name="reply">Ответить</string>
 </resources>

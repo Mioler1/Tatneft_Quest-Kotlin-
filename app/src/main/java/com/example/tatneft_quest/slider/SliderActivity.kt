@@ -28,11 +28,11 @@ class SliderActivity : AppCompatActivity() {
 
         val onBoardingData: MutableList<ViewPagerAdapter.OnBoardingData> = ArrayList()
         onBoardingData.add(ViewPagerAdapter.OnBoardingData("Выбирай квест или экскурсию",
-            R.drawable.icon1))
-        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Следуй маршруту", R.drawable.icon2))
+            R.drawable.icon1v2))
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Следуй маршруту", R.drawable.icon2v2))
         onBoardingData.add(ViewPagerAdapter.OnBoardingData("Сканируй QR-code", R.drawable.icon3))
         onBoardingData.add(ViewPagerAdapter.OnBoardingData("Читай историю", R.drawable.icon4))
-        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Выполняй задания", R.drawable.icon5))
+        onBoardingData.add(ViewPagerAdapter.OnBoardingData("Выполняй задания", R.drawable.icon5v2))
         onBoardingData.add(ViewPagerAdapter.OnBoardingData("Меняй баллы на подарки",
             R.drawable.icon6))
 

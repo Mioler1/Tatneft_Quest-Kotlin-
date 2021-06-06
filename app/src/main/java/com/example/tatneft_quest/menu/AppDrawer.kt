@@ -136,6 +136,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                                     AuthorizationActivity::class.java))
                                 activity.finish()
                             }
+                            5 -> addFragment(HelpFragment())
                         }
                     }
                     return false

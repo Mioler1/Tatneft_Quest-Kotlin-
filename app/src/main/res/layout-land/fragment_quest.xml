@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".travelPackage.QuestFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/city"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_login">
+
+                <TextView
+                    android:id="@+id/titleCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/image1"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/titleForCity"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/rating1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleCity"
+                    android:layout_toStartOf="@id/image1"
+                    android:paddingStart="10dp"
+                    android:gravity="center"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rating"
+                        android:textSize="18sp"/>
+
+                    <RatingBar
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:numStars="5"
+                        android:rating="5" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rating1"
+                    android:layout_toStartOf="@id/image1"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingTop="16dp"
+                    android:textSize="18sp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/textForCity"/>
+
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="155dp"
+                    android:layout_height="206dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/test_image" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/company"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/city"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_login">
+
+                <TextView
+                    android:id="@+id/titleCompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/image2"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/titleForCompany"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/rating2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleCompany"
+                    android:paddingStart="10dp"
+                    android:layout_toStartOf="@id/image2"
+                    android:gravity="center"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="@string/rating" />
+
+                    <RatingBar
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:numStars="5"
+                        android:rating="4.5" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rating2"
+                    android:layout_toStartOf="@id/image2"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingTop="16dp"
+                    android:textSize="18sp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/textForCompany" />
+
+
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="155dp"
+                    android:layout_height="206dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tatneft_for_quest" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/resource"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/company"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/shape_login">
+
+                <TextView
+                    android:id="@+id/titleResource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/image3"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/titleForResource"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/rating3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleResource"
+                    android:layout_toStartOf="@id/image3"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rating"
+                        android:textSize="18sp"/>
+
+                    <RatingBar
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:numStars="5"
+                        android:rating="4" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rating3"
+                    android:layout_toStartOf="@id/image3"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/textForResource" />
+
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="155dp"
+                    android:layout_height="206dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/resource" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

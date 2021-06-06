@@ -5,6 +5,7 @@
     style="@style/mainRelative"
     tools:context=".firstActivity.RegistrationActivity">
 
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -50,7 +51,7 @@
                     android:id="@+id/iconPerson"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/ic_person" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -134,7 +135,7 @@
                     android:id="@+id/iconBirthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/ic_birth_day" />
 
                 <LinearLayout
@@ -146,7 +147,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputBirthday"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="175dp"
+                        android:layout_width="185dp"
                         android:layout_height="wrap_content"
                         app:endIconDrawable="@drawable/ic_calendar"
                         app:endIconMode="custom"
@@ -164,10 +165,9 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputGender"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="150dp"
+                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_toEndOf="@id/textInputBirthday"
                         app:endIconMode="dropdown_menu"
                         app:errorEnabled="true"
                         app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
@@ -176,7 +176,8 @@
                             android:id="@+id/gender"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/gender" />
+                            android:hint="@string/gender"
+                            android:text="" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
@@ -193,7 +194,7 @@
                     android:id="@+id/iconCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/ic_location" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -225,7 +226,7 @@
                     android:id="@+id/iconEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/ic_email" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -260,7 +261,7 @@
                     android:id="@+id/iconNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="22dp"
                     android:background="@drawable/ic_phone" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -332,8 +333,17 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/passwordReg"
                         android:inputType="text" />
-
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/helper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_help" />
             </RelativeLayout>
 
             <RelativeLayout

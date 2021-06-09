@@ -4,11 +4,14 @@ import android.content.Context
 import android.os.Bundle
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
+import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.`interface`.ReplaceFragmentHandler
+import com.example.tatneft_quest.models.ClusterMarkerPoints
 import com.example.tatneft_quest.travelPackage.testing.QuestionOneFragment
 import com.example.tatneft_quest.travelPackage.testing.QuestionThreeFragment
 import com.example.tatneft_quest.travelPackage.testing.QuestionTwoFragment
 import com.example.tatneft_quest.travelPackage.StartGeneralFragment
+import com.google.android.gms.maps.model.LatLng
 
 open class BaseFragment : Fragment() {
     @Nullable
@@ -37,6 +40,17 @@ open class BaseFragment : Fragment() {
         mFragmentHandler?.replace(startGeneralFragment, true)
     }
 
+    fun fillingSheetForPoints(
+        id: Int,
+        latitude: Double,
+        longitude: Double,
+        title: String,
+        image: Int,
+        active: Boolean
+    ) {
+        pointsSheet.add(ClusterMarkerPoints(id, LatLng(latitude, longitude), title, image, active))
+    }
+
     fun fillingQuestOne(
         question: String,
         descriptionQuestions: String,
@@ -54,7 +68,7 @@ open class BaseFragment : Fragment() {
         bundle.putString("answerTwo", answerTwo)
         bundle.putString("correctAnswer", correctAnswer)
         questionOneFragment.arguments = bundle
-        mFragmentHandler?.replace(questionOneFragment,false)
+        mFragmentHandler?.replace(questionOneFragment, false)
     }
 
     fun afterAnsweringOne(

@@ -1,11 +1,19 @@
 package com.example.tatneft_quest.travelPackage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tatneft_quest.R
+import com.example.tatneft_quest.Variables.Companion.LIST_DATA_POINTS
+import com.example.tatneft_quest.Variables.Companion.TAG
+import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.databinding.FragmentQuestBinding
 import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.libs.ImprovedPreference
+import com.example.tatneft_quest.models.ClusterMarkerPoints
+import kotlin.collections.ArrayList
 
 class QuestFragment : BaseFragment() {
     private lateinit var binding: FragmentQuestBinding
@@ -19,11 +27,21 @@ class QuestFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.company.setOnClickListener {
-            outputData("2 часа", 10, 25, "Татнефть", "Шамсинур")
-        }
-        binding.city.setOnClickListener{
-            outputData("4 часа", 20, 50, "Каскад", "Шамсинур")
+        val improvedPreference = ImprovedPreference(context)
+        val list: ArrayList<ClusterMarkerPoints> = improvedPreference.getListObject(LIST_DATA_POINTS, ClusterMarkerPoints::class.java)
+        binding.city.setOnClickListener {
+            if (list.isNotEmpty()) {
+                pointsSheet = list
+                Log.d(TAG, "not")
+            } else {
+                Log.d(TAG, "yes")
+                fillingSheetForPoints(1, 54.903642, 52.281305, "Парк Шамсинур", R.drawable.icon1, true)
+                fillingSheetForPoints(2, 54.893911, 52.276184, "Городской пляж", R.drawable.icon2, false)
+                fillingSheetForPoints(3, 54.904369, 52.287813, "Каскад прудов", R.drawable.icon3, false)
+                fillingSheetForPoints(4, 54.898794, 52.29991, "Городской парк", R.drawable.icon4, false)
+                improvedPreference.putListObject(LIST_DATA_POINTS, pointsSheet)
+            }
+            mFragmentHandler?.replace(StartGeneralFragment(), true)
         }
     }
 }

@@ -38,6 +38,7 @@ class MyClusterManagerRendererUser(
         iconGenerator!!.setContentView(imageView)
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     override fun onBeforeClusterItemRendered(item: ClusterMarkerUser, markerOptions: MarkerOptions) {
         imageView.setImageBitmap(item.getIconPicture())
         val icon: Bitmap? = iconGenerator?.makeIcon()

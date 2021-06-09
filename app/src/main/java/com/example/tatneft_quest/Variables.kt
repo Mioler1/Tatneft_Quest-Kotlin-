@@ -1,6 +1,7 @@
 package com.example.tatneft_quest
 
 import androidx.fragment.app.Fragment
+import com.example.tatneft_quest.models.ClusterMarkerPoints
 import kotlin.properties.Delegates
 
 open class Variables {
@@ -9,12 +10,14 @@ open class Variables {
         const val TAG = "check"
         val fragmentList: ArrayList<Fragment> = ArrayList()
         val menuList: ArrayList<Fragment> = ArrayList()
+        var pointsSheet: ArrayList<ClusterMarkerPoints> = ArrayList()
         var LATITUDE by Delegates.notNull<Double>()
         var LONGITUDE by Delegates.notNull<Double>()
 
         //  Name settings
         const val SAVE_DATA_USER: String = "saveDataUser"
         const val SAVE_DATA_PROGRAM = "saveDataProgram"
+        const val SAVE_DATA_POINTS = "saveDataPoints"
 
         //  Name variables SAVE_DATA_USER
         const val SAVE_DATA_USER_EMAIL = "email"
@@ -33,5 +36,8 @@ open class Variables {
 
         //  Name variables SAVE_DATA_PROGRAM
         const val INTRO_OPEN = "introOpen"
+
+        //  Name variables SAVE_DATA_POINTS
+        const val LIST_DATA_POINTS = "listDataPoints"
     }
 }

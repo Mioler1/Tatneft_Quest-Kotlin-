@@ -23,17 +23,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/point_1"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/name_location"
+                android:id="@+id/nameLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pointPosition"
                 android:layout_centerHorizontal="true"
                 android:padding="10dp"
-                android:text="@string/name_location"
                 android:textSize="20sp" />
 
         </RelativeLayout>

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.tatneft_quest.tablayout
 
 import androidx.fragment.app.Fragment

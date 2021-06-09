@@ -23,10 +23,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.*
 import com.example.tatneft_quest.*
@@ -35,6 +32,7 @@ import com.example.tatneft_quest.Variables.Companion.LATITUDE
 import com.example.tatneft_quest.Variables.Companion.LONGITUDE
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
 import com.example.tatneft_quest.Variables.Companion.fragmentList
+import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.databinding.FragmentStartActionBinding
 import com.example.tatneft_quest.fragments.BaseFragment
 import com.example.tatneft_quest.models.ClusterMarkerPoints
@@ -49,10 +47,14 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.snackbar.Snackbar
 import com.google.maps.android.clustering.ClusterManager
+import com.google.zxing.integration.android.IntentIntegrator
 import com.mikepenz.iconics.Iconics.applicationContext
+import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 @Suppress("DEPRECATION")
 @SuppressLint("MissingPermission")
@@ -66,6 +68,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private lateinit var btnInPlace: Button
     private lateinit var btnSeeingMap: Button
     private lateinit var btnScan: Button
+    private lateinit var pointPosition: TextView
+    private lateinit var nameLocation: TextView
 
     private var alertDialog: AlertDialog? = null
     private var map: GoogleMap? = null
@@ -79,7 +83,6 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     private var clusterManagerPoints: ClusterManager<ClusterMarkerPoints>? = null
     private var clusterManagerRendererPoints: MyClusterManagerRendererPoints? = null
-    private val clusterMarkerPoints: ArrayList<ClusterMarkerPoints> = ArrayList()
 
     private var mLocationPermissionGranted = false
     private val defaultLocation = LatLng(54.901388, 52.297118)
@@ -108,7 +111,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
             return
         }
         getDeviceLocation()
-        addMarkerPoints()
+        addMarkerPoint()
     }
 
     override fun onCreateView(
@@ -141,6 +144,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         btnInPlace = binding.inPlace
         btnSeeingMap = binding.seeingMap
         btnScan = binding.btnScan
+        pointPosition = binding.pointPosition
+        nameLocation = binding.nameLocation
 
         btnMapFullScreen.setOnClickListener(this)
         btnMoveCamera.setOnClickListener(this)
@@ -149,18 +154,30 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
             btnScan.visibility = View.VISIBLE
         }
         btnScan.setOnClickListener {
-            mFragmentHandler?.replace(LocationHistoryFragment(), true)
+            IntentIntegrator.forSupportFragment(this)
+                .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+                .setPrompt("Отсканируйте QR-код")
+                .setCameraId(0)
+                .setBeepEnabled(false)
+                .setOrientationLocked(false)
+                .setBarcodeImageEnabled(true)
+                .initiateScan()
         }
-
-        clusterMarkerPoints.add(ClusterMarkerPoints(LatLng(54.903642,52.281305), "Парк Шамсинур", R.drawable.icon1))
-        clusterMarkerPoints.add(ClusterMarkerPoints(LatLng(54.89389,52.276154), "Городской пляж", R.drawable.icon2))
     }
 
+    @SuppressLint("SetTextI18n")
     private fun visibility() {
         btnMapFullScreen.visibility = View.VISIBLE
         btnMoveCamera.visibility = View.VISIBLE
         btnInPlace.visibility = View.VISIBLE
         btnSeeingMap.visibility = View.VISIBLE
+
+        pointsSheet.forEach { el ->
+            if (el.getActive()) {
+                pointPosition.text = "Точка №${el.getId()}"
+                nameLocation.text = el.title
+            }
+        }
     }
 
     private fun moveCamera(latitude: Double, longitude: Double) {
@@ -258,7 +275,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         mClusterManagerUser?.cluster()
     }
 
-    private fun addMarkerPoints() {
+    private fun addMarkerPoint() {
         if (map != null) {
             if (clusterManagerPoints == null) {
                 clusterManagerPoints =
@@ -270,8 +287,10 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                 clusterManagerPoints!!.renderer = clusterManagerRendererPoints
             }
             try {
-                clusterMarkerPoints.forEach {
-                    clusterManagerPoints!!.addItem(it)
+                pointsSheet.forEach { el ->
+                    if (el.getActive()) {
+                        clusterManagerPoints!!.addItem(el)
+                    }
                 }
             } catch (e: java.lang.NullPointerException) {
                 Log.e(TAG, "addMapMarkersPoints: NullPointerException: ${e.message}")
@@ -443,6 +462,32 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                     super.requireActivity().onBackPressed()
                 }
             }
+        }
+    }
+
+    //  Проверка QR-code
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Snackbar.make(requireView(), "Нужно отсканировать QR-код", Snackbar.LENGTH_SHORT).show()
+            } else {
+                val json = JSONObject(result.contents)
+                val namePoint = json.get("name").toString()
+                Snackbar.make(requireView(), namePoint, Snackbar.LENGTH_SHORT).show()
+                pointsSheet.forEach { el ->
+                    if (el.getActive()) {
+                        if (el.title == namePoint) {
+                            mFragmentHandler?.replace(LocationHistoryFragment(), true)
+                        } else {
+                            Snackbar.make(requireView(), "QR-код не соответсвует данной локации", Snackbar.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+            Snackbar.make(requireView(), "Что то не так", Snackbar.LENGTH_SHORT).show()
         }
     }
 

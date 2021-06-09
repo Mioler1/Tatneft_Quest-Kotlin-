@@ -11,6 +11,7 @@ import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 
+@Suppress("DEPRECATION")
 class AlertDialogGpsActivity : AppCompatActivity() {
     private var alert: AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {

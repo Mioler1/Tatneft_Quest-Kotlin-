@@ -67,7 +67,6 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
                 if (fragmentList.isNotEmpty()) {
                     if (fragmentList[fragmentList.size - 1] != menuList[menuList.size - 1]) {
                         replace(fragmentList[fragmentList.size - 1], false)
-                        appDrawer.setSelection()
                     } else {
                         super.onBackPressed()
                         fragmentList.removeAt(fragmentList.size - 1)
@@ -75,6 +74,7 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
                 } else {
                     replace(TravelFragment(), false)
                 }
+                appDrawer.setSelection()
                 menuList.clear()
             } else {
                 if (fragmentList.isNotEmpty()) {

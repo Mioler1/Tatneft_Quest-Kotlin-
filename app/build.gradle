@@ -65,7 +65,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
 
     // Scanner QR-code and barcode
-//    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+    implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
+    implementation 'com.google.zxing:core:3.3.0'
 
     implementation "androidx.preference:preference-ktx:1.1.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

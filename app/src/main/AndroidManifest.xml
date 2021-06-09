@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tatneft_quest">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <supports-screens
         android:largeScreens="false"
@@ -16,15 +19,21 @@
     <application
         android:name=".fragments.MyApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.TatneftQuest">
+
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
+
         <activity
             android:name=".utils.AlertDialogGpsActivity"
             android:theme="@style/MaterialBaseTheme.Light.AlertDialog" />
-        <activity android:name=".travelPackage.LocationHistoryFragment" />
         <activity
             android:name=".firstActivity.RegistrationActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -52,11 +61,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <!-- <activity -->
-        <!-- android:name="com.journeyapps.barcodescanner.CaptureActivity" -->
-        <!-- android:screenOrientation="fullSensor" -->
-        <!-- tools:replace="screenOrientation" /> -->
 
         <activity
             android:name=".firstActivity.SplashScreen"

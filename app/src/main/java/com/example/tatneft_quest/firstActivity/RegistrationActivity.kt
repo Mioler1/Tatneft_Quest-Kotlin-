@@ -34,6 +34,7 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("DEPRECATION")
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var emailRegistration: TextInputEditText
     private lateinit var passwordRegistration: TextInputEditText

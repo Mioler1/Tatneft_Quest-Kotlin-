@@ -130,11 +130,14 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                             })
                             3 -> addFragment(PrizeFragment())
                             8 -> {
+                                menuList.clear()
+                                fragmentList.clear()
                                 sharedPreferencesUser.edit()
                                     .putString(SAVE_DATA_USER_TOKEN, "false").apply()
                                 activity.startActivity(Intent(activity.applicationContext,
                                     AuthorizationActivity::class.java))
                                 activity.finish()
+
                             }
                             5 -> addFragment(HelpFragment())
                         }

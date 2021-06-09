@@ -110,6 +110,12 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(7)
                     .withIconTintingEnabled(true)
+                    .withName("О приложении")
+                    .withIcon(R.drawable.ic_info)
+                    .withSelectable(true),
+                DividerDrawerItem(),
+                PrimaryDrawerItem().withIdentifier(8)
+                    .withIconTintingEnabled(true)
                     .withName("Выход")
                     .withIcon(R.drawable.ic_logout)
                     .withSelectable(false)
@@ -129,14 +135,15 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                                 TravelFragment()
                             })
                             3 -> addFragment(PrizeFragment())
-                            8 -> {
+                            9 -> {
                                 sharedPreferencesUser.edit()
                                     .putString(SAVE_DATA_USER_TOKEN, "false").apply()
                                 activity.startActivity(Intent(activity.applicationContext,
                                     AuthorizationActivity::class.java))
                                 activity.finish()
                             }
-                            5 -> addFragment(HelpFragment())
+                            6 -> addFragment(HelpFragment())
+                            8 -> addFragment(AboutApplicationFragment())
                         }
                     }
                     return false

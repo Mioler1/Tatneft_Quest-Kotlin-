@@ -35,41 +35,51 @@ class QuestionThreeFragment : BaseFragment() {
 
         binding.answerOne.setOnClickListener {
             binding.answerOne.background =
-                ContextCompat.getDrawable(context!!, R.drawable.background_button_green)
-            binding.answerOne.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+                ContextCompat.getDrawable(requireContext(), R.drawable.background_button_green)
+            binding.answerOne.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             binding.answerTwo.background =
-                ContextCompat.getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerTwo.setTextColor(ContextCompat.getColor(context!!, R.color.green))
+                ContextCompat.getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerTwo.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             binding.correctAnswer.background =
-                ContextCompat.getDrawable(context!!, R.drawable.border_button_green)
-            binding.correctAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.green))
+                ContextCompat.getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.correctAnswer.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
         }
         binding.answerTwo.setOnClickListener {
             binding.answerTwo.background =
-                ContextCompat.getDrawable(context!!, R.drawable.background_button_green)
-            binding.answerTwo.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+                ContextCompat.getDrawable(requireContext(), R.drawable.background_button_green)
+            binding.answerTwo.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             binding.answerOne.background =
-                ContextCompat.getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerOne.setTextColor(ContextCompat.getColor(context!!, R.color.green))
+                ContextCompat.getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerOne.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             binding.correctAnswer.background =
-                ContextCompat.getDrawable(context!!, R.drawable.border_button_green)
-            binding.correctAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.green))
+                ContextCompat.getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.correctAnswer.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
         }
         binding.correctAnswer.setOnClickListener {
             binding.correctAnswer.background =
-                ContextCompat.getDrawable(context!!, R.drawable.background_button_green)
-            binding.correctAnswer.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+                ContextCompat.getDrawable(requireContext(), R.drawable.background_button_green)
+            binding.correctAnswer.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             binding.answerOne.background =
-                ContextCompat.getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerOne.setTextColor(ContextCompat.getColor(context!!, R.color.green))
+                ContextCompat.getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerOne.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             binding.answerTwo.background =
-                ContextCompat.getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerTwo.setTextColor(ContextCompat.getColor(context!!, R.color.green))
+                ContextCompat.getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerTwo.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
         }
         binding.reply.setOnClickListener {
-            afterAnsweringOne("Ответ на вопрос 3/3:", "Объединение \"Татнефть\" получило статус акционерного общества 1994 году.","Результат", "7", "5", "9")
+            afterAnsweringOne(
+                "Ответ на вопрос 3/3:",
+                "Объединение \"Татнефть\" получило статус акционерного общества 1994 году.",
+                "Результат",
+                "7",
+                "5",
+                "9"
+            )
             binding.nextQuestion.visibility = View.VISIBLE
             binding.reply.visibility = View.GONE
+            binding.answerOne.isClickable = false
+            binding.answerTwo.isClickable = false
+            binding.correctAnswer.isClickable = false
         }
         binding.nextQuestion.setOnClickListener {
             mFragmentHandler?.replace(StartActionFragment(), false)

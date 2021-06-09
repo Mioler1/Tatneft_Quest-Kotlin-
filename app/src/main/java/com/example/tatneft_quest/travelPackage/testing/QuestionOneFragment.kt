@@ -33,33 +33,33 @@ class QuestionOneFragment : BaseFragment() {
         }
 
         binding.answerOne.setOnClickListener {
-            binding.answerOne.background = getDrawable(context!!,
+            binding.answerOne.background = getDrawable(requireContext(),
                 R.drawable.background_button_green)
-            binding.answerOne.setTextColor(getColor(context!!, R.color.white))
-            binding.answerTwo.background = getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerTwo.setTextColor(getColor(context!!, R.color.green))
-            binding.correctAnswer.background = getDrawable(context!!,
+            binding.answerOne.setTextColor(getColor(requireContext(), R.color.white))
+            binding.answerTwo.background = getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerTwo.setTextColor(getColor(requireContext(), R.color.green))
+            binding.correctAnswer.background = getDrawable(requireContext(),
                 R.drawable.border_button_green)
-            binding.correctAnswer.setTextColor(getColor(context!!, R.color.green))
+            binding.correctAnswer.setTextColor(getColor(requireContext(), R.color.green))
         }
         binding.answerTwo.setOnClickListener {
-            binding.answerTwo.background = getDrawable(context!!,
+            binding.answerTwo.background = getDrawable(requireContext(),
                 R.drawable.background_button_green)
-            binding.answerTwo.setTextColor(getColor(context!!, R.color.white))
-            binding.answerOne.background = getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerOne.setTextColor(getColor(context!!, R.color.green))
-            binding.correctAnswer.background = getDrawable(context!!,
+            binding.answerTwo.setTextColor(getColor(requireContext(), R.color.white))
+            binding.answerOne.background = getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerOne.setTextColor(getColor(requireContext(), R.color.green))
+            binding.correctAnswer.background = getDrawable(requireContext(),
                 R.drawable.border_button_green)
-            binding.correctAnswer.setTextColor(getColor(context!!, R.color.green))
+            binding.correctAnswer.setTextColor(getColor(requireContext(), R.color.green))
         }
         binding.correctAnswer.setOnClickListener {
-            binding.correctAnswer.background = getDrawable(context!!,
+            binding.correctAnswer.background = getDrawable(requireContext(),
                 R.drawable.background_button_green)
-            binding.correctAnswer.setTextColor(getColor(context!!, R.color.white))
-            binding.answerOne.background = getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerOne.setTextColor(getColor(context!!, R.color.green))
-            binding.answerTwo.background = getDrawable(context!!, R.drawable.border_button_green)
-            binding.answerTwo.setTextColor(getColor(context!!, R.color.green))
+            binding.correctAnswer.setTextColor(getColor(requireContext(), R.color.white))
+            binding.answerOne.background = getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerOne.setTextColor(getColor(requireContext(), R.color.green))
+            binding.answerTwo.background = getDrawable(requireContext(), R.drawable.border_button_green)
+            binding.answerTwo.setTextColor(getColor(requireContext(), R.color.green))
         }
 
         binding.reply.setOnClickListener {
@@ -73,6 +73,9 @@ class QuestionOneFragment : BaseFragment() {
                     "5",
                     "9"
                 )
+                binding.answerOne.isClickable = false
+                binding.answerTwo.isClickable = false
+                binding.correctAnswer.isClickable = false
         }
 
         binding.nextQuestion.setOnClickListener {

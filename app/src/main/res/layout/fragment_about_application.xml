@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menu.AboutApplicationFragment"
+    android:background="@color/green">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/nameApplication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tatneft Quest"
+            android:textSize="36sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Версия 1.0.15"
+            android:layout_below="@id/nameApplication"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_below="@id/version"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="© 2021 студенты &quot;Альметьевского политехнического техникума&quot;"
+            android:layout_below="@id/logo"
+            android:textSize="16sp"
+            android:layout_marginTop="15sp"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

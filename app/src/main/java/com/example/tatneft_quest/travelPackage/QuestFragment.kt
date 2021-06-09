@@ -36,7 +36,7 @@ class QuestFragment : BaseFragment() {
             } else {
                 Log.d(TAG, "yes")
                 fillingSheetForPoints(1, 54.903642, 52.281305, "Парк Шамсинур", R.drawable.icon1, true)
-                fillingSheetForPoints(2, 54.893911, 52.276184, "Городской пляж", R.drawable.icon2, false)
+                fillingSheetForPoints(2, 54.897804, 52.266678, "Парк здоровья", R.drawable.icon2, false)
                 fillingSheetForPoints(3, 54.904369, 52.287813, "Каскад прудов", R.drawable.icon3, false)
                 fillingSheetForPoints(4, 54.898794, 52.29991, "Городской парк", R.drawable.icon4, false)
                 improvedPreference.putListObject(LIST_DATA_POINTS, pointsSheet)

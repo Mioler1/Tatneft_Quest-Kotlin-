@@ -474,11 +474,11 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
             } else {
                 val json = JSONObject(result.contents)
                 val namePoint = json.get("name").toString()
-                Snackbar.make(requireView(), namePoint, Snackbar.LENGTH_SHORT).show()
                 pointsSheet.forEach { el ->
                     if (el.getActive()) {
                         if (el.title == namePoint) {
                             mFragmentHandler?.replace(LocationHistoryFragment(), true)
+                            requireActivity().stopService(Intent(context, LocationService::class.java))
                         } else {
                             Snackbar.make(requireView(), "QR-код не соответсвует данной локации", Snackbar.LENGTH_SHORT).show()
                         }

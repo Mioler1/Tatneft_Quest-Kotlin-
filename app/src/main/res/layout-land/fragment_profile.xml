@@ -8,9 +8,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/title"
-        android:layout_marginTop="5dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/AutoLayout"
@@ -135,7 +133,7 @@
                     android:layout_toEndOf="@id/iconBirthday">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputAge"
+                        android:id="@+id/textInputBirthday"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
@@ -145,7 +143,7 @@
                         app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/age"
+                            android:id="@+id/birthday"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/age"

@@ -3,6 +3,10 @@ package com.example.tatneft_quest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneft_quest.Variables.Companion.TAG
@@ -13,6 +17,7 @@ import com.example.tatneft_quest.travelPackage.StartActionFragment
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.databinding.ActivityMainBinding
+import com.example.tatneft_quest.menu.ProfileFragment
 
 class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
     private lateinit var mBinding: ActivityMainBinding
@@ -100,5 +105,6 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
             replace(StartActionFragment(), false)
         }
     }
+
 }
 

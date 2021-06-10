@@ -33,7 +33,7 @@ class LocationHistoryFragment : BaseFragment() {
         init()
         downloadData()
         binding.testing.setOnClickListener {
-
+            mFragmentHandler?.replace(QuestTestFragment(), true)
         }
     }
 

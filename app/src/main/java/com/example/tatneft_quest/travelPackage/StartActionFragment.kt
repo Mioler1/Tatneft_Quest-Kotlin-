@@ -163,7 +163,6 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 //                .setBarcodeImageEnabled(true)
 //                .initiateScan()
             mFragmentHandler?.replace(LocationHistoryFragment(), true)
-            requireActivity().stopService(Intent(context, LocationService::class.java))
         }
     }
 
@@ -482,8 +481,6 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                     if (el.getActive()) {
                         if (el.title == namePoint) {
                             mFragmentHandler?.replace(LocationHistoryFragment(), true)
-                            requireActivity().stopService(Intent(context,
-                                LocationService::class.java))
                         } else {
                             Snackbar.make(requireView(),
                                 "QR-код не соответсвует данной локации",

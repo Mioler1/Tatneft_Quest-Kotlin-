@@ -51,7 +51,7 @@
                     android:layout_below="@id/site_name"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/background_button_red"
-                    android:text="Пройти тестирование"
+                    android:text="Пройти тестированtе"
                     android:textColor="@color/white" />
 
             </RelativeLayout>

@@ -55,12 +55,13 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
 
     override fun replace(fragment: Fragment, boolean: Boolean) {
         if (boolean) {
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, "fragment")
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment, "fragment")
                 .addToBackStack("stackFragment").commit()
             fragmentList.add(fragment)
         } else {
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, "fragment")
-                .commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment, "fragment").commit()
         }
     }
 

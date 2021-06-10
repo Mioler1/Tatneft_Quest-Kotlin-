@@ -22,33 +22,16 @@ open class BaseFragment : Fragment() {
         mFragmentHandler = context as ReplaceFragmentHandler
     }
 
-    fun outputData(
-        timeTransit: String,
-        numberPoint: Int,
-        score: Int,
-        firstPoint: String,
-        lastPoint: String,
-    ) {
-        val startGeneralFragment = StartGeneralFragment()
-        val bundle = Bundle()
-        bundle.putString("timeTransit", timeTransit)
-        bundle.putInt("numberPoint", numberPoint)
-        bundle.putInt("score", score)
-        bundle.putString("firstPoint", firstPoint)
-        bundle.putString("lastPoint", lastPoint)
-        startGeneralFragment.arguments = bundle
-        mFragmentHandler?.replace(startGeneralFragment, true)
-    }
-
     fun fillingSheetForPoints(
         id: Int,
         latitude: Double,
         longitude: Double,
         title: String,
         image: Int,
-        active: Boolean
+        active: Boolean,
+        information: String
     ) {
-        pointsSheet.add(ClusterMarkerPoints(id, LatLng(latitude, longitude), title, image, active))
+        pointsSheet.add(ClusterMarkerPoints(id, LatLng(latitude, longitude), title, image, active, information))
     }
 
     fun fillingQuestOne(

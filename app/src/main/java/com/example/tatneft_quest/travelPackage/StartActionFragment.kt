@@ -154,14 +154,16 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
             btnScan.visibility = View.VISIBLE
         }
         btnScan.setOnClickListener {
-            IntentIntegrator.forSupportFragment(this)
-                .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-                .setPrompt("Отсканируйте QR-код")
-                .setCameraId(0)
-                .setBeepEnabled(false)
-                .setOrientationLocked(false)
-                .setBarcodeImageEnabled(true)
-                .initiateScan()
+//            IntentIntegrator.forSupportFragment(this)
+//                .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+//                .setPrompt("Отсканируйте QR-код")
+//                .setCameraId(0)
+//                .setBeepEnabled(false)
+//                .setOrientationLocked(false)
+//                .setBarcodeImageEnabled(true)
+//                .initiateScan()
+            mFragmentHandler?.replace(LocationHistoryFragment(), true)
+            requireActivity().stopService(Intent(context, LocationService::class.java))
         }
     }
 

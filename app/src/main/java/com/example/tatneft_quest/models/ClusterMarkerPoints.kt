@@ -9,6 +9,7 @@ class ClusterMarkerPoints(
     private var title: String,
     private var iconPicture: Int,
     private var active: Boolean,
+    private var information: String,
 ) : ClusterItem {
 
     override fun getPosition(): LatLng {
@@ -35,6 +36,10 @@ class ClusterMarkerPoints(
         return iconPicture
     }
 
+    fun getInformation(): String {
+        return information
+    }
+
     fun setId(id: Int) {
         this.id = id
     }
@@ -49,5 +54,9 @@ class ClusterMarkerPoints(
 
     fun setTitle(title: String) {
         this.title = title
+    }
+
+    fun setInformation(information: String) {
+        this.information = information
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.`interface`.ReplaceFragmentHandler
 import com.example.tatneft_quest.menu.AppDrawer
 import com.example.tatneft_quest.menu.TravelFragment
@@ -29,12 +30,17 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
             if (menuList.isNotEmpty()) {
                 supportFragmentManager.beginTransaction().attach(menuList[menuList.size - 1])
             } else {
-                val fragment = if (fragmentList.isNotEmpty()) {
-                    fragmentList[fragmentList.size - 1]
+                if (supportFragmentManager.findFragmentByTag("fragment") == null) {
+                    replace(TravelFragment(), false)
                 } else {
-                    TravelFragment()
+                    val fragment = if (fragmentList.isNotEmpty()) {
+                        Log.d(TAG, "onCreate")
+                        fragmentList[fragmentList.size - 1]
+                    } else {
+                        TravelFragment()
+                    }
+                    supportFragmentManager.beginTransaction().attach(fragment)
                 }
-                supportFragmentManager.beginTransaction().attach(fragment)
             }
         }
         init()
@@ -49,11 +55,11 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
 
     override fun replace(fragment: Fragment, boolean: Boolean) {
         if (boolean) {
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, "fragment")
                 .addToBackStack("stackFragment").commit()
             fragmentList.add(fragment)
         } else {
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, "fragment")
                 .commit()
         }
     }

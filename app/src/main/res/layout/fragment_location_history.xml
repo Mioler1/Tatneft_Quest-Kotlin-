@@ -48,7 +48,7 @@
                     android:layout_below="@id/informationLocation"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/background_button_red"
-                    android:text="Пройти тестирование"
+                    android:text="Пройти тестированtе"
                     android:textColor="@color/white" />
 
             </RelativeLayout>

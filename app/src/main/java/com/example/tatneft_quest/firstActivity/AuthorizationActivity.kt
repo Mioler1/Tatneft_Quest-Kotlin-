@@ -39,7 +39,10 @@ class AuthorizationActivity : AppCompatActivity() {
         binding.regButton.setOnClickListener {
             startActivity(Intent(this, RegistrationActivity::class.java))
         }
-        binding.comeButton.setOnClickListener { view -> authorization(view) }
+        binding.comeButton.setOnClickListener { view ->
+//            authorization(view)
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
     private fun init() {

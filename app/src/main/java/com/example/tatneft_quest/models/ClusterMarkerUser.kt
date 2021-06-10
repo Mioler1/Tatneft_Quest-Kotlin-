@@ -4,14 +4,14 @@ import android.graphics.Bitmap
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
-class ClusterMarkerUser(private var position: LatLng, private var iconPicture: Bitmap) : ClusterItem {
+class ClusterMarkerUser(private var position: LatLng, private var title: String, private var iconPicture: Bitmap) : ClusterItem {
 
     override fun getPosition(): LatLng {
         return position
     }
 
-    override fun getTitle(): String? {
-        return null
+    override fun getTitle(): String {
+        return title
     }
 
     override fun getSnippet(): String? {
@@ -24,5 +24,9 @@ class ClusterMarkerUser(private var position: LatLng, private var iconPicture: B
 
     fun setPosition(position: LatLng) {
         this.position = position
+    }
+
+    fun setTitle(title: String) {
+        this.title = title
     }
 }

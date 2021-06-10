@@ -265,7 +265,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                 }
                 val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
 
-                val newClusterMarker = ClusterMarkerUser(LatLng(latitude, longitude), bitmap)
+                val newClusterMarker = ClusterMarkerUser(LatLng(latitude, longitude),
+                    "Ваше местоположение", bitmap)
                 mClusterManagerUser!!.addItem(newClusterMarker)
                 mClusterMarkersUser.add(newClusterMarker)
             } catch (e: NullPointerException) {
@@ -470,7 +471,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
-                Snackbar.make(requireView(), "Нужно отсканировать QR-код", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Нужно отсканировать QR-код", Snackbar.LENGTH_SHORT)
+                    .show()
             } else {
                 val json = JSONObject(result.contents)
                 val namePoint = json.get("name").toString()
@@ -478,9 +480,12 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                     if (el.getActive()) {
                         if (el.title == namePoint) {
                             mFragmentHandler?.replace(LocationHistoryFragment(), true)
-                            requireActivity().stopService(Intent(context, LocationService::class.java))
+                            requireActivity().stopService(Intent(context,
+                                LocationService::class.java))
                         } else {
-                            Snackbar.make(requireView(), "QR-код не соответсвует данной локации", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(requireView(),
+                                "QR-код не соответсвует данной локации",
+                                Snackbar.LENGTH_SHORT).show()
                         }
                     }
                 }

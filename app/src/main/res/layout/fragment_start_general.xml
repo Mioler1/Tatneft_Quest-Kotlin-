@@ -221,7 +221,42 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/relative_myTime"
+                    style="@style/layoutMargin_5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/image_myTime"
+                        style="@style/imageViewInStartGeneralFragment"
+                        android:src="@drawable/time" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_toEndOf="@+id/image_myTime">
+
+                        <TextView
+                            android:id="@+id/text_myTime"
+                            style="@style/textViewInStartGeneralFragment"
+                            android:layout_centerHorizontal="true"
+                            android:text="Время затраченное на квест" />
+
+                        <TextView
+                            android:id="@+id/myTime"
+                            style="@style/textViewResultInStartGeneralFragment"
+                            android:layout_below="@+id/text_myTime"
+                            android:layout_centerHorizontal="true" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
                 <LinearLayout
+                    android:id="@+id/linerButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
@@ -248,6 +283,16 @@
                         android:textColor="@color/white" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/stopQuestButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="Прекратить квест"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

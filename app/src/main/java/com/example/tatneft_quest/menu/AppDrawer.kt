@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -18,6 +19,7 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NAME
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PATRONYMIC
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_SURNAME
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_TOKEN
+import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.firstActivity.AuthorizationActivity
@@ -38,7 +40,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
     private lateinit var email: String
     private lateinit var surname: String
     private lateinit var name: String
-    private lateinit var patranymic: String
+    private lateinit var patronymic: String
     private lateinit var avatar: String
     private lateinit var bitmap: Bitmap
     private var pos: Int = 2
@@ -48,7 +50,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
         email = sharedPreferencesUser.getString(SAVE_DATA_USER_EMAIL, "").toString()
         surname = sharedPreferencesUser.getString(SAVE_DATA_USER_SURNAME, "").toString()
         name = sharedPreferencesUser.getString(SAVE_DATA_USER_NAME, "").toString()
-        patranymic = sharedPreferencesUser.getString(SAVE_DATA_USER_PATRONYMIC, "").toString()
+        patronymic = sharedPreferencesUser.getString(SAVE_DATA_USER_PATRONYMIC, "").toString()
         avatar = sharedPreferencesUser.getString(SAVE_DATA_USER_AVATAR, "").toString()
         val byteArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Base64.getDecoder().decode(avatar)
@@ -65,7 +67,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
             .addProfiles(
-                ProfileDrawerItem().withName("$surname $name $patranymic")
+                ProfileDrawerItem().withName("$surname $name $patronymic")
                     .withEmail(email)
                     .withIcon(bitmap)
             ).build()

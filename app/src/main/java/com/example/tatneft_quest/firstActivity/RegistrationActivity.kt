@@ -65,7 +65,7 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var textInputRepeatPassword: TextInputLayout
 
     private lateinit var binding: ActivityRegistrationBinding
-    private var byteString = "null"
+    private var byteString: String? = null
 
     private fun init() {
         emailRegistration = binding.emailRegistration
@@ -122,7 +122,9 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
         helper.setOnClickListener {
-            Snackbar.make(it, "Латиница, кириллица, цифра, от 6 символов, @\$#?_.-", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(it,
+                "Латиница, кириллица, цифра, от 6 символов, @\$#?_.-",
+                Snackbar.LENGTH_LONG).show()
 
         }
 
@@ -257,7 +259,17 @@ class RegistrationActivity : AppCompatActivity() {
             textInputRepeatPassword.requestFocus()
             return
         }
-
+        if (byteString == null) {
+            val bitmap: Bitmap = (avatar.drawable as BitmapDrawable).bitmap
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            val byteArray = byteArrayOutputStream.toByteArray()
+            byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Base64.getEncoder().encodeToString(byteArray)
+            } else {
+                android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
+            }
+        }
         getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE).edit().also {
             it.putString(SAVE_DATA_USER_EMAIL, emailText)
                 .putString(SAVE_DATA_USER_PASSWORD, passwordText)
@@ -301,7 +313,7 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun uploadImage() {
-        val bitmap = (avatar.drawable as BitmapDrawable).bitmap
+        val bitmap: Bitmap = (avatar.drawable as BitmapDrawable).bitmap
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()

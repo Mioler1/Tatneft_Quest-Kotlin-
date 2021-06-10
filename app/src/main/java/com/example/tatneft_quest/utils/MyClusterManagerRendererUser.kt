@@ -42,7 +42,7 @@ class MyClusterManagerRendererUser(
     override fun onBeforeClusterItemRendered(item: ClusterMarkerUser, markerOptions: MarkerOptions) {
         imageView.setImageBitmap(item.getIconPicture())
         val icon: Bitmap? = iconGenerator?.makeIcon()
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon))
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon)).title(item.title)
     }
 
     override fun shouldRenderAsCluster(cluster: Cluster<ClusterMarkerUser?>): Boolean {

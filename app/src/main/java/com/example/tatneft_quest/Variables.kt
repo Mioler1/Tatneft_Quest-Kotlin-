@@ -13,6 +13,7 @@ open class Variables {
         var pointsSheet: ArrayList<ClusterMarkerPoints> = ArrayList()
         var LATITUDE by Delegates.notNull<Double>()
         var LONGITUDE by Delegates.notNull<Double>()
+        var TIME by Delegates.notNull<Int>()
 
         //  Name settings
         const val SAVE_DATA_USER: String = "saveDataUser"
@@ -39,5 +40,7 @@ open class Variables {
 
         //  Name variables SAVE_DATA_POINTS
         const val LIST_DATA_POINTS = "listDataPoints"
+        const val ACTIVE_QUEST = "activeQuest"
+        const val TIME_QUEST = "timeQuest"
     }
 }

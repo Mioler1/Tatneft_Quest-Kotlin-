@@ -8,24 +8,21 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.os.Build
-import android.os.Handler
-import android.os.IBinder
-import android.os.Looper
-import android.provider.Settings
+import android.os.*
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.example.tatneft_quest.fragments.MyApplication
 import com.example.tatneft_quest.MainActivity
 import com.example.tatneft_quest.R
-import com.example.tatneft_quest.Variables
 import com.example.tatneft_quest.Variables.Companion.LATITUDE
 import com.example.tatneft_quest.Variables.Companion.LONGITUDE
-import com.example.tatneft_quest.travelPackage.StartActionFragment
+import com.example.tatneft_quest.Variables.Companion.TIME
+import com.example.tatneft_quest.Variables.Companion.TIME_QUEST
+import com.example.tatneft_quest.fragments.MyApplication
+import com.example.tatneft_quest.libs.ImprovedPreference
 import com.example.tatneft_quest.utils.AlertDialogGpsActivity
 import com.google.android.gms.location.*
+import java.util.*
+
 
 @Suppress("DEPRECATION")
 class LocationService : Service() {
@@ -36,6 +33,13 @@ class LocationService : Service() {
     private var mHandler: Handler? = Handler()
     private var mRunnable: Runnable? = null
     private lateinit var mLocationRequestHighAccuracy: LocationRequest
+
+    private var improvedPreference: ImprovedPreference? = null
+    private val timerHandler = Handler()
+    private var startTime = 0L
+    private var saveTime = 0L
+    private var timeInMilliseconds = 0L
+    private var updatedTime = 0L
 
     companion object {
         private const val UPDATE_INTERVAL: Long = 4000
@@ -53,9 +57,11 @@ class LocationService : Service() {
         super.onCreate()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        improvedPreference = ImprovedPreference(this)
         sendNotification()
         checkLocation()
         checkGPS()
+        timer()
         requestLocationUpdates()
     }
 
@@ -151,17 +157,48 @@ class LocationService : Service() {
         }.also { mRunnable = it }, UPDATE_INTERVAL)
     }
 
+    private fun timer() {
+        startTime = SystemClock.uptimeMillis()
+        TIME = if (improvedPreference?.getInt((TIME_QUEST)) != 0) {
+            improvedPreference?.getInt(TIME_QUEST)!!
+        } else {
+            0
+        }
+        saveTime = TIME.toLong()
+        timerHandler.postDelayed(updateTimerThread, 0)
+        Log.d(TAG, "timer: ${improvedPreference?.getInt(TIME_QUEST)}")
+    }
+
+    private val updateTimerThread: Runnable = object : Runnable {
+        override fun run() {
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime
+            updatedTime = saveTime + timeInMilliseconds
+            var sec = (updatedTime / 1000).toInt()
+            var min = sec / 60
+            var hour = min / 60
+            sec %= 60; min %= 60; hour %= 60
+            TIME = (hour * 3600 * 1000) + (min * 60 * 1000) + (sec * 1000)
+            timerHandler.postDelayed(this, 1000)
+        }
+    }
+
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
         mFusedLocationClient?.requestLocationUpdates(mLocationRequestHighAccuracy,
-            mLocationCallback,
-            Looper.myLooper())
+            mLocationCallback, Looper.myLooper())
+    }
+
+    private fun stopTimer() {
+        improvedPreference?.putInt(TIME_QUEST, TIME)
+        timerHandler.removeCallbacks(updateTimerThread)
     }
 
     private fun removeLocationUpdates() {
         Log.d(TAG, "removeLocationUpdates")
+        stopTimer()
         mFusedLocationClient?.removeLocationUpdates(mLocationCallback)
         mHandler?.removeCallbacks(mRunnable!!)
         stopSelf()
     }
+
 }

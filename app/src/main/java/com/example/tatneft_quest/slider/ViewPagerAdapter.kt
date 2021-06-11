@@ -8,8 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.tatneft_quest.R
+import com.example.tatneft_quest.databinding.FragmentHelpBinding
 
 class ViewPagerAdapter(
+
     private var context: Context,
     private var onBoardingDataList: List<OnBoardingData>,
 ) : PagerAdapter() {

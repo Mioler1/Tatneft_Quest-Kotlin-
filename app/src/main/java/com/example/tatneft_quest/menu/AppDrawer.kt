@@ -139,7 +139,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                             3 -> addFragment(PrizeFragment())
                             6 -> addFragment(HelpFragment())
                             8 -> addFragment(AboutApplicationFragment())
-                            9 -> {
+                            10 -> {
                                 menuList.clear()
                                 fragmentList.clear()
                                 sharedPreferencesUser.edit()

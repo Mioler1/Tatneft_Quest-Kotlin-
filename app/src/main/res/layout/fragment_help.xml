@@ -21,13 +21,15 @@
                 android:id="@+id/textInputNameProblem"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
+                android:padding="10dp"
                 android:layout_height="wrap_content"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameProblem"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
                     android:hint="@string/nameProblem"
                     android:background="?android:attr/selectableItemBackground"
                     android:inputType="text" />
@@ -48,16 +50,18 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="15dp"
                 app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/descriptionProblem"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
                     android:hint="@string/describe_problem"
-                    android:inputType="text" />
+                    android:textSize="16sp"
+                    android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

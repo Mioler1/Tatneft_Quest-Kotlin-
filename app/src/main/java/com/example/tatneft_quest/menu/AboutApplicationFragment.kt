@@ -13,10 +13,6 @@ class AboutApplicationFragment : Fragment() {
 
     private lateinit var binding: FragmentAboutApplicationBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,

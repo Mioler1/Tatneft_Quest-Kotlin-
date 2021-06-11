@@ -74,7 +74,7 @@ class RegistrationActivity : AppCompatActivity() {
         surname = binding.surname
         name = binding.name
         patronymic = binding.patronymic
-        birthday = binding.birthday!!
+        birthday = binding.birthday
         gender = binding.gender
         city = binding.city
         numberRegistration = binding.numberRegistration
@@ -90,7 +90,7 @@ class RegistrationActivity : AppCompatActivity() {
         textInputSurname = binding.textInputSurname
         textInputName = binding.textInputName
         textInputPatronymic = binding.textInputPatronymic
-        textInputBirthday = binding.textInputBirthday!!
+        textInputBirthday = binding.textInputBirthday
         textInputGender = binding.textInputGender
         textInputCity = binding.textInputCity
         textInputEmail = binding.textInputEmail

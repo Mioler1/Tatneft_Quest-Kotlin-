@@ -102,4 +102,7 @@
     <string name="answer_two_questions">Ответ на второй вопрос</string>
     <string name="answer_correctly_questions">Ответ на правильный вопрос</string>
     <string name="reply">Ответить</string>
+    
+    <!--fragment_location_history-->
+    <string name="pass_test">Пройти тестирование</string>
 </resources>

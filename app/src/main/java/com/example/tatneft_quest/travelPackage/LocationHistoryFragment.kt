@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.tatneft_quest.Variables.Companion.ACTIVE_QUEST
@@ -16,6 +17,7 @@ class LocationHistoryFragment : BaseFragment() {
     private lateinit var nameLocation: TextView
     private lateinit var imageLocation: ImageView
     private lateinit var informationLocation: TextView
+    private lateinit var testing: Button
 
     private lateinit var improvedPreference: ImprovedPreference
     private lateinit var binding: FragmentLocationHistoryBinding
@@ -32,7 +34,7 @@ class LocationHistoryFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         downloadData()
-        binding.testing.setOnClickListener {
+        testing.setOnClickListener {
             mFragmentHandler?.replace(QuestTestFragment(), true)
         }
     }
@@ -42,6 +44,7 @@ class LocationHistoryFragment : BaseFragment() {
         imageLocation = binding.imageLocation!!
         informationLocation = binding.informationLocation
         improvedPreference = ImprovedPreference(context)
+        testing = binding.testing
     }
 
     private fun downloadData() {

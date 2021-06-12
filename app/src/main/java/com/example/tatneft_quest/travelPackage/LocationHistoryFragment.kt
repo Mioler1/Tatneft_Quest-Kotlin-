@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.tatneft_quest.Variables.Companion.ACTIVE_QUEST
+import com.example.tatneft_quest.Variables.Companion.ACTIVE_TEST
+import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.fragments.BaseFragment
 import com.example.tatneft_quest.databinding.FragmentLocationHistoryBinding
@@ -21,8 +22,7 @@ class LocationHistoryFragment : BaseFragment() {
     private lateinit var binding: FragmentLocationHistoryBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLocationHistoryBinding.inflate(inflater)
         return binding.root
@@ -33,7 +33,10 @@ class LocationHistoryFragment : BaseFragment() {
         init()
         downloadData()
         binding.testing.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+            fragmentList.removeAt(fragmentList.size - 1)
             mFragmentHandler?.replace(QuestTestFragment(), true)
+            improvedPreference.putBoolean(ACTIVE_TEST, true)
         }
     }
 

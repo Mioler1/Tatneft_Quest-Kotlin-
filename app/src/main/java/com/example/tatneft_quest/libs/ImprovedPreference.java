@@ -18,6 +18,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.tatneft_quest.models.ClusterMarkerPoints;
+import com.example.tatneft_quest.models.TestQuestionsModel;
 import com.google.gson.Gson;
 
 public class ImprovedPreference {
@@ -209,7 +210,7 @@ public class ImprovedPreference {
         return newList;
     }
 
-    public ArrayList<ClusterMarkerPoints> getListObject(String key, Class<?> mClass) {
+    public ArrayList<ClusterMarkerPoints> getListObjectMarker(String key, Class<?> mClass) {
         Gson gson = new Gson();
 
         ArrayList<String> objStrings = getListString(key);
@@ -218,6 +219,19 @@ public class ImprovedPreference {
         for (String jObjString : objStrings) {
             Object value = gson.fromJson(jObjString, mClass);
             objects.add((ClusterMarkerPoints) value);
+        }
+        return objects;
+    }
+
+    public ArrayList<TestQuestionsModel> getListObjectTest(String key, Class<?> mClass) {
+        Gson gson = new Gson();
+
+        ArrayList<String> objStrings = getListString(key);
+        ArrayList<TestQuestionsModel> objects = new ArrayList<TestQuestionsModel>();
+
+        for (String jObjString : objStrings) {
+            Object value = gson.fromJson(jObjString, mClass);
+            objects.add((TestQuestionsModel) value);
         }
         return objects;
     }
@@ -308,11 +322,21 @@ public class ImprovedPreference {
         putString(key, gson.toJson(obj));
     }
 
-    public void putListObject(String key, ArrayList<ClusterMarkerPoints> objArray) {
+    public void putListObjectMarker(String key, ArrayList<ClusterMarkerPoints> objArray) {
         checkForNullKey(key);
         Gson gson = new Gson();
         ArrayList<String> objStrings = new ArrayList<String>();
         for (ClusterMarkerPoints obj : objArray) {
+            objStrings.add(gson.toJson(obj));
+        }
+        putListString(key, objStrings);
+    }
+
+    public void putListObjectTest(String key, ArrayList<TestQuestionsModel> objArray) {
+        checkForNullKey(key);
+        Gson gson = new Gson();
+        ArrayList<String> objStrings = new ArrayList<String>();
+        for (TestQuestionsModel obj : objArray) {
             objStrings.add(gson.toJson(obj));
         }
         putListString(key, objStrings);

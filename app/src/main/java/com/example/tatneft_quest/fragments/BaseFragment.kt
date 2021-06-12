@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
+import com.example.tatneft_quest.Variables.Companion.testSheet
 import com.example.tatneft_quest.`interface`.ReplaceFragmentHandler
 import com.example.tatneft_quest.models.ClusterMarkerPoints
+import com.example.tatneft_quest.models.TestQuestionsModel
 import com.example.tatneft_quest.travelPackage.testing.QuestionOneFragment
 import com.example.tatneft_quest.travelPackage.testing.QuestionThreeFragment
 import com.example.tatneft_quest.travelPackage.testing.QuestionTwoFragment
@@ -29,9 +31,32 @@ open class BaseFragment : Fragment() {
         title: String,
         image: Int,
         active: Boolean,
-        information: String
+        information: String,
     ) {
-        pointsSheet.add(ClusterMarkerPoints(id, LatLng(latitude, longitude), title, image, active, information))
+        pointsSheet.add(ClusterMarkerPoints(id,
+            LatLng(latitude, longitude),
+            title,
+            image,
+            active,
+            information))
+    }
+
+    fun fillingSheetForTest(
+        idPoint: Int,
+        numberQuestion: Int,
+        textQuestion: String,
+        answerOne: String,
+        answerTwo: String,
+        answerThree: String,
+        answerCorrect: String,
+    ) {
+        testSheet.add(TestQuestionsModel(idPoint,
+            numberQuestion,
+            textQuestion,
+            answerOne,
+            answerTwo,
+            answerThree,
+            answerCorrect))
     }
 
     fun fillingQuestOne(

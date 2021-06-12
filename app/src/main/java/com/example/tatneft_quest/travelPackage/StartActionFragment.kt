@@ -28,6 +28,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.*
 import com.example.tatneft_quest.*
 import com.example.tatneft_quest.R
+import com.example.tatneft_quest.Variables.Companion.ACTIVE_SCAN
 import com.example.tatneft_quest.Variables.Companion.LATITUDE
 import com.example.tatneft_quest.Variables.Companion.LONGITUDE
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
@@ -35,6 +36,7 @@ import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.databinding.FragmentStartActionBinding
 import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.libs.ImprovedPreference
 import com.example.tatneft_quest.models.ClusterMarkerPoints
 import com.example.tatneft_quest.models.ClusterMarkerUser
 import com.example.tatneft_quest.services.LocationService
@@ -70,6 +72,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private lateinit var btnScan: Button
     private lateinit var pointPosition: TextView
     private lateinit var nameLocation: TextView
+    private lateinit var improvedPreference: ImprovedPreference
 
     private var alertDialog: AlertDialog? = null
     private var map: GoogleMap? = null
@@ -115,9 +118,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
         binding = FragmentStartActionBinding.inflate(inflater)
         return binding.root
@@ -136,6 +137,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     private fun init() {
         sharedPreferencesUser = requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
+        improvedPreference = ImprovedPreference(context)
         headerRelative = binding.headerRelative
         mapRelative = binding.mapRelative
         footerRelative = binding.footerRelativeButton!!
@@ -162,6 +164,9 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 //                .setOrientationLocked(false)
 //                .setBarcodeImageEnabled(true)
 //                .initiateScan()
+            requireActivity().supportFragmentManager.popBackStack()
+            fragmentList.removeAt(fragmentList.size - 1)
+            improvedPreference.putBoolean(ACTIVE_SCAN, true)
             mFragmentHandler?.replace(LocationHistoryFragment(), true)
         }
     }
@@ -480,6 +485,9 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
                 pointsSheet.forEach { el ->
                     if (el.getActive()) {
                         if (el.title == namePoint) {
+                            requireActivity().supportFragmentManager.popBackStack()
+                            fragmentList.removeAt(fragmentList.size - 1)
+                            improvedPreference.putBoolean(ACTIVE_SCAN, true)
                             mFragmentHandler?.replace(LocationHistoryFragment(), true)
                         } else {
                             Snackbar.make(requireView(),

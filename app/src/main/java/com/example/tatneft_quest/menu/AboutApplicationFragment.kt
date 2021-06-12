@@ -6,16 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tatneft_quest.R
 import com.example.tatneft_quest.databinding.FragmentAboutApplicationBinding
 
 class AboutApplicationFragment : Fragment() {
 
     private lateinit var binding: FragmentAboutApplicationBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

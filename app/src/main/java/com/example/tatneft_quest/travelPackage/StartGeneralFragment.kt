@@ -5,10 +5,8 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -16,15 +14,20 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tatneft_quest.R
-import com.example.tatneft_quest.Variables
 import com.example.tatneft_quest.Variables.Companion.ACTIVE_QUEST
-import com.example.tatneft_quest.Variables.Companion.LIST_DATA_POINTS
+import com.example.tatneft_quest.Variables.Companion.ACTIVE_SCAN
+import com.example.tatneft_quest.Variables.Companion.ACTIVE_TEST
+import com.example.tatneft_quest.Variables.Companion.NUMBER_POINT
+import com.example.tatneft_quest.Variables.Companion.NUMBER_QUESTIONS
+import com.example.tatneft_quest.Variables.Companion.QUEST_COMPLETE
+import com.example.tatneft_quest.Variables.Companion.SCORE
 import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.TIME
 import com.example.tatneft_quest.Variables.Companion.TIME_QUEST
+import com.example.tatneft_quest.Variables.Companion.USER_SCORE
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
+import com.example.tatneft_quest.Variables.Companion.testSheet
 import com.example.tatneft_quest.databinding.FragmentStartGeneralBinding
 import com.example.tatneft_quest.fragments.BaseFragment
 import com.example.tatneft_quest.libs.ImprovedPreference
@@ -56,13 +59,25 @@ class StartGeneralFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Квест"
-
+        checkQuest()
         init()
-        downloadData()
 
         startQuest.setOnClickListener {
-            improvedPreference.putBoolean(ACTIVE_QUEST, true)
-            mFragmentHandler?.replace(StartActionFragment(), true)
+            when (true) {
+                improvedPreference.getBoolean(ACTIVE_SCAN) -> {
+                    if (improvedPreference.getBoolean(ACTIVE_TEST)) {
+                        improvedPreference.putBoolean(ACTIVE_QUEST, true)
+                        mFragmentHandler?.replace(QuestTestFragment(), true)
+                    } else {
+                        improvedPreference.putBoolean(ACTIVE_QUEST, true)
+                        mFragmentHandler?.replace(LocationHistoryFragment(), true)
+                    }
+                }
+                else -> {
+                    improvedPreference.putBoolean(ACTIVE_QUEST, true)
+                    mFragmentHandler?.replace(StartActionFragment(), true)
+                }
+            }
         }
         binding.seeingMap.setOnClickListener {
             mFragmentHandler?.replace(MapFragment(), true)
@@ -74,11 +89,7 @@ class StartGeneralFragment : BaseFragment() {
                 .setCancelable(false)
                 .setPositiveButton("Да") { _, _ ->
                     alert?.dismiss()
-                    improvedPreference.putBoolean(ACTIVE_QUEST, false)
-                    improvedPreference.remove(LIST_DATA_POINTS)
-                    improvedPreference.remove(TIME_QUEST)
-                    pointsSheet.clear()
-                    TIME = 0
+                    clear()
                     fragmentList.removeAt(fragmentList.size - 1)
                     requireActivity().stopService(Intent(context, LocationService::class.java))
                     super.requireActivity().onBackPressed()
@@ -91,6 +102,17 @@ class StartGeneralFragment : BaseFragment() {
         }
     }
 
+    private fun checkQuest() {
+        improvedPreference = ImprovedPreference(context)
+        if (improvedPreference.getBoolean(QUEST_COMPLETE)) {
+            requireActivity().stopService(Intent(context, LocationService::class.java))
+            requireActivity().supportFragmentManager.popBackStack()
+            fragmentList.removeAt(fragmentList.size - 1)
+            mFragmentHandler?.replace(FinishQuestFragment(), true)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun init() {
         timeTransit = binding.timeTransit
         numberPoint = binding.numberPoint
@@ -101,10 +123,14 @@ class StartGeneralFragment : BaseFragment() {
         stopQuestButton = binding.stopQuestButton!!
         relativeMyTime = binding.relativeMyTime!!
         myTime = binding.myTime!!
-        improvedPreference = ImprovedPreference(context)
+
+        downloadData()
 
         if (improvedPreference.getBoolean(ACTIVE_QUEST)) {
             startQuest.text = "Продолжить квест"
+            SCORE = if (improvedPreference.getInt(USER_SCORE) != 0)
+                improvedPreference.getInt(USER_SCORE) else 0
+            score.text = "$SCORE/${score.text}"
             stopQuestButton.visibility = View.VISIBLE
             relativeMyTime.visibility = View.VISIBLE
             myTime.text = when {
@@ -140,6 +166,7 @@ class StartGeneralFragment : BaseFragment() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun isLocationServiceRunning(): Boolean {
         val manager = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
         for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
@@ -150,5 +177,15 @@ class StartGeneralFragment : BaseFragment() {
         }
         Log.d(TAG, "isLocationServiceRunning: location service is not running.")
         return false
+    }
+
+    private fun clear() {
+        improvedPreference.clear()
+        pointsSheet.clear()
+        testSheet.clear()
+        TIME = 0
+        NUMBER_QUESTIONS = 0
+        NUMBER_POINT = 0
+        SCORE = 0
     }
 }

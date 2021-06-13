@@ -164,6 +164,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 //                .setOrientationLocked(false)
 //                .setBarcodeImageEnabled(true)
 //                .initiateScan()
+
+            //  удалить
             requireActivity().supportFragmentManager.popBackStack()
             fragmentList.removeAt(fragmentList.size - 1)
             improvedPreference.putBoolean(ACTIVE_SCAN, true)

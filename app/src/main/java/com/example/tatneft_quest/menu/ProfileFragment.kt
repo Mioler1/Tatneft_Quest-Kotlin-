@@ -1,26 +1,63 @@
 package com.example.tatneft_quest.menu
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.view.*
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tatneft_quest.R
 import com.example.tatneft_quest.databinding.FragmentProfileBinding
+import com.example.tatneft_quest.firstActivity.RegistrationActivity
 import com.google.android.material.datepicker.*
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import de.hdodenhof.circleimageview.CircleImageView
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private var addedToFavorites = false
+    private lateinit var progressBar: ProgressBar
+    private lateinit var avatar: CircleImageView
+    private var byteString: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+    private lateinit var emailRegistration: TextInputEditText
+    private lateinit var surname: TextInputEditText
+    private lateinit var name: TextInputEditText
+    private lateinit var patronymic: TextInputEditText
+    private lateinit var birthday: TextInputEditText
+    private lateinit var gender: AutoCompleteTextView
+    private lateinit var city: TextInputEditText
+    private lateinit var numberRegistration: TextInputEditText
+
+    private lateinit var textInputGender: TextInputLayout
+
+    fun init() {
+        emailRegistration = binding.emailRegistration
+        surname = binding.surname
+        name = binding.name
+        patronymic = binding.patronymic
+        birthday = binding.birthday
+        gender = binding.gender
+        city = binding.city
+        numberRegistration = binding.numberRegistration
+        avatar = binding.avatar
+        progressBar = binding.progressBar!!
+
+        gender.inputType = InputType.TYPE_NULL
+        birthday.inputType = InputType.TYPE_NULL
+        textInputGender = binding.textInputGender
     }
 
     override fun onCreateView(
@@ -34,10 +71,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        init()
         (activity as? AppCompatActivity)?.supportActionBar?.title = "Профиль"
-        binding.textInputGender.isEndIconVisible = false
-        binding.gender.inputType = InputType.TYPE_NULL
-        binding.birthday.inputType = InputType.TYPE_NULL
+        textInputGender.isEndIconVisible = false
+        gender.inputType = InputType.TYPE_NULL
+        birthday.inputType = InputType.TYPE_NULL
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -51,16 +91,22 @@ class ProfileFragment : Fragment() {
                 edited()
                 requireActivity().invalidateOptionsMenu()
 
-                binding.birthday.setOnClickListener {
+                birthday.setOnClickListener {
                     selectBirthday()
                 }
                 val items = listOf("Мужской", "Женский")
                 val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
-                binding.gender.setAdapter(adapter)
+                gender.setAdapter(adapter)
+
+                avatar.setOnClickListener {
+                    pickImageFromGallery()
+                }
             }
             R.id.save -> {
                 noEdited()
                 requireActivity().invalidateOptionsMenu()
+                hideKeyboard()
+
             }
         }
 
@@ -85,59 +131,63 @@ class ProfileFragment : Fragment() {
     }
 
     private fun edited() {
-        binding.surname.isFocusable = true
-        binding.surname.isCursorVisible = true
-        binding.surname.isFocusableInTouchMode = true
-        binding.name.isFocusable = true
-        binding.name.isCursorVisible = true
-        binding.name.isFocusableInTouchMode = true
-        binding.patronymic.isFocusable = true
-        binding.patronymic.isCursorVisible = true
-        binding.patronymic.isFocusableInTouchMode = true
-        binding.birthday.isFocusable = true
-        binding.birthday.isCursorVisible = true
-        binding.birthday.isFocusableInTouchMode = true
-        binding.gender.isFocusable = true
-        binding.gender.isCursorVisible = true
-        binding.gender.isFocusableInTouchMode = true
-        binding.textInputGender.isEndIconVisible = true
-        binding.city.isFocusable = true
-        binding.city.isCursorVisible = true
-        binding.city.isFocusableInTouchMode = true
-        binding.emailRegistration.isFocusable = true
-        binding.emailRegistration.isCursorVisible = true
-        binding.emailRegistration.isFocusableInTouchMode = true
-        binding.numberRegistration.isFocusable = true
-        binding.numberRegistration.isCursorVisible = true
-        binding.numberRegistration.isFocusableInTouchMode = true
+        surname.isFocusable = true
+        surname.isCursorVisible = true
+        surname.isFocusableInTouchMode = true
+        name.isFocusable = true
+        name.isCursorVisible = true
+        name.isFocusableInTouchMode = true
+        patronymic.isFocusable = true
+        patronymic.isCursorVisible = true
+        patronymic.isFocusableInTouchMode = true
+        birthday.isFocusable = true
+        birthday.isCursorVisible = true
+        birthday.isFocusableInTouchMode = true
+        gender.isFocusable = true
+        gender.isCursorVisible = true
+        gender.isFocusableInTouchMode = true
+        textInputGender.isEndIconVisible = true
+        city.isFocusable = true
+        city.isCursorVisible = true
+        city.isFocusableInTouchMode = true
+        emailRegistration.isFocusable = true
+        emailRegistration.isCursorVisible = true
+        emailRegistration.isFocusableInTouchMode = true
+        numberRegistration.isFocusable = true
+        numberRegistration.isCursorVisible = true
+        numberRegistration.isFocusableInTouchMode = true
+        avatar.isClickable = true
     }
 
     private fun noEdited() {
-        binding.surname.isFocusable = false
-        binding.surname.isCursorVisible = false
-        binding.surname.isFocusableInTouchMode = false
-        binding.name.isFocusable = false
-        binding.name.isCursorVisible = false
-        binding.name.isFocusableInTouchMode = false
-        binding.patronymic.isFocusable = false
-        binding.patronymic.isCursorVisible = false
-        binding.patronymic.isFocusableInTouchMode = false
-        binding.birthday.isFocusable = false
-        binding.birthday.isCursorVisible = false
-        binding.birthday.isFocusableInTouchMode = false
-        binding.gender.isFocusable = false
-        binding.gender.isCursorVisible = false
-        binding.gender.isFocusableInTouchMode = false
-        binding.textInputGender.isEndIconVisible = false
-        binding.city.isFocusable = false
-        binding.city.isCursorVisible = false
-        binding.city.isFocusableInTouchMode = false
-        binding.emailRegistration.isFocusable = false
-        binding.emailRegistration.isCursorVisible = false
-        binding.emailRegistration.isFocusableInTouchMode = false
-        binding.numberRegistration.isFocusable = false
-        binding.numberRegistration.isCursorVisible = false
-        binding.numberRegistration.isFocusableInTouchMode = false
+        surname.isFocusable = false
+        surname.isCursorVisible = false
+        surname.isFocusableInTouchMode = false
+        name.isFocusable = false
+        name.isCursorVisible = false
+        name.isFocusableInTouchMode = false
+        patronymic.isFocusable = false
+        patronymic.isCursorVisible = false
+        patronymic.isFocusableInTouchMode = false
+        birthday.isFocusable = false
+        birthday.isCursorVisible = false
+        birthday.isEnabled = false
+        birthday.isFocusableInTouchMode = false
+        gender.isFocusable = false
+        gender.isCursorVisible = false
+        gender.isFocusableInTouchMode = false
+        gender.isEnabled = false
+        textInputGender.isEndIconVisible = false
+        city.isFocusable = false
+        city.isCursorVisible = false
+        city.isFocusableInTouchMode = false
+        emailRegistration.isFocusable = false
+        emailRegistration.isCursorVisible = false
+        emailRegistration.isFocusableInTouchMode = false
+        numberRegistration.isFocusable = false
+        numberRegistration.isCursorVisible = false
+        numberRegistration.isFocusableInTouchMode = false
+        avatar.isClickable = false
     }
 
     @SuppressLint("SetTextI18n")
@@ -166,11 +216,60 @@ class ProfileFragment : Fragment() {
         materialDatePicker.addOnPositiveButtonClickListener {
             val calendar = Calendar.getInstance()
             calendar.time = Date(it)
-            binding.birthday.setText("${calendar.get(Calendar.DAY_OF_MONTH)}.${calendar.get(Calendar.MONTH) + 1}.${
+            birthday.setText("${calendar.get(Calendar.DAY_OF_MONTH)}.${calendar.get(Calendar.MONTH) + 1}.${
                 calendar.get(Calendar.YEAR)
             }")
         }
         materialDatePicker.show(requireActivity().supportFragmentManager, "MaterialDatePicker")
     }
 
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RegistrationActivity.IMAGE_PICK_CODE && data != null && data.data != null) {
+            if (resultCode == Activity.RESULT_OK) {
+                progressBar.visibility = View.VISIBLE
+                avatar.setImageURI(data.data)
+                uploadImage()
+            }
+        }
+    }
+
+    private fun uploadImage() {
+        val bitmap: Bitmap = (avatar.drawable as BitmapDrawable).bitmap
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        if (byteArray.size <= 5242880) {
+            byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Base64.getEncoder().encodeToString(byteArray)
+            } else {
+                android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
+            }
+            progressBar.visibility = View.GONE
+        } else {
+            Toast.makeText(requireContext(), "Размер картинки не более 5мб", Toast.LENGTH_SHORT)
+                .show()
+            avatar.setImageResource(R.drawable.default_avatar)
+            progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    companion object {
+        const val IMAGE_PICK_CODE = 1000
+    }
 }

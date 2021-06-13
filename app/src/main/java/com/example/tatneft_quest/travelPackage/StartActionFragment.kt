@@ -140,9 +140,9 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         improvedPreference = ImprovedPreference(context)
         headerRelative = binding.headerRelative
         mapRelative = binding.mapRelative
-        footerRelative = binding.footerRelativeButton!!
+        footerRelative = binding.footerRelativeButton
         btnMapFullScreen = binding.btnMapFullScreen
-        btnMoveCamera = binding.btnMoveCamera!!
+        btnMoveCamera = binding.btnMoveCamera
         btnInPlace = binding.inPlace
         btnSeeingMap = binding.seeingMap
         btnScan = binding.btnScan

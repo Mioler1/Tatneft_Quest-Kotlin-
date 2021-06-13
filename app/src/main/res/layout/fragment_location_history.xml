@@ -24,12 +24,15 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:paddingBottom="@dimen/padding_default"
-                    android:textStyle="bold|italic" />
+                    android:padding="10dp"
+                    android:textStyle="bold|italic"
+                    android:textSize="22sp"/>
 
                 <ImageView
                     android:id="@+id/imageLocation"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@id/nameLocation"
                     android:paddingBottom="@dimen/padding_default" />
 
@@ -39,7 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/imageLocation"
                     android:paddingBottom="@dimen/padding_default"
-                    android:textStyle="italic" />
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:textSize="18sp"/>
 
                 <Button
                     android:id="@+id/testing"
@@ -48,7 +53,8 @@
                     android:layout_below="@id/informationLocation"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/background_button_red"
-                    android:text="Пройти тестированtе"
+                    android:text="@string/pass_test"
+                    android:layout_margin="10dp"
                     android:textColor="@color/white" />
 
             </RelativeLayout>

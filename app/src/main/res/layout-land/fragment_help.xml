@@ -3,14 +3,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".menu.HelpFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="В разработке"
-        android:textColor="@color/black"
-        android:textSize="22sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:id="@+id/blockNameProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputNameProblem"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameProblem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:hint="@string/nameProblem"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/blockDescriptionProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blockNameProblem"
+            android:layout_marginTop="15dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputDescriptionProblem"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                app:errorEnabled="true"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionProblem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:hint="@string/describe_problem"
+                    android:textSize="16sp"
+                    android:inputType="textMultiLine" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/inPlace"
+            android:layout_width="225dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/background_button_red"
+            android:text="@string/report_problem"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

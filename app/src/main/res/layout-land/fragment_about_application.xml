@@ -12,11 +12,12 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:padding="10dp">
+
         <TextView
             android:id="@+id/nameApplication"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tatneft Quest"
+            android:text="@string/app_name"
             android:textSize="36sp"
             android:layout_centerHorizontal="true"
             android:textColor="@color/white"/>
@@ -25,7 +26,7 @@
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Версия 1.0.15"
+            android:text="@string/version"
             android:layout_below="@id/nameApplication"
             android:textSize="18sp"
             android:layout_centerHorizontal="true"/>
@@ -42,8 +43,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="© 2021 студенты &quot;Альметьевского политехнического техникума&quot;"
+            android:text="@string/about_app"
             android:layout_below="@id/logo"
+            android:layout_centerHorizontal="true"
             android:textSize="16sp"
             android:layout_marginTop="15sp"
             android:gravity="center"/>

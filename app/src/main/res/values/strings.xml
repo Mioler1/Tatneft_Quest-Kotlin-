@@ -55,6 +55,7 @@
     <string name="maxPoint">Максимальное количество баллов</string>
     <string name="firstPoint">Первая точка на маршруте</string>
     <string name="lastPoint">Последняя точка на маршруте</string>
+    <string name="stop_quest">Прекратить квест</string>
 
     <!--activity_start_action-->
     <string name="showing_code_in_fragment">Showing code in fragment</string>
@@ -105,4 +106,8 @@
     
     <!--fragment_location_history-->
     <string name="pass_test">Пройти тестирование</string>
+
+    <!--fragment_about_application-->
+    <string name="version">Версия 1.0.15</string>
+    <string name="about_app">© 2021 студенты &quot;Альметьевского политехнического техникума&quot;</string>
 </resources>

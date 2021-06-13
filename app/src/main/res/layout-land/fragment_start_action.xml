@@ -24,8 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/point_1"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/nameLocation"
@@ -34,7 +33,6 @@
                 android:layout_below="@id/pointPosition"
                 android:layout_centerHorizontal="true"
                 android:padding="10dp"
-                android:text="@string/place"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -43,7 +41,6 @@
             android:id="@+id/mapRelative"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
             android:layout_weight="65">
 
             <fragment
@@ -60,51 +57,65 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_fullscreen" />
+                android:src="@drawable/ic_fullscreen"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/btnMoveCamera"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_gps"
+                android:visibility="gone" />
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/footerRelative"
+    <RelativeLayout
+        android:id="@+id/footerRelativeButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="20">
+
+        <Button
+            android:id="@+id/seeingMap"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/border_button_red"
+            android:text="@string/open_in_navigator"
+            android:textColor="@color/red"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/inPlace"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/background_button_red"
+            android:text="@string/place"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnScan"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:layout_marginHorizontal="10dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="20">
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/background_button_red"
+            android:text="@string/scanning"
+            android:textColor="@color/white"
+            android:visibility="gone" />
 
-            <Button
-                android:id="@+id/seeingMap"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/border_button_red"
-                android:text="@string/open_in_navigator"
-                android:textColor="@color/red" />
-
-            <Button
-                android:id="@+id/inPlace"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/background_button_red"
-                android:text="@string/place"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/btnScan"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/background_button_red"
-                android:text="@string/scanning"
-                android:textColor="@color/white"
-                android:visibility="gone" />
-
-        </LinearLayout>
+    </RelativeLayout>
 
     </LinearLayout>
 

@@ -22,6 +22,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:padding="10dp"
+                app:counterMaxLength="50"
+                app:counterEnabled="true"
                 android:layout_height="wrap_content"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
 
@@ -29,7 +31,8 @@
                     android:id="@+id/nameProblem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:maxLength="50"
+                    android:textSize="18sp"
                     android:hint="@string/nameProblem"
                     android:background="?android:attr/selectableItemBackground"
                     android:inputType="text" />
@@ -50,6 +53,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:counterMaxLength="255"
+                app:counterEnabled="true"
                 android:padding="15dp"
                 app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
@@ -58,9 +63,11 @@
                     android:id="@+id/descriptionProblem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="255"
                     android:background="?android:attr/selectableItemBackground"
                     android:hint="@string/describe_problem"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
+                    android:lineSpacingMultiplier="1.25"
                     android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>

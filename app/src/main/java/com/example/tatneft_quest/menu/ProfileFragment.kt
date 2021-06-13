@@ -53,7 +53,7 @@ class ProfileFragment : Fragment() {
         city = binding.city
         numberRegistration = binding.numberRegistration
         avatar = binding.avatar
-        progressBar = binding.progressBar!!
+        progressBar = binding.progressBar
 
         gender.inputType = InputType.TYPE_NULL
         birthday.inputType = InputType.TYPE_NULL
@@ -142,6 +142,7 @@ class ProfileFragment : Fragment() {
         patronymic.isFocusableInTouchMode = true
         birthday.isFocusable = true
         birthday.isCursorVisible = true
+        birthday.isEnabled = true
         birthday.isFocusableInTouchMode = true
         gender.isFocusable = true
         gender.isCursorVisible = true

@@ -23,11 +23,14 @@ import com.example.tatneft_quest.databinding.FragmentFinishQuestBinding
 import com.example.tatneft_quest.fragments.BaseFragment
 import com.example.tatneft_quest.libs.ImprovedPreference
 import com.example.tatneft_quest.menu.TravelFragment
+import org.w3c.dom.Text
 
 class FinishQuestFragment : BaseFragment() {
     private lateinit var compliment: TextView
     private lateinit var timeQuest: TextView
     private lateinit var finishQuest: Button
+    private lateinit var description: TextView
+    private lateinit var parting: TextView
 
     private lateinit var improvedPreference: ImprovedPreference
     private lateinit var sharedPreferences: SharedPreferences
@@ -53,6 +56,8 @@ class FinishQuestFragment : BaseFragment() {
         compliment = binding.compliments
         timeQuest = binding.timeQuest
         finishQuest = binding.finishQuest
+        parting = binding.parting
+        description = binding.description
 
         finishQuest.setOnClickListener {
             clear()
@@ -68,11 +73,16 @@ class FinishQuestFragment : BaseFragment() {
         var hour = min / 60
         sec %= 60; min %= 60; hour %= 60
 
-        compliment.text = "Поздравляем с прохождением квеста ${
+        compliment.text = "Поздравляем с успешным прохождением квеста"
+        timeQuest.text = "$hour час $min минут ${String.format("%02d", sec)} секунд"
+        description.text = "Обменивайте полученные баллы на призы и бонусы от ПАО Татнефть${
             sharedPreferences
                 .getString(SAVE_DATA_USER_LOGIN, "")
         }"
-        timeQuest.text = "$hour час $min минут ${String.format("%02d", sec)} секунд"
+        parting.text = "До скорых встреч!${
+            sharedPreferences
+                .getString(SAVE_DATA_USER_LOGIN, "")
+        }"
     }
 
     private fun clear() {

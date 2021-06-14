@@ -3,18 +3,34 @@ package com.example.tatneft_quest.menu
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tatneft_quest.R
+import com.example.tatneft_quest.Variables
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_AVATAR
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_BIRTHDAY
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_CITY
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_EMAIL
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_GENDER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NAME
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NUMBER
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PATRONYMIC
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_SURNAME
+import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.databinding.FragmentProfileBinding
 import com.example.tatneft_quest.firstActivity.RegistrationActivity
 import com.google.android.material.datepicker.*
@@ -25,12 +41,12 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
-    private lateinit var binding: FragmentProfileBinding
-    private var addedToFavorites = false
+    private var addedToFavorites: Boolean? = null
+    private var byteString: String? = null
     private lateinit var progressBar: ProgressBar
     private lateinit var avatar: CircleImageView
-    private var byteString: String? = null
 
     private lateinit var emailRegistration: TextInputEditText
     private lateinit var surname: TextInputEditText
@@ -40,25 +56,18 @@ class ProfileFragment : Fragment() {
     private lateinit var gender: AutoCompleteTextView
     private lateinit var city: TextInputEditText
     private lateinit var numberRegistration: TextInputEditText
-
     private lateinit var textInputGender: TextInputLayout
 
-    fun init() {
-        emailRegistration = binding.emailRegistration
-        surname = binding.surname
-        name = binding.name
-        patronymic = binding.patronymic
-        birthday = binding.birthday
-        gender = binding.gender
-        city = binding.city
-        numberRegistration = binding.numberRegistration
-        avatar = binding.avatar
-        progressBar = binding.progressBar
+    private lateinit var textInputSurname: TextInputLayout
+    private lateinit var textInputName: TextInputLayout
+    private lateinit var textInputPatronymic: TextInputLayout
+    private lateinit var textInputBirthday: TextInputLayout
+    private lateinit var textInputCity: TextInputLayout
+    private lateinit var textInputEmail: TextInputLayout
+    private lateinit var textInputNumber: TextInputLayout
 
-        gender.inputType = InputType.TYPE_NULL
-        birthday.inputType = InputType.TYPE_NULL
-        textInputGender = binding.textInputGender
-    }
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,13 +80,39 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        addedToFavorites = savedInstanceState?.getBoolean("IconToolbar") ?: false
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Профиль"
         setHasOptionsMenu(true)
         init()
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Профиль"
-        textInputGender.isEndIconVisible = false
+        downloadData()
+    }
+
+    private fun init() {
+        sharedPreferences = requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
+        emailRegistration = binding.emailRegistration
+        surname = binding.surname
+        name = binding.name
+        patronymic = binding.patronymic
+        birthday = binding.birthday
+        gender = binding.gender
+        city = binding.city
+        numberRegistration = binding.numberRegistration
+        avatar = binding.avatar
+        progressBar = binding.progressBar
+        textInputGender = binding.textInputGender
+
+        textInputSurname = binding.textInputSurname
+        textInputName = binding.textInputName
+        textInputPatronymic = binding.textInputPatronymic
+        textInputBirthday = binding.textInputBirthday
+        textInputGender = binding.textInputGender
+        textInputCity = binding.textInputCity
+        textInputEmail = binding.textInputEmail
+        textInputNumber = binding.textInputNumber
+
         gender.inputType = InputType.TYPE_NULL
         birthday.inputType = InputType.TYPE_NULL
-
+        textInputGender.isEndIconVisible = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -88,25 +123,13 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.edit -> {
-                edited()
+                addedToFavorites = true
                 requireActivity().invalidateOptionsMenu()
-
-                birthday.setOnClickListener {
-                    selectBirthday()
-                }
-                val items = listOf("Мужской", "Женский")
-                val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
-                gender.setAdapter(adapter)
-
-                avatar.setOnClickListener {
-                    pickImageFromGallery()
-                }
             }
             R.id.save -> {
-                noEdited()
+                addedToFavorites = false
                 requireActivity().invalidateOptionsMenu()
-                hideKeyboard()
-
+                saveData()
             }
         }
 
@@ -114,20 +137,152 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        addedToFavorites = if (!addedToFavorites) {
+        if (!addedToFavorites!!) {
             val mi = menu.findItem(R.id.save)
             menu.removeItem(R.id.save)
             mi.setIcon(R.drawable.ic_edit)
             mi.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-            true
+            noEdited()
+            hideKeyboard()
         } else {
             val mi = menu.findItem(R.id.edit)
             menu.removeItem(R.id.edit)
             mi.setIcon(R.drawable.ic_check)
             mi.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-            false
+            edited()
+            birthday.setOnClickListener {
+                selectBirthday()
+            }
+            val items = listOf("Мужской", "Женский")
+            val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, items)
+            gender.setAdapter(adapter)
+            gender.setOnClickListener {
+                hideKeyboard()
+            }
+            avatar.setOnClickListener {
+                pickImageFromGallery()
+            }
         }
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    private fun downloadData() {
+        surname.setText(sharedPreferences.getString(SAVE_DATA_USER_SURNAME, ""))
+        name.setText(sharedPreferences.getString(SAVE_DATA_USER_NAME, ""))
+        patronymic.setText(sharedPreferences.getString(SAVE_DATA_USER_PATRONYMIC, ""))
+        birthday.setText(sharedPreferences.getString(SAVE_DATA_USER_BIRTHDAY, ""))
+        gender.setText(sharedPreferences.getString(SAVE_DATA_USER_GENDER, ""))
+        city.setText(sharedPreferences.getString(SAVE_DATA_USER_CITY, ""))
+        emailRegistration.setText(sharedPreferences.getString(SAVE_DATA_USER_EMAIL, ""))
+        numberRegistration.setText(sharedPreferences.getString(SAVE_DATA_USER_NUMBER, ""))
+        byteString = sharedPreferences.getString(SAVE_DATA_USER_AVATAR, "")
+        val byteArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Base64.getDecoder().decode(byteString)
+        } else {
+            android.util.Base64.decode(byteString, android.util.Base64.DEFAULT)
+        }
+        val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+        avatar.setImageBitmap(bitmap)
+    }
+
+    private fun saveData() {
+        val emailText = emailRegistration.text.toString()
+        val surnameText = surname.text.toString()
+        val nameText = name.text.toString()
+        val patronymicText = patronymic.text.toString()
+        val birthdayText = birthday.text.toString()
+        val genderText = gender.text.toString()
+        val cityText = city.text.toString()
+        val numberText = numberRegistration.text.toString()
+
+        clearTextInputLayout()
+        if (surnameText.isEmpty()) {
+            textInputSurname.error = "Пустое поле"
+            textInputSurname.requestFocus()
+            return
+        }
+        if (nameText.isEmpty()) {
+            textInputName.error = "Пустое поле"
+            textInputName.requestFocus()
+            return
+        }
+        if (patronymicText.isEmpty()) {
+            textInputPatronymic.error = "Пустое поле"
+            textInputPatronymic.requestFocus()
+            return
+        }
+        if (birthdayText.isEmpty()) {
+            textInputBirthday.error = "Пустое поле"
+            textInputBirthday.requestFocus()
+            return
+        }
+        if (genderText.isEmpty()) {
+            textInputGender.error = "Пустое поле"
+            textInputGender.requestFocus()
+            return
+        }
+        if (cityText.isEmpty()) {
+            textInputCity.error = "Пустое поле"
+            textInputCity.requestFocus()
+            return
+        }
+        if (emailText.isEmpty()) {
+            textInputEmail.error = "Пустое поле"
+            textInputEmail.requestFocus()
+            return
+        }
+        if (numberText.isEmpty()) {
+            textInputNumber.error = "Пустое поле"
+            textInputNumber.requestFocus()
+            return
+        }
+        if (numberText.length != 10) {
+            textInputNumber.error = "Номер телефона введен неверно"
+            textInputNumber.requestFocus()
+            return
+        }
+
+        if (byteString == "") {
+            val bitmap: Bitmap = (avatar.drawable as BitmapDrawable).bitmap
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            val byteArray = byteArrayOutputStream.toByteArray()
+            transformationImage(byteArray)
+        }
+
+        Log.d(TAG, "saveData: $byteString")
+
+        requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE).edit().also {
+            it.putString(SAVE_DATA_USER_EMAIL, emailText)
+                .putString(SAVE_DATA_USER_SURNAME, surnameText)
+                .putString(SAVE_DATA_USER_NAME, nameText)
+                .putString(SAVE_DATA_USER_PATRONYMIC, patronymicText)
+                .putString(SAVE_DATA_USER_BIRTHDAY, birthdayText)
+                .putString(SAVE_DATA_USER_GENDER, genderText)
+                .putString(SAVE_DATA_USER_CITY, cityText)
+                .putString(SAVE_DATA_USER_NUMBER, numberText)
+                .putString(SAVE_DATA_USER_AVATAR, byteString)
+                .apply()
+        }
+    }
+
+    private fun clearTextInputLayout() {
+        textInputSurname.error = null
+        textInputName.error = null
+        textInputPatronymic.error = null
+        textInputBirthday.error = null
+        textInputGender.error = null
+        textInputCity.error = null
+        textInputEmail.error = null
+        textInputNumber.error = null
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (byteString != null) {
+            outState.putString("Image", byteString)
+        }
+        outState.putBoolean("IconToolbar", addedToFavorites!!)
     }
 
     private fun edited() {
@@ -143,10 +298,10 @@ class ProfileFragment : Fragment() {
         birthday.isFocusable = true
         birthday.isCursorVisible = true
         birthday.isEnabled = true
-        birthday.isFocusableInTouchMode = true
         gender.isFocusable = true
         gender.isCursorVisible = true
         gender.isFocusableInTouchMode = true
+        gender.isEnabled = true
         textInputGender.isEndIconVisible = true
         city.isFocusable = true
         city.isCursorVisible = true
@@ -225,6 +380,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun pickImageFromGallery() {
+        byteString = ""
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_PICK_CODE)
@@ -247,18 +403,14 @@ class ProfileFragment : Fragment() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         if (byteArray.size <= 5242880) {
-            byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                Base64.getEncoder().encodeToString(byteArray)
-            } else {
-                android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
-            }
+            transformationImage(byteArray)
             progressBar.visibility = View.GONE
         } else {
-            Toast.makeText(requireContext(), "Размер картинки не более 5мб", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(context, "Размер картинки не более 5мб", Toast.LENGTH_SHORT).show()
             avatar.setImageResource(R.drawable.default_avatar)
             progressBar.visibility = View.GONE
         }
+
     }
 
     private fun Fragment.hideKeyboard() {
@@ -266,8 +418,17 @@ class ProfileFragment : Fragment() {
     }
 
     private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun transformationImage(byteArray: ByteArray) {
+        byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Base64.getEncoder().encodeToString(byteArray)
+        } else {
+            android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
+        }
     }
 
     companion object {

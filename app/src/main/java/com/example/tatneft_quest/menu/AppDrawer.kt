@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,7 +18,7 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NAME
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PATRONYMIC
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_SURNAME
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_TOKEN
-import com.example.tatneft_quest.Variables.Companion.TAG
+import com.example.tatneft_quest.Variables.Companion.USER_SCORE
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.firstActivity.AuthorizationActivity
@@ -34,6 +33,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import java.util.*
 
 class AppDrawer(private val activity: AppCompatActivity, private val toolbar: Toolbar) {
+
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var sharedPreferencesUser: SharedPreferences
@@ -41,7 +41,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
     private lateinit var surname: String
     private lateinit var name: String
     private lateinit var patronymic: String
-    private lateinit var avatar: String
+    private var byteString: String? = null
     private lateinit var bitmap: Bitmap
     private var pos: Int = 2
 
@@ -51,13 +51,13 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
         surname = sharedPreferencesUser.getString(SAVE_DATA_USER_SURNAME, "").toString()
         name = sharedPreferencesUser.getString(SAVE_DATA_USER_NAME, "").toString()
         patronymic = sharedPreferencesUser.getString(SAVE_DATA_USER_PATRONYMIC, "").toString()
-        avatar = sharedPreferencesUser.getString(SAVE_DATA_USER_AVATAR, "").toString()
+        byteString = sharedPreferencesUser.getString(SAVE_DATA_USER_AVATAR, "")
         val byteArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Base64.getDecoder().decode(avatar)
+            Base64.getDecoder().decode(byteString)
         } else {
-            android.util.Base64.decode(avatar, android.util.Base64.DEFAULT)
+            android.util.Base64.decode(byteString, android.util.Base64.DEFAULT)
         }
-        bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+         bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
     fun drawerMenuFunc() {
@@ -92,6 +92,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                 PrimaryDrawerItem().withIdentifier(3)
                     .withIconTintingEnabled(true)
                     .withName("Призы")
+                    .withBadge(setScore())
                     .withIcon(R.drawable.ic_celebration)
                     .withSelectable(true),
                 PrimaryDrawerItem().withIdentifier(4)
@@ -167,5 +168,9 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
             menuList.clear()
         }
         menuList.add(fragment)
+    }
+
+    fun setScore(): String {
+        return sharedPreferencesUser.getInt(USER_SCORE, 0).toString()
     }
 }

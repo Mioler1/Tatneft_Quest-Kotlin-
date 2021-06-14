@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
@@ -81,7 +82,7 @@ class RegistrationActivity : AppCompatActivity() {
         login = binding.login
         avatar = binding.avatar
         regButton = binding.regButton
-        progressBar = binding.progressBar!!
+        progressBar = binding.progressBar
         helper = binding.helper
 
         gender.inputType = InputType.TYPE_NULL
@@ -125,11 +126,32 @@ class RegistrationActivity : AppCompatActivity() {
             Snackbar.make(it,
                 "Латиница, кириллица, цифра, от 6 символов, @\$#?_.-",
                 Snackbar.LENGTH_LONG).show()
-
         }
 
         birthday.setOnClickListener {
             selectBirthday()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (byteString != null) {
+            outState.putString("Image", byteString)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val saveByteArray = savedInstanceState.getString("Image")
+        if (saveByteArray != null) {
+            val byteArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Base64.getDecoder().decode(saveByteArray)
+            } else {
+                android.util.Base64.decode(saveByteArray, android.util.Base64.DEFAULT)
+            }
+            val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+            avatar.setImageBitmap(bitmap)
+            byteString = saveByteArray
         }
     }
 
@@ -264,11 +286,7 @@ class RegistrationActivity : AppCompatActivity() {
             val byteArrayOutputStream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
             val byteArray = byteArrayOutputStream.toByteArray()
-            byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                Base64.getEncoder().encodeToString(byteArray)
-            } else {
-                android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
-            }
+            transformationImage(byteArray)
         }
         getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE).edit().also {
             it.putString(SAVE_DATA_USER_EMAIL, emailText)
@@ -318,11 +336,7 @@ class RegistrationActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
         if (byteArray.size <= 5242880) {
-            byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                Base64.getEncoder().encodeToString(byteArray)
-            } else {
-                android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
-            }
+            transformationImage(byteArray)
             regButton.isEnabled = true
             regButton.setBackgroundResource(R.drawable.background_button_green)
             progressBar.visibility = View.GONE
@@ -351,5 +365,13 @@ class RegistrationActivity : AppCompatActivity() {
 
     companion object {
         const val IMAGE_PICK_CODE = 1000
+    }
+
+    private fun transformationImage(byteArray: ByteArray) {
+        byteString = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Base64.getEncoder().encodeToString(byteArray)
+        } else {
+            android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
+        }
     }
 }

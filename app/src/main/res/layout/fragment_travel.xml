@@ -14,12 +14,13 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_scrollFlags="exitUntilCollapsed"
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/black"
+            app:tabMaxWidth="0dp"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/white"
-            app:layout_scrollFlags="exitUntilCollapsed">
+            app:tabTextColor="@color/white">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -30,6 +31,7 @@
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.tabs.TabLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

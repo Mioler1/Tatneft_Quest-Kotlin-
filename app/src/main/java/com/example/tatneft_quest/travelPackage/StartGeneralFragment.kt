@@ -3,6 +3,7 @@ package com.example.tatneft_quest.travelPackage
 import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ import com.example.tatneft_quest.Variables.Companion.ACTIVE_TEST
 import com.example.tatneft_quest.Variables.Companion.NUMBER_POINT
 import com.example.tatneft_quest.Variables.Companion.NUMBER_QUESTIONS
 import com.example.tatneft_quest.Variables.Companion.QUEST_COMPLETE
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
 import com.example.tatneft_quest.Variables.Companion.SCORE
 import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.TIME
@@ -120,16 +122,18 @@ class StartGeneralFragment : BaseFragment() {
         firstPoint = binding.firstPoint
         lastPoint = binding.lastPoint
         startQuest = binding.startQuest
-        stopQuestButton = binding.stopQuestButton!!
-        relativeMyTime = binding.relativeMyTime!!
-        myTime = binding.myTime!!
+        stopQuestButton = binding.stopQuestButton
+        relativeMyTime = binding.relativeMyTime
+        myTime = binding.myTime
 
         downloadData()
 
         if (improvedPreference.getBoolean(ACTIVE_QUEST)) {
             startQuest.text = "Продолжить квест"
-            SCORE = if (improvedPreference.getInt(USER_SCORE) != 0)
-                improvedPreference.getInt(USER_SCORE) else 0
+            SCORE = if (requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
+                    .getInt(USER_SCORE, 0) != 0
+            ) requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
+                .getInt(USER_SCORE, 0) else 0
             score.text = "$SCORE/${score.text}"
             stopQuestButton.visibility = View.VISIBLE
             relativeMyTime.visibility = View.VISIBLE
@@ -186,6 +190,5 @@ class StartGeneralFragment : BaseFragment() {
         TIME = 0
         NUMBER_QUESTIONS = 0
         NUMBER_POINT = 0
-        SCORE = 0
     }
 }

@@ -3,10 +3,6 @@ package com.example.tatneft_quest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tatneft_quest.Variables.Companion.TAG
@@ -17,7 +13,6 @@ import com.example.tatneft_quest.travelPackage.StartActionFragment
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.databinding.ActivityMainBinding
-import com.example.tatneft_quest.menu.ProfileFragment
 
 class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
     private lateinit var mBinding: ActivityMainBinding
@@ -39,7 +34,6 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
                     replace(TravelFragment(), false)
                 } else {
                     val fragment = if (fragmentList.isNotEmpty()) {
-                        Log.d(TAG, "onCreate")
                         fragmentList[fragmentList.size - 1]
                     } else {
                         TravelFragment()
@@ -70,18 +64,26 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
         }
     }
 
-
     override fun onBackPressed() {
         if (fragmentList.isEmpty() && menuList.isEmpty()) {
             super.onBackPressed()
         } else {
             if (menuList.isNotEmpty()) {
                 if (fragmentList.isNotEmpty()) {
-                    if (fragmentList[fragmentList.size - 1] != menuList[menuList.size - 1]) {
-                        replace(fragmentList[fragmentList.size - 1], false)
+                    if (supportFragmentManager.findFragmentByTag("fragment") == null) {
+                        if (fragmentList[fragmentList.size - 1] != menuList[menuList.size - 1]) {
+                            replace(fragmentList[fragmentList.size - 1], false)
+                        } else {
+                            super.onBackPressed()
+                            fragmentList.removeAt(fragmentList.size - 1)
+                        }
                     } else {
-                        super.onBackPressed()
-                        fragmentList.removeAt(fragmentList.size - 1)
+                        val fragment = if (fragmentList.isNotEmpty()) {
+                            fragmentList[fragmentList.size - 1]
+                        } else {
+                            TravelFragment()
+                        }
+                        supportFragmentManager.beginTransaction().attach(fragment)
                     }
                 } else {
                     replace(TravelFragment(), false)

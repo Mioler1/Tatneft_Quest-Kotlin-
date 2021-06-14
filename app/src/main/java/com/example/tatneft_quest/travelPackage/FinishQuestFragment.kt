@@ -82,6 +82,5 @@ class FinishQuestFragment : BaseFragment() {
         TIME = 0
         NUMBER_QUESTIONS = 0
         NUMBER_POINT = 0
-        SCORE = 0
     }
 }

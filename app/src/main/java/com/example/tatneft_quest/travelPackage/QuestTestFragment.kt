@@ -1,6 +1,7 @@
 package com.example.tatneft_quest.travelPackage
 
 import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.example.tatneft_quest.Variables.Companion.LIST_DATA_POINTS
 import com.example.tatneft_quest.Variables.Companion.NUMBER_POINT
 import com.example.tatneft_quest.Variables.Companion.NUMBER_QUESTIONS
 import com.example.tatneft_quest.Variables.Companion.QUEST_COMPLETE
+import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
 import com.example.tatneft_quest.Variables.Companion.SCORE
 import com.example.tatneft_quest.Variables.Companion.USER_SCORE
 import com.example.tatneft_quest.Variables.Companion.fragmentList
@@ -147,7 +149,8 @@ class QuestTestFragment : BaseFragment() {
             if (answerUser == answerCorrect) {
                 Snackbar.make(view, "Верно", Snackbar.LENGTH_SHORT).show()
                 SCORE += 2
-                improvedPreference.putInt(USER_SCORE, SCORE)
+                requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE).edit()
+                    .putInt(USER_SCORE, SCORE).apply()
             } else {
                 val getTextOne = answerOneButton.text
                 val getTextTwo = answerTwoButton.text

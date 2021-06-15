@@ -31,7 +31,7 @@ import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.Variables.Companion.testSheet
 import com.example.tatneft_quest.databinding.FragmentStartGeneralBinding
-import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.baseClasses.BaseFragment
 import com.example.tatneft_quest.libs.ImprovedPreference
 import com.example.tatneft_quest.services.LocationService
 
@@ -104,10 +104,32 @@ class StartGeneralFragment : BaseFragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (isLocationServiceRunning()) {
+            requireActivity().stopService(Intent(context, LocationService::class.java))
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun isLocationServiceRunning(): Boolean {
+        val manager = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
+        for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
+            if ("com.example.tatneft_quest.services.LocationService" == service.service.className) {
+                Log.d(TAG, "isLocationServiceRunning: location service is already running.")
+                return true
+            }
+        }
+        Log.d(TAG, "isLocationServiceRunning: location service is not running.")
+        return false
+    }
+
     private fun checkQuest() {
         improvedPreference = ImprovedPreference(context)
         if (improvedPreference.getBoolean(QUEST_COMPLETE)) {
-            requireActivity().stopService(Intent(context, LocationService::class.java))
+            if (isLocationServiceRunning()) {
+                requireActivity().stopService(Intent(context, LocationService::class.java))
+            }
             requireActivity().supportFragmentManager.popBackStack()
             fragmentList.removeAt(fragmentList.size - 1)
             mFragmentHandler?.replace(FinishQuestFragment(), true)

@@ -1,4 +1,4 @@
-package com.example.tatneft_quest.fragments
+package com.example.tatneft_quest.baseClasses
 
 import android.content.Context
 import androidx.annotation.Nullable

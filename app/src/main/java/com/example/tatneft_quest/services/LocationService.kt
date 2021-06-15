@@ -17,7 +17,7 @@ import com.example.tatneft_quest.Variables.Companion.LATITUDE
 import com.example.tatneft_quest.Variables.Companion.LONGITUDE
 import com.example.tatneft_quest.Variables.Companion.TIME
 import com.example.tatneft_quest.Variables.Companion.TIME_QUEST
-import com.example.tatneft_quest.fragments.MyApplication
+import com.example.tatneft_quest.baseClasses.MyApplication
 import com.example.tatneft_quest.libs.ImprovedPreference
 import com.example.tatneft_quest.utils.AlertDialogGpsActivity
 import com.google.android.gms.location.*
@@ -154,7 +154,8 @@ class LocationService : Service() {
             Log.d(TAG, "checkGPS")
             val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                startActivity(Intent(applicationContext, AlertDialogGpsActivity::class.java))
+                startActivity(Intent(applicationContext, AlertDialogGpsActivity::class.java)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                 removeLocationUpdates()
                 return@Runnable
             }
@@ -171,7 +172,6 @@ class LocationService : Service() {
         }
         saveTime = TIME.toLong()
         timerHandler.postDelayed(updateTimerThread, 0)
-        Log.d(TAG, "timer: ${improvedPreference?.getInt(TIME_QUEST)}")
     }
 
     private val updateTimerThread: Runnable = object : Runnable {

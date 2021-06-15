@@ -26,6 +26,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.*
 import com.example.tatneft_quest.*
 import com.example.tatneft_quest.R
@@ -36,7 +37,7 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.databinding.FragmentStartActionBinding
-import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.baseClasses.BaseFragment
 import com.example.tatneft_quest.libs.ImprovedPreference
 import com.example.tatneft_quest.models.ClusterMarkerPoints
 import com.example.tatneft_quest.models.ClusterMarkerUser
@@ -116,6 +117,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         }
         getDeviceLocation()
         addMarkerPoint()
+        map?.uiSettings?.isCompassEnabled = false
     }
 
     override fun onCreateView(
@@ -127,6 +129,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Квест"
         init()
     }
 
@@ -156,20 +159,14 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
             btnScan.visibility = View.VISIBLE
         }
         btnScan.setOnClickListener {
-//            IntentIntegrator.forSupportFragment(this)
-//                .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-//                .setPrompt("Отсканируйте QR-код")
-//                .setCameraId(0)
-//                .setBeepEnabled(false)
-//                .setOrientationLocked(false)
-//                .setBarcodeImageEnabled(true)
-//                .initiateScan()
-
-            //  удалить
-            requireActivity().supportFragmentManager.popBackStack()
-            fragmentList.removeAt(fragmentList.size - 1)
-            improvedPreference.putBoolean(ACTIVE_SCAN, true)
-            mFragmentHandler?.replace(LocationHistoryFragment(), true)
+            IntentIntegrator.forSupportFragment(this)
+                .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+                .setPrompt("Отсканируйте QR-код")
+                .setCameraId(0)
+                .setBeepEnabled(false)
+                .setOrientationLocked(false)
+                .setBarcodeImageEnabled(true)
+                .initiateScan()
         }
     }
 

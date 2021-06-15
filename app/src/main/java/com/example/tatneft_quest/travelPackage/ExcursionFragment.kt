@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.tatneft_quest.R
-import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.baseClasses.BaseFragment
 
 class ExcursionFragment : BaseFragment() {
 

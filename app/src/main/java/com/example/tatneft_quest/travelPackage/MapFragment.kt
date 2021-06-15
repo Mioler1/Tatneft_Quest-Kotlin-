@@ -15,6 +15,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tatneft_quest.R
 import com.example.tatneft_quest.Variables
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
@@ -63,6 +64,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Квест"
         init()
     }
 

@@ -1,17 +1,16 @@
 package com.example.tatneft_quest.travelPackage
 
 import android.annotation.SuppressLint
-import android.app.ActivityManager
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.tatneft_quest.Variables
 import com.example.tatneft_quest.Variables.Companion.NUMBER_POINT
 import com.example.tatneft_quest.Variables.Companion.NUMBER_QUESTIONS
@@ -20,14 +19,15 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_LOGIN
 import com.example.tatneft_quest.Variables.Companion.SCORE
 import com.example.tatneft_quest.Variables.Companion.TIME
 import com.example.tatneft_quest.Variables.Companion.TIME_QUEST
+import com.example.tatneft_quest.Variables.Companion.USER_SCORE
 import com.example.tatneft_quest.Variables.Companion.fragmentList
+import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.Variables.Companion.testSheet
 import com.example.tatneft_quest.databinding.FragmentFinishQuestBinding
-import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.baseClasses.BaseFragment
 import com.example.tatneft_quest.libs.ImprovedPreference
-import com.example.tatneft_quest.menu.TravelFragment
-import org.w3c.dom.Text
+import com.example.tatneft_quest.menu.PrizeFragment
 
 class FinishQuestFragment : BaseFragment() {
     private lateinit var compliment: TextView
@@ -51,6 +51,7 @@ class FinishQuestFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "Квест"
         init()
         downloadData()
     }
@@ -68,7 +69,10 @@ class FinishQuestFragment : BaseFragment() {
         finishQuest.setOnClickListener {
             clear()
             fragmentList.clear()
-            super.requireActivity().onBackPressed()
+            requireActivity().supportFragmentManager.popBackStack("stackFragment",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            menuList.add(PrizeFragment())
+            mFragmentHandler?.replace(PrizeFragment(), false)
         }
     }
 
@@ -94,9 +98,9 @@ class FinishQuestFragment : BaseFragment() {
             }
         }
         SCORE = if (requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
-                .getInt(Variables.USER_SCORE, 0) != 0
+                .getInt(USER_SCORE, 0) != 0
         ) requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
-            .getInt(Variables.USER_SCORE, 0) else 0
+            .getInt(USER_SCORE, 0) else 0
         score.text = "У вас $SCORE баллов"
     }
 

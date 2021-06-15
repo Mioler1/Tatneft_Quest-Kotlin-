@@ -277,7 +277,7 @@ class RegistrationActivity : AppCompatActivity() {
             return
         }
         if (passwordText != repeatPassword) {
-            textInputRepeatPassword.error = "Пароль не совпадают"
+            textInputRepeatPassword.error = "Пароль не совпадает"
             textInputRepeatPassword.requestFocus()
             return
         }

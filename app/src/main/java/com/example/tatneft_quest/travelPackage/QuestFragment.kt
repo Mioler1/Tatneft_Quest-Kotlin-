@@ -10,7 +10,7 @@ import com.example.tatneft_quest.Variables.Companion.LIST_DATA_TEST
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.Variables.Companion.testSheet
 import com.example.tatneft_quest.databinding.FragmentQuestBinding
-import com.example.tatneft_quest.fragments.BaseFragment
+import com.example.tatneft_quest.baseClasses.BaseFragment
 import com.example.tatneft_quest.libs.ImprovedPreference
 import com.example.tatneft_quest.models.ClusterMarkerPoints
 import com.example.tatneft_quest.models.TestQuestionsModel

@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/mainRelative"
-    tools:context=".fragments.BaseFragment">
+    tools:context=".baseClasses.BaseFragment">
 
     <TextView
         android:layout_width="match_parent"

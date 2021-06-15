@@ -1,4 +1,4 @@
-package com.example.tatneft_quest.fragments
+package com.example.tatneft_quest.baseClasses
 
 import android.app.Activity
 import android.app.Application

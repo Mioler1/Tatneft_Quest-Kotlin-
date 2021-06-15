@@ -22,7 +22,7 @@
     <string name="surname">Фамилия</string>
     <string name="namePeople">Имя</string>
     <string name="patronymic">Отчество</string>
-    <string name="age">Дата рождение</string>
+    <string name="age">Дата рождения</string>
     <string name="repeatPassword">Введите повторный пароль</string>
     <string name="login">Придумайте логин</string>
     <string name="auth">Уже зарегистрированы? /Войти</string>

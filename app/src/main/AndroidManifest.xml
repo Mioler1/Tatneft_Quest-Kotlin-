@@ -17,7 +17,7 @@
         android:xlargeScreens="false" />
 
     <application
-        android:name=".fragments.MyApplication"
+        android:name=".baseClasses.MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/logo"

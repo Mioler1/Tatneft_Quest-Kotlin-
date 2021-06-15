@@ -1,9 +1,12 @@
 package com.example.tatneft_quest.travelPackage
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +19,7 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_LOGIN
 import com.example.tatneft_quest.Variables.Companion.SCORE
 import com.example.tatneft_quest.Variables.Companion.TIME
+import com.example.tatneft_quest.Variables.Companion.TIME_QUEST
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.pointsSheet
 import com.example.tatneft_quest.Variables.Companion.testSheet
@@ -31,6 +35,7 @@ class FinishQuestFragment : BaseFragment() {
     private lateinit var finishQuest: Button
     private lateinit var description: TextView
     private lateinit var parting: TextView
+    private lateinit var score: TextView
 
     private lateinit var improvedPreference: ImprovedPreference
     private lateinit var sharedPreferences: SharedPreferences
@@ -58,6 +63,7 @@ class FinishQuestFragment : BaseFragment() {
         finishQuest = binding.finishQuest
         parting = binding.parting
         description = binding.description
+        score = binding.score
 
         finishQuest.setOnClickListener {
             clear()
@@ -68,13 +74,8 @@ class FinishQuestFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun downloadData() {
-        var sec = (improvedPreference.getInt(Variables.TIME_QUEST) / 1000)
-        var min = sec / 60
-        var hour = min / 60
-        sec %= 60; min %= 60; hour %= 60
-
         compliment.text = "Поздравляем с успешным прохождением квеста"
-        timeQuest.text = "$hour час $min минут ${String.format("%02d", sec)} секунд"
+
         description.text = "Обменивайте полученные баллы на призы и бонусы от ПАО Татнефть${
             sharedPreferences
                 .getString(SAVE_DATA_USER_LOGIN, "")
@@ -83,6 +84,24 @@ class FinishQuestFragment : BaseFragment() {
             sharedPreferences
                 .getString(SAVE_DATA_USER_LOGIN, "")
         }"
+
+        timeQuest.text = when {
+            improvedPreference.getInt(TIME_QUEST) != 0 -> {
+                var sec = (improvedPreference.getInt(TIME_QUEST) / 1000)
+                var min = sec / 60
+                var hour = min / 60
+                sec %= 60; min %= 60; hour %= 60
+                "$hour час $min минут ${String.format("%02d", sec)} секунд"
+            }
+            else -> {
+                "0 часов 0 минут 0 секунд"
+            }
+        }
+        SCORE = if (requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
+                .getInt(Variables.USER_SCORE, 0) != 0
+        ) requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE)
+            .getInt(Variables.USER_SCORE, 0) else 0
+        score.text = "У вас $SCORE баллов"
     }
 
     private fun clear() {
@@ -93,4 +112,5 @@ class FinishQuestFragment : BaseFragment() {
         NUMBER_QUESTIONS = 0
         NUMBER_POINT = 0
     }
+
 }

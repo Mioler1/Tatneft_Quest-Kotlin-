@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), ReplaceFragmentHandler {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-
         if (menuList.isEmpty() && fragmentList.isEmpty()) {
             replace(TravelFragment(), false)
         } else {

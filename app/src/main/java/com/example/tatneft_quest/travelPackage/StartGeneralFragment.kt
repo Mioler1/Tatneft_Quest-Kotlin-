@@ -138,13 +138,6 @@ class StartGeneralFragment : BaseFragment() {
             stopQuestButton.visibility = View.VISIBLE
             relativeMyTime.visibility = View.VISIBLE
             myTime.text = when {
-                isLocationServiceRunning() -> {
-                    var sec = (TIME / 1000)
-                    var min = sec / 60
-                    var hour = min / 60
-                    sec %= 60; min %= 60; hour %= 60
-                    "$hour час $min минут ${String.format("%02d", sec)} секунд"
-                }
                 improvedPreference.getInt(TIME_QUEST) != 0 -> {
                     var sec = (improvedPreference.getInt(TIME_QUEST) / 1000)
                     var min = sec / 60
@@ -168,19 +161,6 @@ class StartGeneralFragment : BaseFragment() {
             firstPoint.text = pointsSheet[0].title
             lastPoint.text = pointsSheet[pointsSheet.size - 1].title
         }
-    }
-
-    @Suppress("DEPRECATION")
-    private fun isLocationServiceRunning(): Boolean {
-        val manager = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
-        for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
-            if ("com.example.tatneft_quest.services.LocationService" == service.service.className) {
-                Log.d(TAG, "isLocationServiceRunning: location service is already running.")
-                return true
-            }
-        }
-        Log.d(TAG, "isLocationServiceRunning: location service is not running.")
-        return false
     }
 
     private fun clear() {

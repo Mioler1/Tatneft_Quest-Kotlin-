@@ -62,7 +62,7 @@ class QuestFragment : BaseFragment() {
             pointsSheet = listPoint
         } else {
             fillingSheetForPoints(1, 54.903642, 52.281305,
-                "Парк Шамсинур", R.drawable.icon1, true, shamsinur)
+                "Парк Шамсинур", R.drawable.icon1v2, true, shamsinur)
             fillingSheetForPoints(2, 54.897804, 52.266678,
                 "Парк здоровья", R.drawable.icon2, false, healthPark)
             fillingSheetForPoints(3, 54.904369, 52.287813,

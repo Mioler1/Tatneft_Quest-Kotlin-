@@ -74,6 +74,11 @@ class LocationService : Service() {
         return START_NOT_STICKY
     }
 
+    override fun onDestroy() {
+        removeLocationUpdates()
+        super.onDestroy()
+    }
+
     private fun sendNotification() {
         val stopIntent = Intent(this, LocationService::class.java)
         stopIntent.action = ACTION_STOP_SERVICE
@@ -178,6 +183,7 @@ class LocationService : Service() {
             var hour = min / 60
             sec %= 60; min %= 60; hour %= 60
             TIME = (hour * 3600 * 1000) + (min * 60 * 1000) + (sec * 1000)
+            improvedPreference?.putInt(TIME_QUEST, TIME)
             timerHandler.postDelayed(this, 1000)
         }
     }

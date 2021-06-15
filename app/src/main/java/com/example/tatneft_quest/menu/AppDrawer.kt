@@ -57,12 +57,12 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
         } else {
             android.util.Base64.decode(byteString, android.util.Base64.DEFAULT)
         }
-         bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+        bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
     fun drawerMenuFunc() {
-        init()
         activity.setSupportActionBar(toolbar)
+        init()
         mHeader = AccountHeaderBuilder()
             .withActivity(activity)
             .withHeaderBackground(R.drawable.background_header_menu)
@@ -149,7 +149,6 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                                     AuthorizationActivity::class.java))
                                 activity.finish()
                             }
-
                         }
                     }
                     return false

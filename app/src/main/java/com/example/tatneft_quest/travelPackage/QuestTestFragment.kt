@@ -147,7 +147,6 @@ class QuestTestFragment : BaseFragment() {
                 }
             }
             if (answerUser == answerCorrect) {
-                Snackbar.make(view, "Верно", Snackbar.LENGTH_SHORT).show()
                 SCORE += 2
                 requireActivity().getSharedPreferences(SAVE_DATA_USER, MODE_PRIVATE).edit()
                     .putInt(USER_SCORE, SCORE).apply()
@@ -205,10 +204,8 @@ class QuestTestFragment : BaseFragment() {
                 idActiveElement = -1
             }
             if (improvedPreference.getBoolean(QUEST_COMPLETE)) {
-                requireActivity().supportFragmentManager.popBackStack()
                 fragmentList.removeAt(fragmentList.size - 1)
-                improvedPreference.putBoolean(QUEST_COMPLETE, false)
-                mFragmentHandler?.replace(FinishQuestFragment(), true)
+                super.requireActivity().onBackPressed()
             }
         }
     }

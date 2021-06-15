@@ -78,7 +78,7 @@
                     android:src="@drawable/points" />
 
                 <TextView
-                    android:id="@+id/pointQuest"
+                    android:id="@+id/score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -94,8 +94,8 @@
                 android:layout_below="@id/point"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
-                android:background="@color/red"
                 android:layout_marginBottom="10dp"
+                android:background="@color/red"
                 android:text="Призы и бонусы"
                 android:textColor="@color/white" />
 

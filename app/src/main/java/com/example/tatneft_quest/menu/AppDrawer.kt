@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -33,7 +34,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import java.util.*
 
 class AppDrawer(private val activity: AppCompatActivity, private val toolbar: Toolbar) {
-
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var sharedPreferencesUser: SharedPreferences
@@ -138,7 +138,9 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                                 TravelFragment()
                             })
                             3 -> addFragment(PrizeFragment())
+                            4 -> addFragment(QuestionsFragment())
                             6 -> addFragment(HelpFragment())
+                            7 -> addFragment(SettingFragment())
                             8 -> addFragment(AboutApplicationFragment())
                             10 -> {
                                 menuList.clear()

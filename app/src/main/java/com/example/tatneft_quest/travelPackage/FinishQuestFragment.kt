@@ -74,16 +74,13 @@ class FinishQuestFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun downloadData() {
-        compliment.text = "Поздравляем с успешным прохождением квеста"
-
-        description.text = "Обменивайте полученные баллы на призы и бонусы от ПАО Татнефть${
+        compliment.text = "Поздравляем с успешным прохождением квеста \n ${
             sharedPreferences
                 .getString(SAVE_DATA_USER_LOGIN, "")
         }"
-        parting.text = "До скорых встреч!${
-            sharedPreferences
-                .getString(SAVE_DATA_USER_LOGIN, "")
-        }"
+        timeQuest.text = "$hour час $min минут ${String.format("%02d", sec)} секунд"
+        description.text = "Обменивайте полученные баллы на призы и бонусы от ПАО Татнефть"
+        parting.text = "До скорых встреч!"
 
         timeQuest.text = when {
             improvedPreference.getInt(TIME_QUEST) != 0 -> {
@@ -112,5 +109,4 @@ class FinishQuestFragment : BaseFragment() {
         NUMBER_QUESTIONS = 0
         NUMBER_POINT = 0
     }
-
 }

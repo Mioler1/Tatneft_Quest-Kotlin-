@@ -11,6 +11,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationManager
@@ -144,7 +145,6 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         btnMapFullScreen = binding.btnMapFullScreen
         btnMoveCamera = binding.btnMoveCamera
         btnInPlace = binding.inPlace
-        btnSeeingMap = binding.seeingMap
         btnScan = binding.btnScan
         pointPosition = binding.pointPosition
         nameLocation = binding.nameLocation
@@ -178,7 +178,6 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         btnMapFullScreen.visibility = View.VISIBLE
         btnMoveCamera.visibility = View.VISIBLE
         btnInPlace.visibility = View.VISIBLE
-        btnSeeingMap.visibility = View.VISIBLE
 
         pointsSheet.forEach { el ->
             if (el.getActive()) {
@@ -507,9 +506,18 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     //  Полный экран карты
     private fun expandMapAnimation() {
+        val weightMap: Float
+        val weightFooter: Float
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            weightMap = 70f
+            weightFooter = 15f
+        } else {
+            weightMap = 65f
+            weightFooter = 20f
+        }
         val mapAnimationWrapper = ViewWeightAnimationWrapper(mapRelative)
         val mapAnimation = ObjectAnimator.ofFloat(mapAnimationWrapper,
-            "weight", 65f, 100f)
+            "weight", weightMap, 100f)
         mapAnimation.duration = 0
         val recyclerHeaderAnimationWrapper = ViewWeightAnimationWrapper(headerRelative)
         val recyclerHeaderAnimation = ObjectAnimator.ofFloat(recyclerHeaderAnimationWrapper,
@@ -517,7 +525,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         recyclerHeaderAnimation.duration = 0
         val recyclerFooterAnimationWrapper = ViewWeightAnimationWrapper(footerRelative)
         val recyclerFooterAnimation = ObjectAnimator.ofFloat(recyclerFooterAnimationWrapper,
-            "weight", 20f, 0f)
+            "weight", weightFooter, 0f)
         recyclerFooterAnimation.duration = 0
         recyclerHeaderAnimation.start()
         recyclerFooterAnimation.start()
@@ -526,9 +534,18 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
 
     //  Обычный экран
     private fun contractMapAnimation() {
+        val weightMap: Float
+        val weightFooter: Float
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            weightMap = 70f
+            weightFooter = 15f
+        } else {
+            weightMap = 65f
+            weightFooter = 20f
+        }
         val mapAnimationWrapper = ViewWeightAnimationWrapper(mapRelative)
         val mapAnimation = ObjectAnimator.ofFloat(mapAnimationWrapper,
-            "weight", 100f, 65f)
+            "weight", 100f, weightMap)
         mapAnimation.duration = 0
         val recyclerHeaderAnimationWrapper = ViewWeightAnimationWrapper(headerRelative)
         val recyclerHeaderAnimation = ObjectAnimator.ofFloat(recyclerHeaderAnimationWrapper,
@@ -536,7 +553,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         recyclerHeaderAnimation.duration = 0
         val recyclerFooterAnimationWrapper = ViewWeightAnimationWrapper(footerRelative)
         val recyclerFooterAnimation = ObjectAnimator.ofFloat(recyclerFooterAnimationWrapper,
-            "weight", 0f, 20f)
+            "weight", 0f, weightFooter)
         recyclerFooterAnimation.duration = 0
         recyclerHeaderAnimation.start()
         recyclerFooterAnimation.start()

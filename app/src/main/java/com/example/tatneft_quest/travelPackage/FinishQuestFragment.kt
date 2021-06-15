@@ -78,7 +78,6 @@ class FinishQuestFragment : BaseFragment() {
             sharedPreferences
                 .getString(SAVE_DATA_USER_LOGIN, "")
         }"
-        timeQuest.text = "$hour час $min минут ${String.format("%02d", sec)} секунд"
         description.text = "Обменивайте полученные баллы на призы и бонусы от ПАО Татнефть"
         parting.text = "До скорых встреч!"
 

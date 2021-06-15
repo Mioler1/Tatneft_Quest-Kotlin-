@@ -93,6 +93,7 @@
     <string name="prize_backpack">300 баллов - Рюкзак</string>
     <string name="my_prize">Мои подарки</string>
     <string name="get_prize">Получить подарок</string>
+    <string name="prize_bon">Призы и бонусы</string>
 
     <!--fragment_question-->
     <string name="point">точка</string>
@@ -103,11 +104,15 @@
     <string name="answer_two_questions">Ответ на второй вопрос</string>
     <string name="answer_correctly_questions">Ответ на правильный вопрос</string>
     <string name="reply">Ответить</string>
-    
+
     <!--fragment_location_history-->
     <string name="pass_test">Пройти тестирование</string>
 
     <!--fragment_about_application-->
     <string name="version">Версия 1.0.15</string>
     <string name="about_app">© 2021 студенты &quot;Альметьевского политехнического техникума&quot;</string>
+    
+    <!--fragment_developers-->
+    <string name="page_in_developer">Страница находится в разработке</string>
+    <string name="parting">С уважением, Tatneft Quest</string>
 </resources>

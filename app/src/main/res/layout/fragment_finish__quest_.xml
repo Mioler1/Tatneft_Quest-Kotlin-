@@ -10,11 +10,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingStart="15dp"
-        android:paddingEnd="15dp">
+        android:paddingEnd="15dp"
+        android:weightSum="100">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="45">
 
             <TextView
                 android:id="@+id/compliments"
@@ -43,15 +45,22 @@
                 android:fontFamily="@font/montserrat"
                 android:textSize="22sp" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="35">
+
             <RelativeLayout
                 android:id="@+id/time"
                 style="@style/layoutMargin_5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/parting"
                 android:layout_marginTop="20dp">
 
                 <ImageView
+                    android:id="@+id/image1"
                     style="@style/imageViewInStartGeneralFragment"
                     android:src="@drawable/time" />
 
@@ -60,7 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="15dp"
+                    android:layout_toEndOf="@id/image1"
+                    android:layout_marginStart="15dp"
                     android:textSize="22sp" />
 
             </RelativeLayout>
@@ -74,6 +84,7 @@
                 android:layout_marginTop="20dp">
 
                 <ImageView
+                    android:id="@+id/image2"
                     style="@style/imageViewInStartGeneralFragment"
                     android:src="@drawable/points" />
 
@@ -82,23 +93,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toEndOf="@id/image2"
+                    android:layout_marginStart="15dp"
                     android:textSize="22sp" />
 
             </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20">
 
             <Button
                 android:id="@+id/finishQuest"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/point"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
-                android:background="@color/red"
+                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="10dp"
-                android:text="Призы и бонусы"
+                android:background="@color/red"
+                android:text="@string/prize_bon"
                 android:textColor="@color/white" />
-
         </RelativeLayout>
 
     </LinearLayout>

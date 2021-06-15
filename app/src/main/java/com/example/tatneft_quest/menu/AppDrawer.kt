@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,7 +18,6 @@ import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_NAME
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_PATRONYMIC
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_SURNAME
 import com.example.tatneft_quest.Variables.Companion.SAVE_DATA_USER_TOKEN
-import com.example.tatneft_quest.Variables.Companion.TAG
 import com.example.tatneft_quest.Variables.Companion.fragmentList
 import com.example.tatneft_quest.Variables.Companion.menuList
 import com.example.tatneft_quest.firstActivity.AuthorizationActivity
@@ -137,7 +135,9 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
                                 TravelFragment()
                             })
                             3 -> addFragment(PrizeFragment())
+                            4 -> addFragment(QuestionsFragment())
                             6 -> addFragment(HelpFragment())
+                            7 -> addFragment(SettingFragment())
                             8 -> addFragment(AboutApplicationFragment())
                             10 -> {
                                 menuList.clear()

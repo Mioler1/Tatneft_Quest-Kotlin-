@@ -62,13 +62,13 @@ class QuestFragment : BaseFragment() {
             pointsSheet = listPoint
         } else {
             fillingSheetForPoints(1, 54.903642, 52.281305,
-                "Парк Шамсинур", R.drawable.icon1, true, shamsinur)
+                "Парк Шамсинур", R.drawable.park_shamsinur, true, shamsinur)
             fillingSheetForPoints(2, 54.897804, 52.266678,
-                "Парк здоровья", R.drawable.icon2, false, healthPark)
+                "Парк здоровья", R.drawable.park_healthy, false, healthPark)
             fillingSheetForPoints(3, 54.904369, 52.287813,
-                "Каскад прудов", R.drawable.icon3, false, cascadeOfProud)
+                "Каскад прудов", R.drawable.cascade, false, cascadeOfProud)
             fillingSheetForPoints(4, 54.898794, 52.29991,
-                "Городской парк", R.drawable.icon4, false, cityPark)
+                "Городской парк", R.drawable.city_park, false, cityPark)
             improvedPreference.putListObjectMarker(LIST_DATA_POINTS, pointsSheet)
         }
         if (listPoint.isNotEmpty()) {

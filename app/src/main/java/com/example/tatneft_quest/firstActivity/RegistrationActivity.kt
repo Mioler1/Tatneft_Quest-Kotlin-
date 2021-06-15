@@ -81,7 +81,7 @@ class RegistrationActivity : AppCompatActivity() {
         login = binding.login
         avatar = binding.avatar
         regButton = binding.regButton
-        progressBar = binding.progressBar!!
+        progressBar = binding.progressBar
         helper = binding.helper
 
         gender.inputType = InputType.TYPE_NULL
@@ -125,7 +125,6 @@ class RegistrationActivity : AppCompatActivity() {
             Snackbar.make(it,
                 "Латиница, кириллица, цифра, от 6 символов, @\$#?_.-",
                 Snackbar.LENGTH_LONG).show()
-
         }
 
         birthday.setOnClickListener {

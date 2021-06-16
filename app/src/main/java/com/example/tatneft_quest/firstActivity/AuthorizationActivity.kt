@@ -41,7 +41,6 @@ class AuthorizationActivity : AppCompatActivity() {
         }
         binding.comeButton.setOnClickListener { view ->
             authorization(view)
-//            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 

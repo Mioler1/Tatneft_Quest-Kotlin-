@@ -5,7 +5,6 @@
     style="@style/mainRelative"
     tools:context=".firstActivity.RegistrationActivity">
 
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -71,7 +70,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/surname"
-                        android:inputType="text" />
+                        android:inputType="textCapSentences" />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
 
@@ -96,7 +95,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/namePeople"
-                        android:inputType="text" />
+                        android:inputType="textCapSentences" />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
 
@@ -121,8 +120,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/patronymic"
-                        android:inputType="text" />
+                        android:inputType="textCapSentences" />
                 </com.google.android.material.textfield.TextInputLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -214,7 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/city"
-                        android:inputType="text" />
+                        android:inputType="textCapSentences" />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
 

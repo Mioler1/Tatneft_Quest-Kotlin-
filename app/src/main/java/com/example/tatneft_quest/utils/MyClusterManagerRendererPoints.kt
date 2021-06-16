@@ -51,8 +51,4 @@ class MyClusterManagerRendererPoints(
         return false
     }
 
-    fun setUpdateMarker(clusterMarker: ClusterMarkerPoints) {
-        val marker: Marker = getMarker(clusterMarker)
-        marker.position = clusterMarker.position
-    }
 }

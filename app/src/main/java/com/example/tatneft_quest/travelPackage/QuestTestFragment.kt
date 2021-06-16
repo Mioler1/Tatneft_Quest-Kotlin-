@@ -244,7 +244,7 @@ class QuestTestFragment : BaseFragment() {
                         if (elPoint.getId() == elTest.getIdPoint()) {
                             if (elTest.getNumberQuestion() == NUMBER_QUESTIONS) {
                                 pointLocation.text = "Точка №${elTest.getIdPoint()}"
-                                questionNumber.text = "Вопрос №${elTest.getNumberQuestion()}"
+                                questionNumber.text = "Вопрос ${elTest.getNumberQuestion()}/3"
                                 questionText.text = elTest.getTextQuestion()
                                 answerOneButton.text = elTest.getAnswerOne()
                                 answerTwoButton.text = elTest.getAnswerTwo()

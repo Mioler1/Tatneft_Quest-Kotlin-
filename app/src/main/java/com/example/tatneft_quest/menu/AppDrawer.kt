@@ -172,7 +172,7 @@ class AppDrawer(private val activity: AppCompatActivity, private val toolbar: To
         menuList.add(fragment)
     }
 
-    fun setScore(): String {
+    private fun setScore(): String {
         return sharedPreferencesUser.getInt(USER_SCORE, 0).toString()
     }
 }

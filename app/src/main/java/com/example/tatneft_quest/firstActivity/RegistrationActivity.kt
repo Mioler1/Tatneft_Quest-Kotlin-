@@ -34,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 @Suppress("DEPRECATION")
 class RegistrationActivity : AppCompatActivity() {
@@ -188,6 +189,14 @@ class RegistrationActivity : AppCompatActivity() {
         materialDatePicker.show(supportFragmentManager, "MaterialDatePicker")
     }
 
+    private fun isValidEmailAddress(email: String): Boolean {
+        val ePattern =
+            "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$"
+        val p = Pattern.compile(ePattern)
+        val m = p.matcher(email)
+        return m.matches()
+    }
+
     private fun onStartRegistration() {
         val emailText = emailRegistration.text.toString()
         val passwordText = passwordRegistration.text.toString()
@@ -235,6 +244,11 @@ class RegistrationActivity : AppCompatActivity() {
         }
         if (emailText.isEmpty()) {
             textInputEmail.error = "Пустое поле"
+            textInputEmail.requestFocus()
+            return
+        }
+        if (!isValidEmailAddress(emailText)) {
+            textInputEmail.error = "Некорретная почта"
             textInputEmail.requestFocus()
             return
         }

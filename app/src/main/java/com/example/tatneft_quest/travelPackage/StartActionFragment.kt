@@ -70,7 +70,6 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
     private lateinit var btnMapFullScreen: ImageView
     private lateinit var btnMoveCamera: ImageView
     private lateinit var btnInPlace: Button
-    private lateinit var btnSeeingMap: Button
     private lateinit var btnScan: Button
     private lateinit var pointPosition: TextView
     private lateinit var nameLocation: TextView
@@ -506,8 +505,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         val weightMap: Float
         val weightFooter: Float
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            weightMap = 70f
-            weightFooter = 15f
+            weightMap = 77f
+            weightFooter = 13f
         } else {
             weightMap = 65f
             weightFooter = 20f
@@ -518,7 +517,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         mapAnimation.duration = 0
         val recyclerHeaderAnimationWrapper = ViewWeightAnimationWrapper(headerRelative)
         val recyclerHeaderAnimation = ObjectAnimator.ofFloat(recyclerHeaderAnimationWrapper,
-            "weight", 15f, 0f)
+            "weight", 10f, 0f)
         recyclerHeaderAnimation.duration = 0
         val recyclerFooterAnimationWrapper = ViewWeightAnimationWrapper(footerRelative)
         val recyclerFooterAnimation = ObjectAnimator.ofFloat(recyclerFooterAnimationWrapper,
@@ -534,8 +533,8 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         val weightMap: Float
         val weightFooter: Float
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            weightMap = 70f
-            weightFooter = 15f
+            weightMap = 77f
+            weightFooter = 13f
         } else {
             weightMap = 65f
             weightFooter = 20f
@@ -546,7 +545,7 @@ class StartActionFragment : BaseFragment(), OnMapReadyCallback, View.OnClickList
         mapAnimation.duration = 0
         val recyclerHeaderAnimationWrapper = ViewWeightAnimationWrapper(headerRelative)
         val recyclerHeaderAnimation = ObjectAnimator.ofFloat(recyclerHeaderAnimationWrapper,
-            "weight", 0f, 15f)
+            "weight", 0f, 10f)
         recyclerHeaderAnimation.duration = 0
         val recyclerFooterAnimationWrapper = ViewWeightAnimationWrapper(footerRelative)
         val recyclerFooterAnimation = ObjectAnimator.ofFloat(recyclerFooterAnimationWrapper,

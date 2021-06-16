@@ -93,7 +93,7 @@
     <string name="prize_backpack">300 баллов - Рюкзак</string>
     <string name="my_prize">Мои подарки</string>
     <string name="get_prize">Получить подарок</string>
-    <string name="prize_bon">Призы и бонусы</string>
+    <string name="prize_bon">Получить приз</string>
 
     <!--fragment_question-->
     <string name="point">точка</string>
